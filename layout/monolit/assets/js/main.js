@@ -31,6 +31,13 @@ $('.center_block .stitle_form input').on('keyup', function(e) {
 	}
 });
 
+$('.fancy').fancybox({
+	openEffect  : 'fade',
+	closeEffect : 'fade',
+	nextEffect : 'fade',
+	prevEffect : 'fade',
+});
+
 $('.mobile_menu .search-button-div button').on('click', function(e) {
 	e.preventDefault();
 	var inputValue = $(this).parents().find('input').val();
