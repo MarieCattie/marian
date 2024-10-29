@@ -1,6 +1,6 @@
 body  .maxwidth-theme, body.fill_bg_y.visible_banner .contacts-page-map, body.fill_bg_y.visible_banner .banners-big .maxwidth-banner, body.fill_bg_y.visible_banner > .body > .main,
-body.fill_bg_y.visible_banner footer, .banners-big.short-banner.small .maxwidth-banner, .fill_bg_y.visible_banner header .line-row{ max-width: 1216px; }
-body.fill_bg_y.visible_banner .banner.TOP_HEADER, body.fill_bg_y.visible_banner .banner.TOP_UNDERHEADER{max-width: 1216px;}
+body.fill_bg_y.visible_banner footer, .banners-big.short-banner.small .maxwidth-banner, .fill_bg_y.visible_banner header .line-row{ max-width: 1392px; }
+body.fill_bg_y.visible_banner .banner.TOP_HEADER, body.fill_bg_y.visible_banner .banner.TOP_UNDERHEADER{max-width: 1392px;}
 .body .main > .container.with_error > .row > .content-md > .page404{max-width: 1136px;margin:auto;}
 .contacts-page-map + .contacts.contacts-page-map-overlay{max-width: 1168px;}
 

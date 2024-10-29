@@ -26,7 +26,7 @@ $(document).ready(function() {
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 1,
                     slidesToScroll: 1,
                 }
             },
@@ -36,11 +36,14 @@ $(document).ready(function() {
     toggleSlick('.service-1c-publications__items', param);
     toggleSlick('.service-1c-program__items', param);
     toggleSlick('.service-1c__prices--mobile', param);
+    toggleSlick('.program-services-quality__block', param);
+
     function updateSlider() {
         timer = setTimeout(() => {
             toggleSlick('.service-1c-publications__items', param);
             toggleSlick('.service-1c-program__items', param);
             toggleSlick('.service-1c__prices--mobile', param);
+            toggleSlick('.program-services-quality__block', param);
         }, 250);
     }
     $(window).resize(function(){
@@ -61,22 +64,67 @@ $(document).ready(function() {
         $accordionItem.toggleClass('active');
         $accordionContent.stop().slideToggle();
     });
-})
+    const reviewSliderParams = {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        variableWidth: true,
+        prevArrow: $('.programs-reviews__slider-prev'),
+        nextArrow: $('.programs-reviews__slider-next'),
+        infinite: true,
+        centerMode: false,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    variableWidth: false,
+                    arrows: false
+                }
+            },
+            {
+                breakpoint: 400,
+                settings: {
+                    slidesToShow: 1,
+                    variableWidth: false,
+                    arrows: false
+                }
+            }
+        ]
+    };
 
-//бургер
-$('.burger').on("click", function () {
-    $(this).toggleClass('c');
-    $(document).find("#mobilemenu").toggleClass('show');
-
-})
-
-//Футер
-$('.footer__menu-block-title').on('click', function (e) {
-    e.preventDefault();
-
-    if (!$(this).hasClass("active")) {
-        $(".footer__menu-block-items").slideUp(400);
+    function initReviewSlider() {
+        $('.programs-reviews__slider').slick(reviewSliderParams);
     }
-    $(this).toggleClass("active");
-    $(this).next().slideToggle();
+
+    // Инициализация слайдера при загрузке страницы
+    initReviewSlider();
+
+    // Обновление слайдера при изменении размера окна
+    $(window).resize(function() {
+        initReviewSlider();
+    });
+    $(document).on("click", ".program-services-quality__showmore--clients", function() {
+        const itemText = $(this).closest(".program-services-quality__item--clients").find('.program-services-quality__text--clients').text()
+
+        console.log(itemText)
+        $(document).find(".program-services-quality__fixed-popup--clients").find(".program-services-quality__fixed-popup-wrapper--clients").find("#popup-clients-text").html(itemText)
+        $(document).find(".program-services-quality__fixed-popup--clients").addClass('popup-show')
+    })
+    $(document).on("click", ".program-services-quality__fixed-popup-button--clients", function() {
+        $(".program-services-quality__fixed-popup--clients").removeClass("popup-show")
+    })
+    $(document).on("click", ".program-services-quality__fixed-popup--clients", function(e) {
+        $(".program-services-quality__fixed-popup--clients").removeClass("popup-show")
+    })
+    $(document).on("click", ".program-services-quality__fixed-popup-wrapper--clients", function(e) {
+        e.stopPropagation();
+    })
+    $('.program-services-quality__button.show-text-js.text-more, .program-services-quality__button.show-text-js.text-collapse').click((e => {
+        $(e.target).parent().children('.text-more').toggleClass('d-none');
+        $(e.target).parent().children('.text-collapse').toggleClass('d-none');
+        $(e.target).parent().children('.program-services-quality__text__full').toggleClass('d-none');
+        $(e.target).parent().children('.program-services-quality__text').toggleClass('transparent-color');
+    }));
 })
+
+
