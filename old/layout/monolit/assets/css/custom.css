@@ -1,0 +1,29 @@
+/*NOTE: This file is intended for programmers. Aspro technical support is not advised to work with him.*/
+.form  .form_center {    float: left;    width: 100%;}.form input[type="checkbox"] {    margin-right: 10px;    width: 16px;    height: 22px;    float: left;}.form label {        max-width: 80%;}
+/* Examples (uncomment to use):*/
+
+/* Expand site width */
+/* body .wrapper { max-width: 1400px !important;  } */
+
+/* Set site background image */
+/* body {  background: url(image_source) top no-repeat; }
+
+/* Hide compare button */
+/* a.compare_item { display: none !important;  }*/
+
+@media (max-width: 1160px) {
+	body .top_slider_wrapp .flexslider .slides>li {
+		background-size: contain!important;
+		background-repeat: no-repeat;
+	}
+}
+
+.item-review-count {
+    padding: 0px;
+    margin: 0px;
+    margin-top: -12px;
+}
+
+.rating {
+    height: 36px;
+}

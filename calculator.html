@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кейс: Калькулятор комбикорма</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fffaf5;
+      color: #333;
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    h1, h2 {
+      font-weight: 700;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .highlight {
+      background: #ffe8cc;
+      padding: 1rem;
+      border-left: 5px solid #ff9900;
+      border-radius: 0.5rem;
+    }
+    .code-block {
+      background: #f8f8f8;
+      padding: 0.75rem;
+      font-family: monospace;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    .portfolio-image img {
+        width: 100%;
+        object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mb-4">Кейс: Калькулятор комбикорма на WordPress</h1>
+    <div class="portfolio-image" style="text-align: center; padding: 40px 0;">
+        <img src="img/smol-khp/photo1.JPG" alt="Скриншот проекта" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+        <!-- <p style="margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+          Скриншот пользовательского интерфейса калькулятора комбикорма
+        </p> -->
+      </div>
+    <br>
+    <div class="section">
+      <h2>Задача</h2>
+      <p>Упростить и автоматизировать расчёты комбикорма для разных видов сельскохозяйственных животных, с возможностью гибкой настройки и получения отчётов в PDF.</p>
+    </div>
+
+    <div class="section">
+      <h2>Описание решения</h2>
+      <p>Разработан плагин WordPress, включающий как интерфейс калькулятора для пользователей, так и административную панель для управления данными.</p>
+    </div>
+
+    <div class="section">
+      <h2>Функции калькулятора</h2>
+      <ul>
+        <li>Выбор животного (бройлер, индейка, несушка и др.)</li>
+        <li>Выбор возраста (по неделям, дням, месяцам)</li>
+        <li>Ввод количества голов</li>
+        <li>Автоматический расчёт:</li>
+        <ul>
+          <li>Среднесуточной потребности (г/гол.)</li>
+          <li>Общего расхода за период (кг)</li>
+          <li>Расхода в мешках (по 25 кг)</li>
+        </ul>
+        <li>Изменение нормы вручную — пересчёт в реальном времени</li>
+        <li>Добавление нескольких животных в один расчёт</li>
+        <li>Скачивание отчёта в формате PDF</li>
+      </ul>
+      <div class="portfolio-image" style="text-align: center; padding: 40px 0;">
+        <img src="img/smol-khp/image-2.png" alt="Скриншот проекта" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+        <p style="margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+          Начальный вид калькулятора
+        </p>
+      </div>
+      <div class="portfolio-image" style="text-align: center; padding: 40px 0;">
+        <img src="img/smol-khp/image-3.png" alt="Скриншот проекта" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+        <p style="margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+          Выбор животного
+        </p>
+      </div>
+      <div class="portfolio-image" style="text-align: center; padding: 40px 0;">
+        <img src="img/smol-khp/image-4.png" alt="Скриншот проекта" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+        <p style="margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+          Выбор возраста
+        </p>
+      </div>
+      <div class="portfolio-image" style="text-align: center; padding: 40px 0;">
+        <img src="img/smol-khp/image-4.png" alt="Скриншот проекта" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+        <p style="margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+          Вывод результата на основе выбранных значений
+        </p>
+      </div>
+      <div class="portfolio-image" style="text-align: center; padding: 40px 0;">
+        <img src="img/smol-khp/image-5.png" alt="Скриншот проекта" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+        <p style="margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+          Пересчет результатов по формуле при смене количества голов и среднесуточной нормы
+        </p>
+      </div>
+      <div class="portfolio-image" style="text-align: center; padding: 40px 0;">
+        <img src="img/smol-khp/image-6.png" alt="Скриншот проекта" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+        <p style="margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+          Добавлено несколько животных
+        </p>
+      </div>
+      <div class="portfolio-image" style="text-align: center; padding: 40px 0;">
+        <img src="img/smol-khp/image-7.png" alt="Скриншот проекта" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+        <p style="margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+          Формирование PDF отчета при добавлении после добавления 2-х животных
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Админ-панель</h2>
+      <p>Плагин добавляет раздел калькулятора в админке, где можно:</p>
+      <ul>
+        <li>Добавлять/редактировать/удалять животных</li>
+        <li>Управлять возрастами</li>
+        <li>Настраивать формулы и нормы потребления</li>
+      </ul>
+      <br>
+      <div class="portfolio-image" style="text-align: center; padding: 40px 0;">
+        <img src="img/smol-khp/photo2.jpg" alt="Скриншот проекта" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+        <p style="margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+          Установка и активация плагина
+        </p>
+      </div>
+      <div class="portfolio-image" style="text-align: center; padding: 40px 0;">
+        <img src="img/smol-khp/photo3.jpg" alt="Скриншот проекта" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+        <p style="margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+          После активации плагина в левом меню добавляется раздел для управления калькулятором
+        </p>
+      </div>
+      <section class="portfolio-slider" style="padding: 60px 0; background: none;">
+        <div class="swiper mySwiper" style="max-width: 900px; margin: 0 auto;">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="img/smol-khp/photo4.JPG" alt="Слайд 1" style="width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+            </div>
+            <div class="swiper-slide">
+              <img src="img/smol-khp/photo5.JPG" alt="Слайд 2" style="width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+            </div>
+            <div class="swiper-slide">
+              <img src="img/smol-khp/photo6.JPG" alt="Слайд 3" style="width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+            </div>
+            <div class="swiper-slide">
+                <img src="img/smol-khp/photo7.JPG" alt="Слайд 3" style="width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+              </div>
+              <div class="swiper-slide">
+                <img src="img/smol-khp/photo8.JPG" alt="Слайд 3" style="width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+              </div>
+              <div class="swiper-slide">
+                <img src="img/smol-khp/photo9.JPG" alt="Слайд 3" style="width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+              </div>
+            <!-- Добавь сколько нужно слайдов -->
+          </div>
+      
+          <!-- Стрелки -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+      
+          <!-- Пагинация -->
+          <div class="swiper-pagination"></div>
+        </div>
+      
+        <p style="text-align:center;margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+            Настройка калькулятора в админ панели
+        </p>
+      </section>
+      <section class="portfolio-slider" style="padding: 60px 0; background: none;">
+        <div class="swiper mySwiper" style="max-width: 900px; margin: 0 auto;">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="img/smol-khp/photo9.JPG" alt="Слайд 1" style="width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+            </div>
+            <div class="swiper-slide">
+                <img src="img/smol-khp/photo10.JPG" alt="Слайд 2" style="width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+              </div>
+          </div>
+      
+          <!-- Стрелки -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+      
+          <!-- Пагинация -->
+          <div class="swiper-pagination"></div>
+        </div>
+      
+        <p style="text-align:center;margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+            Добавление нового животного в админке
+        </p>
+      </section>
+
+    </div>
+
+    <div class="section">
+      <h2>Техническая реализация</h2>
+      <ul>
+        <li>Калькулятор реализован в виде плагина с нуля</li>
+        <li>Для вставки на страницу используется шорткод <span class="code-block">[calculator]</span></li>
+        <li>Отчёты PDF формируются на лету на основе введённых данных</li>
+      </ul>
+    </div>
+
+    <section class="portfolio-slider" style="padding: 60px 0; background: none;">
+        <div class="swiper mySwiper" style="max-width: 900px; margin: 0 auto;">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="img/smol-khp/photo11.JPG" alt="Слайд 1" style="width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+            </div>
+            <div class="swiper-slide">
+                <img src="img/smol-khp/photo12.JPG" alt="Слайд 2" style="width: 100%; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+              </div>
+          </div>
+      
+          <!-- Стрелки -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+      
+          <!-- Пагинация -->
+          <div class="swiper-pagination"></div>
+        </div>
+      
+        <p style="text-align:center;margin-top: 16px; font-size: 1rem; color: #444; font-weight: 600;">
+            Для вывода на страницу калькулятора используется шорткод
+        </p>
+      </section>
+
+    <div class="section highlight">
+      <strong>Результат:</strong>
+      <a href="https://smolkhp.ru/">Ссылка на сайт</a>
+      <p>Удобный инструмент для расчёта комбикорма, который экономит время клиенту и повышает прозрачность и точность расчётов. Администраторы сайта могут гибко управлять всеми параметрами без необходимости вмешательства разработчика.</p>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    loop: true,
+    spaceBetween: 20,
+    centeredSlides: true,
+    grabCursor: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+  });
+</script>
+</body>
+</html>

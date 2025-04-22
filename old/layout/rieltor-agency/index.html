@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <meta name="robots" content="noindex">
+    <title>MST Test</title>
+</head>
+
+<body>
+    <header class="header" id="header">
+        <a href="index.html" class="header__logo">ESTATE</a>
+        <nav class="header__nav main-nav" id="menu">
+            <ul class="main-nav__list">
+                <li class="main-nav__item"><a href="/" class="main-nav__link">Home</a></li>
+                <li class="main-nav__item"><a href="/" class="main-nav__link">Projects</a></li>
+                <li class="main-nav__item"><a href="/" class="main-nav__link">Contacts</a></li>
+                <!-- More than 3 items,  -->
+                <!-- <li class="main-nav__item"><a href="" class="main-nav__link">About</a></li>
+                <li class="main-nav__item"><a href="" class="main-nav__link">Login</a></li>
+                <li class="main-nav__item"><a href="" class="main-nav__link">Buy</a></li> -->
+            </ul>
+        </nav>
+        <div class="burger" id="burger">
+            <div class="burger-bar burger-bar-top"></div>
+            <div class="burger-bar burger-bar-middle"></div>
+            <div class="burger-bar burger-bar-bottom"></div>
+        </div>
+    </header>
+    <main>
+        <section class="banner">
+            <div class="banner__content">
+                <h1 class="banner__title">Building Your Vision, Crafting Your Future</h1>
+                <div class="banner__content-info">
+                    <p class="banner__postitle">Expertly crafted homes and communities tailored to your lifestyle</p>
+                    <ul class="banner__list">
+                        <li class="banner__list-item"><p>Sustainable and innovative designs for modern living</p></li>
+                        <li class="banner__list-item"><p>Tailored homes starting from <span>$150,000</span></p></li>
+                        <li class="banner__list-item"><p>Over <span>15</span> years of expertise in real estate</p></li>
+                    </ul>
+                    <a class="btn banner__btn">Order</a>
+                </div>
+
+            </div>
+            <div class="banner__image">
+                <img src="assets/images/Kandinsky-1.jpg" alt="house">
+            </div>
+        </section>
+        <section class="info">
+            <div class="info__image"><img src="assets/images/DALLE-2024-09-13.webp" alt="house"></div>
+            <ul class="info__list">
+
+                <li class="info__item">
+                    <img src="assets/images/icons/info-item.svg" alt="element">
+                    <p>From the initial consultation to the final
+                        closing, we focus on delivering homes that match your vision and lifestyle.</p>
+                </li>
+                <li class="info__item">
+                    <img src="assets/images/icons/info-item.svg" alt="element">
+                    <p>Our architectural philosophy blends modern aesthetics with functionality, focusing on creating
+                        spaces that are both beautiful and sustainable.</p>
+                </li>
+                <li class="info__item">
+                    <img src="assets/images/icons/info-item.svg" alt="element">
+                    <p>Our team of experienced professionals is dedicated to offering personalized solutions, ensuring
+                        that your home-buying journey is smooth, transparent, and tailored to your unique requirements.
+                    </p>
+                </li>
+                <li class="info__item">
+                    <img src="assets/images/icons/info-item.svg" alt="element">
+                    <p>With over 15 years of experience, Estate has earned a reputation for delivering high-quality
+                        residential complexes that stand the test of time. </p>
+                </li>
+                <a class="btn btn--fullwidth info__btn">Order</a>
+            </ul>
+            <div class="info__image"><img src="assets/images/Kandinsky-3.jpg" alt="house"></div>
+            <div class="slider info__slider--mobile">
+                <div class="slides">
+                    <div class="slide"><img src="assets/images/DALLE-2024-09-13.webp" alt="Slide 1"></div>
+                    <div class="slide"><img src="assets/images/Kandinsky-3.jpg" alt="Slide 2"></div>
+                </div>
+
+                <div class="bullets">
+                    <span class="bullet active" onclick="currentSlide(0)"></span>
+                    <span class="bullet" onclick="currentSlide(1)"></span>
+                </div>
+            </div>
+        </section>
+        <section class="subscription">
+            <div class="subscription__inner">
+                <form action="/send" method="POST" name="subscription-form" id="subscriptionForm"
+                    class="subscription__form">
+                    <h2 class="subscription__title">
+                        Get the Latest Updates
+                    </h2>
+                    <input required type="text" placeholder="Name" name="name" class="field subscription__input">
+                    <input required type="email" placeholder="Email" name="email" class="field subscription__input">
+                    <label class="subscription__policy">
+                        <input type="checkbox" name="privacy-policy" id="privacy-policy">
+                        <span class="subscription__policy-check"></span>
+                        <span>I accept Privacy policy</span>
+                    </label>
+                    <button type="submit" name="submit-button" class="btn subscription__btn">Submit form</button>
+                </form>
+                <div class="subscription__image">
+                    <img src="assets/images/DALLE-2024-09-12-realestate.webp" alt="houses" class="subscription__image-bg">
+                    <img src="assets/images/main-image.png" alt="manager" class="subscription__image-static">
+                </div>
+            </div>
+        </section>
+        <section class="reviews">
+            <div>
+                <div class="reviews__slider-container">
+                    <div class="reviews__slider">
+                        <div class="reviews__slide">
+                            <div class="review">
+                                <div class="review-header">
+                                    <div class="reviews__avatar">
+                                        <img src="assets/images/Kandinsky-6.jpg" alt="Avatar 1" class="avatar">
+                                    </div>
+                                    <div class="review-info">
+                                        <h3 class="review-name">Sarah Davis</h3>
+                                        <div class="review-rating">
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="review-text">Fantastic service from start to finish. The architects and
+                                    designers were attentive to our preferences and offered creative solutions that made
+                                    the final outcome truly remarkable. Our new residential complex is beautiful and
+                                    functional.</p>
+                            </div>
+                        </div>
+                        <div class="reviews__slide">
+                            <div class="review">
+                                <div class="review-header">
+                                    <div class="reviews__avatar">
+                                        <img src="assets/images/Kandinsky-5.jpg" alt="Avatar 1" class="avatar">
+                                    </div>
+                                    <div class="review-info">
+                                        <h3 class="review-name">Emily Johnson</h3>
+                                        <div class="review-rating">
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="review-text">Our experience with this company was exceptional. From the
+                                    initial consultation to the final walkthrough, every detail was handled with
+                                    professionalism and care. The design exceeded our expectations, and we couldn’t be
+                                    happier with our new home</p>
+                            </div>
+                        </div>
+                        <div class="reviews__slide">
+                            <div class="review">
+                                <div class="review-header">
+                                    <div class="reviews__avatar">
+                                        <img src="assets/images/Kandinsky-7.jpg" alt="Avatar 1" class="avatar">
+                                    </div>
+
+                                    <div class="review-info">
+                                        <h3 class="review-name">Kate Smith</h3>
+                                        <div class="review-rating">
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                            <span class="star">★</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="review-text">I was impressed by the level of expertise and dedication shown throughout the project. The team understood our vision perfectly and delivered a stunning property that fits our needs. Highly recommended for anyone looking for quality and reliability.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button class="arrow arrow-left">&#10094;</button>
+                    <button class="arrow arrow-right">&#10095;</button>
+                    <div class="reviews__bullets">
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    <footer class="footer">
+        <ul class="footer__menu">
+            <li><a href="" class="footer__menu-link">consectetur</a></li>
+            <li><a href="" class="footer__menu-link">Adipiscing</a></li>
+            <li><a href="" class="footer__menu-link">tempor</a></li>
+        </ul>
+        <div class="footer__inner">
+            <div class="footer__row">
+                <a href="index.html" class="footer__logo">ESTATE</a>
+                <div class="footer__socials">
+                    <a href="/"><img src="assets/images/icons/inst.svg" alt="instagram"></a>
+                    <a href="/"><img src="assets/images/icons/tiktok.svg" alt="tiktok"></a>
+                    <a href="/"><img src="assets/images/icons/linkedin.svg" alt="linkedin"></a>
+                    <a href="/"><img src="assets/images/icons/facebook.svg" alt="facebook"></a>
+                    <a href="/"><img src="assets/images/icons/telegram.svg" alt="telegram"></a>
+                    <a href="/"><img src="assets/images/icons/youtube.svg" alt="youtube"></a>
+                </div>
+                <a class="btn footer__btn">Order</a>
+            </div>
+            <div class="footer__row footer__links">
+                <p class="footer__text">
+                    &#169; 2024, Copyright.
+                </p>
+                <a href="/" class="footer__text">
+                    Privacy policy
+                </a>
+                <a href="/" class="footer__text">
+                    Terms of Use
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/mo.js"></script>
+    <script src="assets/js/burgerMenu.js"></script>
+    <script src="assets/js/slider.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
