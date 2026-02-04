@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мария — Frontend & Web Developer</title>
+
+  <meta name="robots" content="noindex">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+  <!-- Libs -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+  <style>
+    :root {
+      --bg-main: #f6f7f8;
+      --bg-soft: #ffffff;
+      --text-main: #1c1c1e;
+      --text-muted: #6b6b6f;
+      --accent: #3a6cf4;
+      --line: rgba(0,0,0,0.08);
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    /* ---------- Header ---------- */
+
+    header {
+      padding: 120px 20px 80px;
+      background:
+        radial-gradient(1200px 400px at 50% -100px, rgba(58,108,244,0.12), transparent),
+        linear-gradient(180deg, #ffffff 0%, #f6f7f8 100%);
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 3.6rem);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    header p {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+
+    /* ---------- Sections ---------- */
+
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    /* ---------- About ---------- */
+
+    .about {
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      padding: 60px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.04);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+    }
+
+    .about p {
+      margin-bottom: 16px;
+    }
+
+    .about strong {
+      font-weight: 500;
+    }
+
+    .skills h4 {
+      margin: 28px 0 12px;
+      font-weight: 500;
+    }
+
+    .skills ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .skills li {
+      margin-bottom: 6px;
+      color: var(--text-muted);
+    }
+
+    /* ---------- Portfolio ---------- */
+
+    .swiper {
+      padding-bottom: 60px;
+    }
+
+    .swiper-slide {
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+      transition: transform 0.4s ease;
+    }
+
+    .swiper-slide:hover {
+      transform: translateY(-6px);
+    }
+
+    .project-image img {
+      width: 100%;
+      display: block;
+    }
+
+    .project-content {
+      padding: 28px;
+    }
+
+    .project-content h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    .project-content p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .project-content a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ---------- Footer ---------- */
+
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about {
+        padding: 40px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header data-aos="fade-down">
+  <h1>Мария — Frontend & Web Developer</h1>
+  <p>
+    UX/UI дизайн, адаптивная верстка, фронтенд-разработка и WordPress.
+    Создаю визуально выверенные и технически устойчивые интерфейсы.
+  </p>
+</header>
+
+<section data-aos="fade-up">
+  <div class="about">
+    <div class="about-grid">
+      <div>
+        <h2 class="section-title">Обо мне</h2>
+        <p>
+          Я UX/UI дизайнер и фронтенд-разработчик с сильным визуальным вкусом
+          и инженерным мышлением.
+        </p>
+        <p>
+          Специализируюсь на кроссбраузерной адаптивной верстке по макетам Figma,
+          создании интерфейсов и сборке проектов под реальные бизнес-задачи.
+        </p>
+        <p>
+          <strong>Опыт в веб-разработке — 5 лет</strong>, включая коммерческие проекты,
+          работу в IT-компании и собственные pet-проекты.
+        </p>
+      </div>
+
+      <div class="skills">
+        <h4>Дизайн</h4>
+        <ul>
+          <li>UX/UI дизайн, сетки, композиция</li>
+          <li>Figma (AutoLayout, компоненты, UI-Kit)</li>
+          <li>Adobe Photoshop, Illustrator</li>
+          <li>Скетчинг и графический планшет</li>
+        </ul>
+
+        <h4>Фронтенд</h4>
+        <ul>
+          <li>HTML, CSS, JavaScript</li>
+          <li>Vue, Nuxt, Angular, React</li>
+          <li>Анимации и интерактив</li>
+        </ul>
+
+        <h4>Web / CMS</h4>
+        <ul>
+          <li>WordPress (ACF, WooCommerce, плагины)</li>
+          <li>Laravel, PHP</li>
+          <li>1C-Битрикс (сертификат)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-aos="fade-up">
+  <h2 class="section-title">Проекты</h2>
+
+  <div class="swiper">
+    <div class="swiper-wrapper">
+
+      <div class="swiper-slide">
+        <div class="project-image">
+          <img src="img/Cover.png" alt="Калькулятор комбикорма">
+        </div>
+        <div class="project-content">
+          <h3>
+            <a href="calculator.html">Калькулятор комбикорма</a>
+          </h3>
+          <p>Разработка кастомного WordPress-плагина с логикой расчётов</p>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="project-image">
+          <img src="img/Cover-diamed.JPG" alt="WordPress ACF">
+        </div>
+        <div class="project-content">
+          <h3>
+            <a href="invitro.html">Расширение функционала WordPress</a>
+          </h3>
+          <p>ACF, кастомные разделы админки, доработка Elementor</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Мария — Frontend & Web Developer
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<script>
+  AOS.init({
+    duration: 900,
+    easing: 'ease-out-cubic',
+    once: true
+  });
+
+  new Swiper('.swiper', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      900: {
+        slidesPerView: 2
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
