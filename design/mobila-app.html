@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ПРО Движение — Мобильное приложение | UX/UI кейс</title>
+  
+  <!-- Bootstrap & Fonts -->
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <meta name="robots" content="noindex">
+  
+  <style>
+    /* === ЦВЕТОВАЯ ГАММА КЕЙСА === */
+    :root {
+      --primary-bg: #EBF7FF;
+      --primary-accent: #6DB6FE;
+      --primary-deep: #0C1A2D;
+      
+      --white: #FFFFFF;
+      --gray-light: #F5F9FF;
+      --gray-soft: #E1ECF5;
+      
+      --radius-xl: 40px;
+      --radius-lg: 32px;
+      --radius-md: 24px;
+      --radius-sm: 16px;
+      --radius-xs: 12px;
+      
+      --shadow-soft: 0 20px 40px rgba(11, 30, 50, 0.08);
+      --shadow-strong: 0 30px 60px rgba(11, 30, 50, 0.12);
+      --shadow-accent: 0 15px 35px rgba(109, 182, 254, 0.25);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', 'Manrope', sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--primary-deep);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* === ФОН С ЭФФЕКТОМ === */
+    .case-bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 30%, rgba(107, 182, 254, 0.08) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 70%, rgba(11, 26, 45, 0.04) 0%, transparent 45%),
+                  var(--primary-bg);
+      z-index: -2;
+    }
+    
+    .dot-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(var(--primary-accent) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.15;
+      z-index: -1;
+    }
+    
+    /* === ТИПОГРАФИКА === */
+    h1, h2, h3, h4, h5 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+      color: var(--primary-deep);
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 80px;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-accent), var(--primary-deep));
+      border-radius: 10px;
+    }
+    
+    .section-subtitle {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: rgba(12, 26, 45, 0.7);
+      margin-bottom: 3rem;
+      max-width: 700px;
+    }
+    
+    /* === ХЕДЕР КЕЙСА === */
+    .case-header {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 120px 40px 60px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    
+    .case-header-left {
+      max-width: 700px;
+    }
+    
+    .case-category {
+      display: inline-block;
+      padding: 8px 18px;
+      background: var(--white);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary-deep);
+      border: 1px solid rgba(109, 182, 254, 0.3);
+      backdrop-filter: blur(10px);
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+    }
+    
+    .case-header h1 {
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: var(--primary-deep);
+    }
+    
+    .case-header-description {
+      font-size: 1.2rem;
+      color: rgba(12, 26, 45, 0.7);
+      margin-bottom: 30px;
+    }
+    
+    .case-meta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 30px;
+    }
+    
+    .case-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .case-meta-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(12, 26, 45, 0.5);
+    }
+    
+    .case-meta-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-deep);
+    }
+    
+    /* === ГЕРО-БАННЕР === */
+    .hero-app-showcase {
+      max-width: 1400px;
+      margin: 0 auto 80px;
+      padding: 0 40px;
+      position: relative;
+    }
+    
+    .hero-mockup-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .hero-phone-mockup {
+      width: 320px;
+      height: 772px;
+      background: var(--white);
+      border-radius: 48px;
+      overflow: hidden;
+      box-shadow: var(--shadow-strong);
+      border: 1px solid rgba(255,255,255,0.5);
+      position: relative;
+    }
+    .hero-phone-mockup img {
+        width: 100%;
+        height: 100%;
+        
+    }
+    
+    .hero-phone-screen {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* === СТИЛЬ ДЛЯ ТЕЛЕФОНОВ С ЗАКРУГЛЕННЫМИ КРАЯМИ === */
+    .phone-frame {
+      width: 100%;
+      height: auto;
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,0.8);
+      background: var(--white);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    .phone-frame:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-strong);
+    }
+    
+    .phone-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* === БЛОК ДИЗАЙН-СИСТЕМЫ === */
+    .design-system-section {
+      max-width: 1200px;
+      margin: 120px auto;
+      padding: 0 40px;
+    }
+    
+    .design-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 60px;
+      background: var(--white);
+      padding: 60px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    @media (max-width: 992px) {
+      .design-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Colors */
+    .color-palette-large {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 20px;
+    }
+    
+    .color-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .color-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 3px solid rgba(255,255,255,0.5);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+    
+    .color-name {
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .color-hex {
+      font-size: 0.8rem;
+      color: rgba(12, 26, 45, 0.6);
+      font-family: monospace;
+    }
+    
+    /* Fonts */
+    .font-specimen {
+      margin-bottom: 25px;
+    }
+    
+    .font-sample-inter {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .font-sample-manrope {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .font-details {
+      font-size: 0.9rem;
+      color: rgba(12, 26, 45, 0.6);
+    }
+    
+    /* Logo */
+    .logo-showcase {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    
+    .logo-placeholder {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, var(--primary-accent), var(--primary-deep));
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+      font-weight: 800;
+      box-shadow: var(--shadow-accent);
+    }
+    
+    .logo-variants {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    /* === ГАЛЕРЕЯ МОБИЛЬНЫХ МАКЕТОВ === */
+    .mobile-mockups-section {
+      max-width: 1400px;
+      margin: 0 auto 120px;
+      padding: 0 40px;
+    }
+    
+    .mobile-mockups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 40px;
+      margin-top: 50px;
+    }
+    
+    .mobile-mockup-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .mobile-mockup-frame {
+      width: 260px;
+      height: 530px;
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,0.8);
+      margin-bottom: 15px;
+    }
+    
+    .mobile-mockup-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .mockup-label {
+      font-weight: 600;
+      color: var(--primary-deep);
+      font-size: 1rem;
+    }
+    
+    /* === СЛАЙДЕР ДЛЯ ДЕСКТОП СКРИНШОТОВ === */
+    .desktop-slider-section {
+      max-width: 1400px;
+      margin: 0 auto 120px;
+      padding: 0 40px;
+    }
+    
+    .swiper-desktop {
+      width: 100%;
+      height: 550px;
+      border-radius: var(--radius-lg);
+      margin-top: 40px;
+    }
+    
+    .swiper-slide-desktop {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+    
+    .desktop-screenshot {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+    
+    .swiper-button-next, .swiper-button-prev {
+      color: var(--primary-deep);
+      background: var(--white);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .swiper-button-next:after, .swiper-button-prev:after {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    
+    /* === БЛОК С ПАРАЛЛАКС ЭФФЕКТОМ === */
+    .parallax-section {
+      max-width: 1400px;
+      margin: 0 auto 120px;
+      padding: 0 40px;
+    }
+    
+    .parallax-container {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: start;
+    }
+    
+    @media (max-width: 992px) {
+      .parallax-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .desktop-long-mockup {
+      width: 100%;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-strong);
+      position: sticky;
+      top: 30px;
+    }
+    
+    .desktop-long-mockup img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .mobile-parallax-column {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    
+    .parallax-mobile-item {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease;
+    }
+    
+    .parallax-mobile-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* === БЛОК С FIGMA IFRAME === */
+    .figma-section {
+      max-width: 1400px;
+      margin: 0 auto 80px;
+      padding: 0 40px;
+    }
+    
+    .figma-container {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-strong);
+      margin-top: 40px;
+    }
+    
+    .figma-iframe {
+      width: 100%;
+      height: 700px;
+      border: none;
+    }
+    
+    .figma-button-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    
+    .figma-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 40px;
+      background: var(--primary-deep);
+      color: white;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: var(--shadow-accent);
+    }
+    
+    .figma-button:hover {
+      background: var(--primary-accent);
+      color: var(--primary-deep);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(109, 182, 254, 0.4);
+    }
+    
+    .figma-button i {
+      font-size: 1.4rem;
+    }
+    
+    /* === ФУТЕР === */
+    .case-footer {
+      max-width: 1400px;
+      margin: 80px auto 0;
+      padding: 60px 40px 40px;
+      border-top: 1px solid rgba(12, 26, 45, 0.1);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary-deep);
+      text-decoration: none;
+      font-weight: 600;
+      transition: gap 0.3s ease;
+    }
+    
+    .back-link:hover {
+      gap: 15px;
+      color: var(--primary-accent);
+    }
+    
+    /* === АНИМАЦИИ === */
+    [data-aos="mockup-fade"] {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+    
+    [data-aos="mockup-fade"].aos-animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .parallax-mobile-item {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    .parallax-mobile-item:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-strong);
+    }
+    
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 2.2rem;
+      }
+      .case-header {
+        padding: 80px 20px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Фоновые элементы -->
+  <div class="case-bg-overlay"></div>
+  <div class="dot-pattern"></div>
+
+  <!-- ХЕДЕР КЕЙСА -->
+  <header class="case-header" data-aos="fade-down">
+    <div class="case-header-left">
+      <span class="case-category"><i class="fas fa-road me-2"></i> Мобильное приложение • Веб-платформа</span>
+      <h1>ПРО Движение<br>Умный помощник в пути</h1>
+      <p class="case-header-description">Интуитивное мобильное приложение и веб-кабинет для мониторинга дорожной обстановки, планирования маршрутов и аналитики поездок.</p>
+      
+      <div class="case-meta-grid">
+        <div class="case-meta-item">
+          <span class="case-meta-label">Роль</span>
+          <span class="case-meta-value">UX/UI Дизайнер</span>
+        </div>
+        <div class="case-meta-item">
+          <span class="case-meta-label">Платформы</span>
+          <span class="case-meta-value">iOS • Android • Web</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ГЕРО-БАННЕР С ПРИЛОЖЕНИЕМ -->
+  <section class="hero-app-showcase" data-aos="mockup-fade">
+    <div class="hero-mockup-wrapper">
+      <div class="hero-phone-mockup">
+        <img src="../img/design/mobile/777.svg" alt="Приложение дорожного движения" class="hero-phone-screen">
+      </div>
+      <div class="hero-phone-mockup">
+        <img src="../img/design/mobile/111.svg" alt="Карта маршрутов" class="hero-phone-screen">
+      </div>
+    </div>
+  </section>
+
+  <!-- ДИЗАЙН-СИСТЕМА: ШРИФТЫ, ЦВЕТА, ЛОГОТИП -->
+  <section class="design-system-section">
+    <h2 class="section-title" data-aos="mockup-fade">Дизайн-система</h2>
+    <p class="section-subtitle" data-aos="mockup-fade" data-aos-delay="50">Сбалансированная палитра, современная типографика и минималистичный знак бренда</p>
+    
+    <div class="design-grid" data-aos="mockup-fade" data-aos-delay="100">
+      <!-- Цвета + Логотип -->
+      <div>
+        <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--primary-deep);">Цветовая палитра</h3>
+        <div class="color-palette-large">
+          <div class="color-card">
+            <div class="color-circle" style="background: #EBF7FF; border: 2px solid #6DB6FE;"></div>
+            <span class="color-name">Воздушный</span>
+            <span class="color-hex">#EBF7FF</span>
+          </div>
+          <div class="color-card">
+            <div class="color-circle" style="background: #6DB6FE;"></div>
+            <span class="color-name">Акцентный</span>
+            <span class="color-hex">#6DB6FE</span>
+          </div>
+          <div class="color-card">
+            <div class="color-circle" style="background: #0C1A2D;"></div>
+            <span class="color-name">Глубокий</span>
+            <span class="color-hex">#0C1A2D</span>
+          </div>
+        </div>
+        
+        <h3 style="font-size: 1.8rem; font-weight: 700; margin: 50px 0 30px; color: var(--primary-deep);">Логотип</h3>
+        <div class="logo-showcase">
+          <div class="logo-placeholder">
+            <img src="../img/design/mobile/logotyp.svg" alt="">
+          </div>
+          <div class="logo-variants">
+            <span style="font-weight: 700; font-size: 1.5rem; color: var(--primary-deep);">ПРО Движение</span>
+            <span style="color: rgba(12,26,45,0.6);">Монохромный • Полноцветный • Знак</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Типографика -->
+      <div>
+        <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--primary-deep);">Типографика</h3>
+        
+        <!-- <div class="font-specimen">
+          <div class="font-sample-inter" style="font-family: 'Inter';">Inter</div>
+          <div class="font-details">Inter Bold / Medium / Regular — для интерфейсов, микротекстов, навигации</div>
+        </div> -->
+        
+        <div class="font-specimen" style="margin-top: 35px;">
+          <div class="font-sample-manrope" style="font-family: 'Montserrat';">Montserrat</div>
+          
+        </div>
+        
+        <div style="margin-top: 40px; padding: 25px; background: var(--gray-light); border-radius: var(--radius-sm);">
+          <span style="font-weight: 800; font-size: 2rem; font-family: 'Manrope';">Дорожная карта</span><br>
+          <span style="font-weight: 500; font-size: 1.2rem; font-family: 'Inter';">6 минут до финиша</span><br>
+          <span style="font-weight: 400; font-family: 'Inter'; color: rgba(12,26,45,0.7);">Свободная трасса, без пробок</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- МОБИЛЬНЫЕ МАКЕТЫ — 10 ШТУК В ФОРМЕ ТЕЛЕФОНА -->
+  <section class="mobile-mockups-section">
+    <h2 class="section-title" data-aos="mockup-fade">Экраны мобильного приложения</h2>
+    <p class="section-subtitle" data-aos="mockup-fade" data-aos-delay="50">Ключевые сценарии: маршруты, уведомления, статистика</p>
+    
+    <div class="mobile-mockups-grid">
+      <!-- 10 карточек телефонов с закругленными углами -->
+      <div class="mobile-mockup-item" data-aos="mockup-fade" data-aos-delay="50">
+        <div class="mobile-mockup-frame">
+          <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=300&q=80" alt="Экран 1">
+        </div>
+        <span class="mockup-label">Главный экран</span>
+      </div>
+      <div class="mobile-mockup-item" data-aos="mockup-fade" data-aos-delay="100">
+        <div class="mobile-mockup-frame">
+          <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=300&q=80" alt="Экран 2">
+        </div>
+        <span class="mockup-label">Навигация</span>
+      </div>
+      <div class="mobile-mockup-item" data-aos="mockup-fade" data-aos-delay="150">
+        <div class="mobile-mockup-frame">
+          <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=300&q=80" alt="Экран 3">
+        </div>
+        <span class="mockup-label">Детали маршрута</span>
+      </div>
+      <div class="mobile-mockup-item" data-aos="mockup-fade" data-aos-delay="200">
+        <div class="mobile-mockup-frame">
+          <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80" alt="Экран 4">
+        </div>
+        <span class="mockup-label">Аналитика</span>
+      </div>
+      <div class="mobile-mockup-item" data-aos="mockup-fade" data-aos-delay="250">
+        <div class="mobile-mockup-frame">
+          <img src="https://images.unsplash.com/photo-1611162618619-4a27c5a3a3a0?w=300&q=80" alt="Экран 5">
+        </div>
+        <span class="mockup-label">Профиль</span>
+      </div>
+      <div class="mobile-mockup-item" data-aos="mockup-fade" data-aos-delay="300">
+        <div class="mobile-mockup-frame">
+          <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=300&q=80" alt="Экран 6">
+        </div>
+        <span class="mockup-label">Уведомления</span>
+      </div>
+      <div class="mobile-mockup-item" data-aos="mockup-fade" data-aos-delay="350">
+        <div class="mobile-mockup-frame">
+          <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=300&q=80" alt="Экран 7">
+        </div>
+        <span class="mockup-label">Парковки</span>
+      </div>
+      <div class="mobile-mockup-item" data-aos="mockup-fade" data-aos-delay="400">
+        <div class="mobile-mockup-frame">
+          <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=300&q=80" alt="Экран 8">
+        </div>
+        <span class="mockup-label">История</span>
+      </div>
+      <div class="mobile-mockup-item" data-aos="mockup-fade" data-aos-delay="450">
+        <div class="mobile-mockup-frame">
+          <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80" alt="Экран 9">
+        </div>
+        <span class="mockup-label">Настройки</span>
+      </div>
+      <div class="mobile-mockup-item" data-aos="mockup-fade" data-aos-delay="500">
+        <div class="mobile-mockup-frame">
+          <img src="https://images.unsplash.com/photo-1611162618619-4a27c5a3a3a0?w=300&q=80" alt="Экран 10">
+        </div>
+        <span class="mockup-label">Платежи</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- СЛАЙДЕР ДЛЯ ДЕСКТОП САЙТА -->
+  <section class="desktop-slider-section">
+    <h2 class="section-title" data-aos="mockup-fade">Веб-версия • Десктоп</h2>
+    <p class="section-subtitle" data-aos="mockup-fade" data-aos-delay="50">Аналитическая панель, личный кабинет, управление</p>
+    
+    <div class="swiper swiper-desktop" data-aos="mockup-fade" data-aos-delay="100">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide swiper-slide-desktop">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" alt="Десктоп 1" class="desktop-screenshot">
+        </div>
+        <div class="swiper-slide swiper-slide-desktop">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" alt="Десктоп 2" class="desktop-screenshot">
+        </div>
+        <div class="swiper-slide swiper-slide-desktop">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" alt="Десктоп 3" class="desktop-screenshot">
+        </div>
+        <div class="swiper-slide swiper-slide-desktop">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" alt="Десктоп 4" class="desktop-screenshot">
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+
+  <!-- БЛОК С ПАРАЛЛАКС ЭФФЕКТОМ: ДЛИННЫЙ ДЕСКТОП + МОБИЛКИ -->
+  <section class="parallax-section">
+    <h2 class="section-title" data-aos="mockup-fade">Сайт + Мобильная версия</h2>
+    <p class="section-subtitle" data-aos="mockup-fade" data-aos-delay="50">Единый стиль на всех платформах</p>
+    
+    <div class="parallax-container">
+      <!-- Слева длинный десктоп макет -->
+      <div class="desktop-long-mockup" data-aos="mockup-fade" data-aos-delay="100">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&q=80" alt="Длинный макет десктоп">
+      </div>
+      
+      <!-- Справа колонка мобилок с параллакс эффектом -->
+      <div class="mobile-parallax-column">
+        <div class="parallax-mobile-item" data-aos="mockup-fade" data-aos-delay="150">
+          <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=300&q=80" alt="Мобилка 1">
+        </div>
+        <div class="parallax-mobile-item" data-aos="mockup-fade" data-aos-delay="200">
+          <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=300&q=80" alt="Мобилка 2">
+        </div>
+        <div class="parallax-mobile-item" data-aos="mockup-fade" data-aos-delay="250">
+          <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=300&q=80" alt="Мобилка 3">
+        </div>
+        <div class="parallax-mobile-item" data-aos="mockup-fade" data-aos-delay="300">
+          <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80" alt="Мобилка 4">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК С ИНТЕРАКТИВНЫМ IFRAME FIGMA -->
+  <section class="figma-section">
+    <h2 class="section-title" data-aos="mockup-fade">Интерактивный прототип</h2>
+    <p class="section-subtitle" data-aos="mockup-fade" data-aos-delay="50">Тестируйте пользовательские сценарии прямо в браузере</p>
+    
+    <div class="figma-container" data-aos="mockup-fade" data-aos-delay="100">
+      <iframe class="figma-iframe" src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/12345/ПРО Движение" allowfullscreen></iframe>
+    </div>
+    
+    <div class="figma-button-wrapper" data-aos="mockup-fade" data-aos-delay="150">
+      <a href="#" target="_blank" class="figma-button">
+        <i class="fab fa-figma"></i> Открыть в Figma
+      </a>
+    </div>
+  </section>
+
+  <!-- ФУТЕР С ВОЗВРАТОМ -->
+  <footer class="case-footer">
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Вернуться к портфолио
+    </a>
+    <div style="color: rgba(12,26,45,0.5);">
+      ПРО Движение • 2025
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script>
+    // Инициализация AOS
+    AOS.init({
+      duration: 900,
+      once: true,
+      offset: 60,
+      easing: 'ease-out-cubic'
+    });
+    
+    // Инициализация Swiper для десктоп слайдера
+    const swiperDesktop = new Swiper('.swiper-desktop', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      speed: 600,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 1.5,
+        },
+        1200: {
+          slidesPerView: 2,
+        }
+      }
+    });
+    
+    // Параллакс эффект при скролле (легкая анимация смещения)
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const parallaxItems = document.querySelectorAll('.parallax-mobile-item');
+      
+      parallaxItems.forEach((item, index) => {
+        const speed = 0.1;
+        const yPos = -(scrollY * speed * (index + 0.5));
+        if (window.innerWidth > 992) {
+          item.style.transform = `translateY(${yPos}px)`;
+        }
+      });
+    });
+    
+    // Наблюдение за AOS анимацией
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -30px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('aos-animate');
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('[data-aos="mockup-fade"]').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
