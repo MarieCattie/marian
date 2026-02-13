@@ -235,7 +235,7 @@
     
     .preview-container {
       display: grid;
-      grid-template-columns: 1fr 0.7fr;
+      grid-template-columns: 1fr;
       gap: 30px;
       align-items: start;
     }
@@ -247,6 +247,7 @@
     }
     
     .desktop-preview {
+      height: 880px;
       background: var(--surface);
       border-radius: var(--radius-lg);
       overflow: hidden;
@@ -290,7 +291,7 @@
     
     .preview-iframe {
       width: 100%;
-      height: 550px;
+      height: 832px;
       border: none;
       display: block;
     }
@@ -683,23 +684,14 @@
       <div class="mobile-preview" data-aos="fade-up" data-aos-delay="150">
         <div class="mobile-notch"></div>
         <div class="mobile-frame">
-          <iframe class="mobile-iframe" src="about:blank" srcdoc='
-            <!-- СЮДА ВСТАВЛЯЕТЕ КОД МОБИЛЬНОЙ ВЕРСИИ -->
-            <div style="display:flex;align-items:center;justify-content:center;height:100%;background:#f5f7fa;font-family:Inter;color:#4a5568;padding:20px;text-align:center;">
-              <div>
-                <i class="fas fa-mobile-alt" style="font-size:40px;color:#3B71FE;margin-bottom:16px;"></i>
-                <h4 style="margin-bottom:8px;">Мобильная версия</h4>
-                <p style="font-size:14px;">Адаптивная верстка</p>
-              </div>
-            </div>
-          '></iframe>
+          <iframe class="mobile-iframe" src="1eska.ru/1eska.ru/index.html"></iframe>
         </div>
         
         <div class="preview-actions">
-          <a href="#" class="btn-preview" target="_blank">
+          <a href="https://1eska.ru/" class="btn-preview" target="_blank">
             <i class="fas fa-external-link-alt"></i> Открыть проект
           </a>
-          <a href="#" class="btn-code">
+          <a href="https://github.com/MarieCattie/marian/blob/master/layout/1eska.ru/1eska.ru/index.html" class="btn-code">
             <i class="fas fa-code"></i> Исходный код
           </a>
         </div>
@@ -778,7 +770,7 @@
   </section>
 
   <!-- БЛОК КОДА -->
-  <section class="code-section">
+  <section class="code-section" style="display: none;">
     <h2 class="section-title" data-aos="fade-up">Исходный код</h2>
     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="50">
       Фрагменты ключевых компонентов — структура, стили, логика
