@@ -178,6 +178,140 @@
         padding: 40px 30px;
       }
     }
+    /* ---------- Figma block (full width, animated) ---------- */
+    .figma-full {
+      position: relative;
+      width: 100%;
+      /* background: var(--bg-soft); */
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.02) inset;
+      border-radius: 40px 40px 0 0;  /* скруглены только верхние углы, чтобы блок выглядел цельным */
+      padding: 80px 20px;
+      margin: 0 auto;
+      transition: box-shadow 0.4s ease, transform 0.4s ease;
+      /* лёгкая анимация при наведении */
+    }
+
+    .figma-design-line {
+      position: absolute;
+      top: 30px;
+      left: -32px;
+    }
+
+    .figma-full:hover {
+      transform: scale(1.002);
+    }
+
+    .figma-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .figma-header {
+      position: relative;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .figma-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin: 0;
+      color: var(--text-main);
+    }
+
+    .figma-header .project-badge, .project-badge {
+      color: rgba(37, 32, 99, 0.876);
+      font-size: 0.95rem;
+      background: rgba(58,108,244,0.08);
+      padding: 8px 18px;
+      border-radius: 60px;
+      font-weight: 400;
+    }
+    .figma-header.figma-header--cases .project-badge {
+      background: rgba(244, 58, 114, 0.08);
+      color: rgba(214, 8, 70, 0.876);
+    }
+
+    .project-badge--case {
+      display: inline-flex;
+      background: rgba(244, 132, 58, 0.08);
+      color: #f2500a;
+    }
+
+    .figma-iframe-wrapper {
+      border-radius: 32px;
+      overflow: hidden;
+      background: #eef0f2;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.2);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .figma-iframe-wrapper iframe {
+      display: block;
+      width: 100%;
+      height: 600px;
+      border: none;
+      background: #ffffff;
+    }
+
+    /* подпись, что в фигме несколько проектов */
+    .figma-note {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      letter-spacing: 0.2px;
+    }
+
+    .figma-note span {
+      background: rgba(0,0,0,0.02);
+      padding: 6px 14px;
+      border-radius: 60px;
+      border: 1px solid var(--line);
+    }
+
+    /* ---------- Footer ---------- */
+
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about {
+        padding: 40px 30px;
+      }
+
+      .figma-header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .figma-iframe-wrapper iframe {
+        height: 450px;
+      }
+
+      .figma-full {
+        border-radius: 30px 30px 0 0;
+        padding: 50px 16px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .figma-iframe-wrapper iframe {
+        height: 350px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -186,7 +320,7 @@
   <h1>Мария — Frontend & Web Developer</h1>
   <p>
     UX/UI дизайн, адаптивная верстка, фронтенд-разработка и WordPress.
-    Создаю визуально выверенные и технически устойчивые интерфейсы.
+    Создаю эстетичные и функциональные интерфейсы.
   </p>
 </header>
 
@@ -235,14 +369,63 @@
     </div>
   </div>
 </section>
+<!-- ========== Анимированный блок на всю ширину с iframe Figma ========== -->
+<div class="figma-full" data-aos="fade-up" data-aos-duration="1000">
+  <div class="figma-container">
+    <div class="figma-header">
+      <h2>Портфолио дизайнера</h2>
+      <div class="figma-design-line"><img src="img/line.svg" alt="">
+      </div>
+      <div class="project-badge">Figma • Дизайн</div>
+    </div>
 
+    <div class="figma-iframe-wrapper">
+      <!-- Встроенный Figma еслйм с портфолио.
+           Ссылка ведет на публичный файл, где показаны несколько страниц (проектов).
+           Чтобы было наглядно — используем пример портфолио с разными экранами.
+           При необходимости ссылку можно заменить на актуальную. -->
+     <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="800" src="https://embed.figma.com/design/naylRQNgoICbEoQEqLPJ0t/%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE-%D0%9C%D0%B0%D1%80%D0%B8%D1%8F?node-id=3-35876&embed-host=share" allowfullscreen></iframe>
+    </div>
+
+    <div class="figma-note">
+      <span>⬇️ В Figma каждый проект на отдельной странице — коммерческие и личные проекты</span>
+    </div>
+  </div>
+</div>
 <section data-aos="fade-up">
-  <h2 class="section-title">Проекты</h2>
+  <div class="figma-header figma-header--cases">
+      <h2>Проекты</h2>
+      <div class="project-badge">Кейсы • Дизайн • Разработка</div>
+    </div>
 
   <div class="swiper">
     <div class="swiper-wrapper">
-
       <div class="swiper-slide">
+        <div class="project-image">
+          <img src="img/Cover-fashionshop.JPG" alt="Интернет-магазин одежды">
+        </div>
+        <div class="project-content">
+          <h3>
+            <a href="design/fashion-shop.html">Интернет-магазин одежды</a>
+          </h3>
+          <p>UX/UI дизайн для интернет-магазина женской одежды</p>
+          <div class="project-badge project-badge--case">Коммерческий</div>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="project-image">
+          <img src="img/Cover-mobile.JPG" alt="Верстка и интеграция">
+        </div>
+        <div class="project-content">
+          <h3>
+            <a href="design/mobile-app.html">UX/UI-дизайн мобильного приложения</a>
+          </h3>
+          
+            <p>UX/UI дизайн для мобильного приложения Управления дорожного движения</p>
+          <div class="project-badge project-badge--case">Коммерческий</div>
+        </div>
+      </div>
+<div class="swiper-slide">
         <div class="project-image">
           <img src="img/Cover.png" alt="Калькулятор комбикорма">
         </div>
@@ -251,6 +434,19 @@
             <a href="calculator.html">Калькулятор комбикорма</a>
           </h3>
           <p>Разработка кастомного WordPress-плагина с логикой расчётов</p>
+          <div class="project-badge project-badge--case">Коммерческий</div>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="project-image">
+          <img src="img/Cover-1eska.JPG" alt="Верстка и интеграция">
+        </div>
+        <div class="project-content">
+          <h3>
+            <a href="layout/1eska.html">Верстка и интеграция</a>
+          </h3>
+          <p>Верстка многостраничного сайта и интеграция в CMS 1С Битрикс</p>
+          <div class="project-badge project-badge--case">Коммерческий</div>
         </div>
       </div>
 
@@ -263,6 +459,7 @@
             <a href="invitro.html">Расширение функционала WordPress</a>
           </h3>
           <p>ACF, кастомные разделы админки, доработка Elementor</p>
+          <div class="project-badge project-badge--case">Коммерческий</div>
         </div>
       </div>
 
@@ -274,7 +471,7 @@
 </section>
 
 <footer>
-  © 2025 Мария — Frontend & Web Developer
+  © 2026 Мария — Design, Frontend & Web Developer
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

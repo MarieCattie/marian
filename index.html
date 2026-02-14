@@ -15,7 +15,7 @@
   --bg-paper: #ffffff;
   --ink: #1a1a1a;
   --ink-soft: #5a5a5a;
-  --accent: #3f4bd8;
+  --accent: #e44167;
   --accent-light: #6a75e8;
   --gold: #d4af37;
   --gold-light: rgba(212, 175, 55, 0.15);
@@ -24,6 +24,15 @@
   --radius-sm: 12px;
   --shadow-lg: 0 40px 100px rgba(0,0,0,0.1);
   --shadow-md: 0 20px 60px rgba(0,0,0,0.08);
+}
+@font-face {
+  font-family: 'Americana';
+  src: url(fonts/americanatrus_lat.otf);
+}
+
+@font-face {
+  font-family: 'Tomatoes';
+  src: url(fonts/Tomatoes-O8L8.ttf);
 }
 
 * {
@@ -91,6 +100,18 @@ body {
   overflow: hidden;
 }
 
+.header h1 {
+  font-family: 'Americana';
+}
+.header div.portfolio-descr {
+font-family: 'Tomatoes';
+    font-size: 23px;
+    font-weight: 500;
+    margin-top: -13px;
+    z-index: 200;
+    position: relative;
+}
+
 .header::before {
   content: "";
   position: absolute;
@@ -111,7 +132,7 @@ body {
   opacity: 0;
   transform: translateY(40px);
   animation: reveal 1.2s ease forwards;
-  background: linear-gradient(90deg, #1a1a1a 0%, #3f4bd8 50%, #d4af37 100%);
+  background: linear-gradient(90deg, #dc9b9b 0%, #d8a23f 50%, #d4af37 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -125,8 +146,8 @@ body {
   bottom: -10px;
   left: 10%;
   width: 80%;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, #3f4bd8, #d4af37, transparent);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffce9c, #d4af37, transparent);
   border-radius: 2px;
 }
 
@@ -253,7 +274,7 @@ body {
 .about-header {
   display: flex;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   position: relative;
 }
 
@@ -717,8 +738,11 @@ footer::before {
 
   <!-- Хедер -->
   <header class="header" data-aos="fade-down">
-    <h1>Портфолио МАРИАН</h1>
-    <p>UX/UI Дизайнер & Фронтенд-разработчик</p>
+    <h1>
+      MARIANE
+    </h1>
+    <div class="portfolio-descr">portfolio</div>
+    <p>UX/UI Дизайнер • Фронтенд-разработчик</p>
     <div class="tagline">Создание эстетичных и функциональных цифровых продуктов</div>
   </header>
 
@@ -743,21 +767,35 @@ footer::before {
           </div>
         </div>
       </div>
+
+      <div class="about__text">
+        ghghj
+      </div>
       
       <div class="about-text">
+        
         <div class="about-section" data-aos="custom-fade" data-aos-delay="100">
           <h3><i class="fas fa-user-circle"></i> Профессиональный профиль</h3>
           <p>Привет! Меня зовут Мария - я UX/UI дизайнер и фронтенд-разработчик с художественным образованием и вниманием к деталям.</p>
           <p>Специализируюсь на создании современных адаптивных интерфейсов, кроссбраузерной верстке и разработке комплексных веб-приложений. Объединяю эстетику дизайна с технической реализацией.</p>
           
           <div class="timeline">
+            Полный процесс реализации
             <div class="timeline-item">
-              <div class="timeline-year">5 лет</div>
-              <div class="timeline-desc">Общий опыт в веб-разработке и дизайне</div>
+              <div class="timeline-year">Идея и концепция</div>
+              <div class="timeline-desc">Занимаюсь поиском идеи концепции философии воплощаю идеи нахожу средства</div>
             </div>
             <div class="timeline-item">
-              <div class="timeline-year">4 года</div>
-              <div class="timeline-desc">Опыт работы в IT-компании</div>
+              <div class="timeline-year">UX/UI</div>
+              <div class="timeline-desc">занимаюсь разработкой дизайна</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">Верстка</div>
+              <div class="timeline-desc">111</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">Фронтенд-разработка</div>
+              <div class="timeline-desc">777</div>
             </div>
           </div>
         </div>
@@ -916,7 +954,7 @@ footer::before {
   </section>
 
   <footer>
-    <div class="contact-links">
+    <!-- <div class="contact-links">
       <a href="mailto:hello@example.com" class="contact-link" data-aos="zoom-in" data-aos-delay="100">
         <i class="fas fa-envelope"></i> Написать мне
       </a>
@@ -929,10 +967,10 @@ footer::before {
       <a href="#" class="contact-link" data-aos="zoom-in" data-aos-delay="400">
         <i class="fab fa-dribbble"></i> Dribbble
       </a>
-    </div>
+    </div> -->
     
     <div class="copyright" data-aos="fade-up" data-aos-delay="500">
-      &copy; 2025 MARIAN — UX/UI Дизайнер & Веб-разработчик<br>
+      &copy; 2026 MARIAN — UX/UI Дизайнер & Веб-разработчик<br>
       Свяжитесь со мной для сотрудничества!
     </div>
   </footer>
