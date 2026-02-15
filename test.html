@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masonry + LightGallery</title>
+    
+    <!-- Стили LightGallery -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery-bundle.min.css">
+    
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        
+        /* Masonry Grid */
+        .gallery {
+            width: 100%;
+        }
+        
+        .gallery-item {
+            width: calc(33.333% - 20px);
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            opacity: 0.9;
+        }
+        
+        /* Разная высота для демонстрации Masonry */
+        .gallery-item:nth-child(3n+1) img {
+            min-height: 250px;
+            object-fit: cover;
+        }
+        
+        .gallery-item:nth-child(3n+2) img {
+            min-height: 350px;
+            object-fit: cover;
+        }
+        
+        .gallery-item:nth-child(3n+3) img {
+            min-height: 200px;
+            object-fit: cover;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .gallery-item {
+                width: calc(50% - 15px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-item {
+                width: 100%;
+            }
+        }
+        
+        /* Стили для подписей (если нужны) */
+        .gallery-item .caption {
+            padding: 10px;
+            background: white;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Галерея Masonry + LightGallery</h1>
+        
+        <!-- Галерея -->
+        <div class="gallery" id="gallery">
+            <!-- Элементы будут добавлены через JavaScript -->
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
+    
+    <!-- Модули LightGallery (опционально) -->
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/fullscreen/lg-fullscreen.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/share/lg-share.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Массив с данными для галереи
+            const galleryData = [
+                {
+                    src: 'https://picsum.photos/800/600?random=1',
+                    thumb: 'https://picsum.photos/400/300?random=1',
+                    alt: 'Изображение 1',
+                    caption: 'Горы'
+                },
+                {
+                    src: 'https://picsum.photos/800/900?random=2',
+                    thumb: 'https://picsum.photos/400/450?random=2',
+                    alt: 'Изображение 2',
+                    caption: 'Море'
+                },
+                {
+                    src: 'https://picsum.photos/800/400?random=3',
+                    thumb: 'https://picsum.photos/400/200?random=3',
+                    alt: 'Изображение 3',
+                    caption: 'Город'
+                },
+                {
+                    src: 'https://picsum.photos/800/700?random=4',
+                    thumb: 'https://picsum.photos/400/350?random=4',
+                    alt: 'Изображение 4',
+                    caption: 'Лес'
+                },
+                {
+                    src: 'https://picsum.photos/800/500?random=5',
+                    thumb: 'https://picsum.photos/400/250?random=5',
+                    alt: 'Изображение 5',
+                    caption: 'Озеро'
+                },
+                {
+                    src: 'https://picsum.photos/800/800?random=6',
+                    thumb: 'https://picsum.photos/400/400?random=6',
+                    alt: 'Изображение 6',
+                    caption: 'Закат'
+                },
+                {
+                    src: 'https://picsum.photos/800/450?random=7',
+                    thumb: 'https://picsum.photos/400/225?random=7',
+                    alt: 'Изображение 7',
+                    caption: 'Поле'
+                },
+                {
+                    src: 'https://picsum.photos/800/650?random=8',
+                    thumb: 'https://picsum.photos/400/325?random=8',
+                    alt: 'Изображение 8',
+                    caption: 'Река'
+                },
+                {
+                    src: 'https://picsum.photos/800/550?random=9',
+                    thumb: 'https://picsum.photos/400/275?random=9',
+                    alt: 'Изображение 9',
+                    caption: 'Дорога'
+                }
+            ];
+            
+            const galleryContainer = document.getElementById('gallery');
+            
+            // Создаем элементы галереи
+            galleryData.forEach((item, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.setAttribute('data-src', item.src);
+                galleryItem.setAttribute('data-sub-html', `.${item.caption}`);
+                
+                const img = document.createElement('img');
+                img.src = item.thumb;
+                img.alt = item.alt;
+                
+                // Добавляем подпись (опционально)
+                const caption = document.createElement('div');
+                caption.className = 'caption';
+                caption.textContent = item.caption;
+                
+                galleryItem.appendChild(img);
+                galleryItem.appendChild(caption);
+                galleryContainer.appendChild(galleryItem);
+            });
+            
+            // Инициализация Masonry
+            const masonry = new Masonry(galleryContainer, {
+                itemSelector: '.gallery-item',
+                columnWidth: '.gallery-item',
+                gutter: 20,
+                fitWidth: true,
+                transitionDuration: '0.3s'
+            });
+            
+            // Инициализация LightGallery
+            const lightGalleryInstance = lightGallery(galleryContainer, {
+                selector: '.gallery-item',
+                plugins: [lgZoom, lgThumbnail, lgFullscreen, lgShare],
+                speed: 500,
+                download: false,
+                thumbnail: true,
+                zoom: true,
+                fullscreen: true,
+                share: true,
+                counter: true,
+                controls: true,
+                loop: true,
+                preload: 2,
+                mousewheel: true,
+                // Кастомные кнопки перелистывания
+                prevHtml: '<button class="lg-prev lg-icon"> </button>',
+                nextHtml: '<button class="lg-next lg-icon"> </button>'
+            });
+            
+            // Обновляем Masonry после загрузки всех изображений
+            imagesLoaded(galleryContainer, function() {
+                masonry.layout();
+            });
+            
+            // Перестраиваем Masonry при изменении размера окна
+            window.addEventListener('resize', function() {
+                masonry.layout();
+            });
+        });
+    </script>
+    
+    <!-- Дополнительный скрипт для отслеживания загрузки изображений -->
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+</body>
+</html>
