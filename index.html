@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,15 +11,18 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
+    rel="stylesheet">
 
   <!-- Libs -->
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery-bundle.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery-bundle.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
@@ -27,7 +31,7 @@
       --text-main: #1c1c1e;
       --text-muted: #6b6b6f;
       --accent: #3a6cf4;
-      --line: rgba(0,0,0,0.08);
+      --line: rgba(0, 0, 0, 0.08);
       --radius: 20px;
     }
 
@@ -47,9 +51,6 @@
 
     header {
       padding: 120px 20px 80px;
-      background:
-        radial-gradient(1200px 400px at 50% -100px, rgba(58,108,244,0.12), transparent),
-        linear-gradient(180deg, #ffffff 0%, #f6f7f8 100%);
       text-align: center;
     }
 
@@ -87,7 +88,7 @@
       background: var(--bg-soft);
       border-radius: var(--radius);
       padding: 60px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.04);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.04);
     }
 
     .about-grid {
@@ -129,7 +130,7 @@
       background: var(--bg-soft);
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
       transition: transform 0.4s ease;
     }
 
@@ -182,13 +183,15 @@
         padding: 40px 30px;
       }
     }
+
     /* ---------- Figma block (full width, animated) ---------- */
     .figma-full {
       position: relative;
       width: 100%;
       /* background: var(--bg-soft); */
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.02) inset;
-      border-radius: 40px 40px 0 0;  /* скруглены только верхние углы, чтобы блок выглядел цельным */
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02) inset;
+      border-radius: 40px 40px 0 0;
+      /* скруглены только верхние углы, чтобы блок выглядел цельным */
       padding: 80px 20px;
       margin: 0 auto;
       transition: box-shadow 0.4s ease, transform 0.4s ease;
@@ -225,14 +228,16 @@
       color: var(--text-main);
     }
 
-    .figma-header .project-badge, .project-badge {
+    .figma-header .project-badge,
+    .project-badge {
       color: rgba(37, 32, 99, 0.876);
       font-size: 0.95rem;
-      background: rgba(58,108,244,0.08);
+      background: rgba(58, 108, 244, 0.08);
       padding: 8px 18px;
       border-radius: 60px;
       font-weight: 400;
     }
+
     .figma-header.figma-header--cases .project-badge {
       background: rgba(244, 58, 114, 0.08);
       color: rgba(214, 8, 70, 0.876);
@@ -248,7 +253,7 @@
       border-radius: 32px;
       overflow: hidden;
       background: #eef0f2;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.2);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
       transition: box-shadow 0.3s ease;
     }
 
@@ -267,10 +272,11 @@
       font-size: 0.95rem;
       color: var(--text-muted);
       letter-spacing: 0.2px;
+      margin-bottom: 10px;
     }
 
     .figma-note span {
-      background: rgba(0,0,0,0.02);
+      background: rgba(0, 0, 0, 0.02);
       padding: 6px 14px;
       border-radius: 60px;
       border: 1px solid var(--line);
@@ -284,6 +290,79 @@
       color: var(--text-muted);
       font-size: 0.9rem;
     }
+
+    /* CSS для блока контактных ссылок */
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 40px 0 20px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #ff8f8f; /* Розово-персиковый цвет */
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 12px 28px;
+  border-radius: 50px;
+  background: rgba(255, 143, 143, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.contact-link svg {
+  transition: transform 0.3s ease;
+}
+
+.contact-link:hover {
+  background: #ff8f8f;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 143, 143, 0.4);
+  border-color: #ff8f8f;
+}
+
+.contact-link:hover svg {
+  transform: scale(1.1);
+}
+
+.copyright {
+  text-align: center;
+  color: var(--text-muted, #6b6b6f);
+  font-size: 0.9rem;
+  margin-top: 20px;
+  padding-bottom: 40px;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 600px) {
+  .contact-links {
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contact-link {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .contact-link {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
 
     /* ---------- Responsive ---------- */
 
@@ -316,87 +395,134 @@
         height: 350px;
       }
     }
+
     .gallery {
-            width: 100%;
-        }
-        
-        .gallery-item {
-            width: calc(33.333% - 20px);
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: opacity 0.3s ease;
-        }
-        
-        .gallery-item:hover img {
-            opacity: 0.9;
-        }
-        
-        /* Разная высота для демонстрации Masonry */
-        .gallery-item:nth-child(3n+1) img {
-            /* min-height: 250px; */
-            object-fit: contain;
-        }
-        
-        .gallery-item:nth-child(3n+2) img {
-            min-height: 350px;
-            object-fit: cover;
-        }
-        
-        .gallery-item:nth-child(3n+3) img {
-            min-height: 200px;
-            object-fit: cover;
-        }
-        
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .gallery-item {
-                width: calc(50% - 15px);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .gallery-item {
-                width: 100%;
-            }
-        }
-        
-        /* Стили для подписей (если нужны) */
-        .gallery-item .caption {
-            padding: 10px;
-            background: white;
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-        }
-        .lg-prev-1 .lg-prev.lg-icon::after {
-          display: none !important;
-        }
+      width: 100%;
+    }
+
+    .gallery-item {
+      width: calc(33.333% - 20px);
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      opacity: 0.9;
+    }
+
+    /* Разная высота для демонстрации Masonry */
+    .gallery-item:nth-child(3n+1) img {
+      /* min-height: 250px; */
+      object-fit: contain;
+    }
+
+    .gallery-item:nth-child(3n+2) img {
+      min-height: 350px;
+      object-fit: cover;
+    }
+
+    .gallery-item:nth-child(3n+3) img {
+      min-height: 200px;
+      object-fit: cover;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .gallery-item {
+        width: calc(50% - 15px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-item {
+        width: 100%;
+      }
+    }
+
+    /* Стили для подписей (если нужны) */
+    .gallery-item .caption {
+      padding: 10px;
+      background: white;
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .lg-prev-1 .lg-prev.lg-icon::after {
+      display: none !important;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      background: #ff8f8f;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(255, 143, 143, 0.3);
+    }
+
+    .back-btn:hover {
+      background: #ffafaf;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(255, 143, 143, 0.4);
+      color: white;
+    }
+
+    .figma-btn-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 25px;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+      width: 60px;
+      height: 60px;
+      color: #ff8f8f;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .swiper-button-next:after, .swiper-button-prev:after {
+      color: #ff8f8f;
+      font-size: 25px;
+      font-weight: 900;
+    }
+    
   </style>
 </head>
+
 <body>
 
-<header data-aos="fade-down">
-  <h1>Мария — Designer & Web Developer</h1>
-  <p style="font-family: 'Cormorant Garamond'">
-    Дизайн • Брендинг • Разработка сайта под ключ
-  </p>
-</header>
-    <div class="
+  <header data-aos="fade-down">
+    <h1>Мария — Designer & Web Developer</h1>
+    <p style="font-family: 'Cormorant Garamond'">
+      Дизайн • Брендинг • Разработка сайта под ключ
+    </p>
+  </header>
+  <div class="
         spacing-style
         layout-panel-flex
         layout-panel-flex--column
@@ -412,801 +538,879 @@
 
         --padding-block-start: 0px;--padding-block-end: 0px;
       " data-testid="section-content">
-      
-  
 
 
-<style data-shopify="">
-  .ai-hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    display: block;
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-  }
 
-  .ai-hero-grid__container-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
 
-  .ai-hero-grid__row-1-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    position: relative;
-    z-index: 10;
-    margin-top: 50px;
-    margin-bottom: -100px;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left: max(20px, calc((100vw - 1115px) / 2));
-    padding-right: max(20px, calc((100vw - 1087px) / 2));
-  }
-
-  .ai-hero-grid__headline-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    color: #000000;
-    font-size: 50px;
-    text-align: right;
-    line-height: normal;
-    margin: 0;
-    font-family: "Cormorant Garamond", serif;
-  }
-
-  .ai-hero-grid__row-2-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    display: grid;
-    grid-template-columns: 65% 35%;
-    gap: 40px;
-    position: relative;
-    z-index: 1;
-    padding-right: max(20px, calc((100vw - 1200px) / 2));
-  }
-
-  .ai-hero-grid__left-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .ai-hero-grid__background-box-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    background-color: #e7edeb;
-    width: 100%;
-    height: 500px;
-    border-radius: 0px;
-  }
-
-  .ai-hero-grid__image-wrapper-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    position: absolute;
-    top: 120px;
-    left: 170px;
-    width: 55%;
-    z-index: 2;
-  }
-
-  .ai-hero-grid__image-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 0px;
-  }
-
-  .ai-hero-grid__image-placeholder-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    background-color: #f4f4f4;
-    border-radius: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .ai-hero-grid__image-placeholder-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk svg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .ai-hero-grid__right-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    justify-content: center;
-  }
-
-  .ai-hero-grid__body-text-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    color: #000000;
-    font-size: 16px;
-    line-height: 1.6;
-    margin-top: 35px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-  }
-
-  .ai-hero-grid__button-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 14px 32px;
-    background-color: #000000;
-    color: #ffffff;
-    border: 1px solid #000000;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: fit-content;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-  }
-
-  .ai-hero-grid__button-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk:hover {
-    background-color: #333333;
-    color: #ffffff;
-    border-color: #333333;
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-hero-grid__row-1-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-      margin-top: 50px;
-      margin-bottom: -40px;
-      margin-left: 0px;
-      margin-right: 0px;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-
-    .ai-hero-grid__headline-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-      color: #000000;
-      font-size: 36px;
-      text-align: left;
-    }
-
-    .ai-hero-grid__row-2-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-      grid-template-columns: 1fr;
-      gap: 30px;
-      padding-right: 20px;
-    }
-
-    .ai-hero-grid__background-box-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-      height: 350px;
-    }
-
-    .ai-hero-grid__image-wrapper-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-      top: 75px;
-      left: 55px;
-      width: 75%;
-    }
-
-    .ai-hero-grid__body-text-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-      font-size: 16px;
-      margin-top: 100px;
-      margin-bottom: 15px;
-      margin-left: 30px;
-      margin-right: 0px;
-    }
-
-    .ai-hero-grid__right-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-      gap: 20px;
-    }
-
-    .ai-hero-grid__button-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
-      font-size: 14px;
-      padding: 12px 24px;
-      margin-top: 10px;
-      margin-bottom: 50px;
-      margin-left: 55px;
-      margin-right: 0px;
-    }
-  }
-</style>
-
-<hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk class="ai-hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
-  <div class="ai-hero-grid__container-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
-    <div class="ai-hero-grid__row-1-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
-      
-        <h1 class="ai-hero-grid__headline-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">Помогаю брендам воплощать философию и ценности в визуал</h1>
-      
-    </div>
-
-    <div class="ai-hero-grid__row-2-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
-      <div class="ai-hero-grid__left-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
-        <div class="ai-hero-grid__background-box-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk"></div>
-        <div class="ai-hero-grid__image-wrapper-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
-          
-            <img src="marianstudio/pics/73.jpg" alt="" loading="lazy" width="1856" height="2464" class="ai-hero-grid__image-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
-          
-        </div>
-      </div>
-
-      <div class="ai-hero-grid__right-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
-        
-          <div class="ai-hero-grid__body-text-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk"><p>Брендинг<br/>Графический дизайн<br/>UX/UI-дизайн<br/>Разработка с нуля</p><p>Привет! Меня зовут Мария. Я дизайнер и программист. Занимаюсь разработкой фирменного стиля, брендингом, разработкой дизайна интерфейсов - UX/UI-дизайн, созданием сайта с нуля под ключ - от идеи и дизайна до готового продукта, работающего на хостинге</p></div>
-        
-
-        
-          <a href="#what-we-do" class="ai-hero-grid__button-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
-            BEAUTIFUL BRANDS START HERE
-          </a>
-        
-      </div>
-    </div>
-  </div>
-</hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk>
-
-<script>
-  (function() {
-    class HeroGridaostdmfhrmuhhywxhraigenblockbe4dacdjckifk extends HTMLElement {
-      constructor() {
-        super();
+    <style data-shopify="">
+      .ai-hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        display: block;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
       }
 
-      connectedCallback() {
-        this.adjustImageOverlap();
-        window.addEventListener('resize', () => this.adjustImageOverlap());
+      .ai-hero-grid__container-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
       }
 
-      adjustImageOverlap() {
-        const imageWrapper = this.querySelector('.ai-hero-grid__image-wrapper-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk');
-        const backgroundBox = this.querySelector('.ai-hero-grid__background-box-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk');
-        const leftColumn = this.querySelector('.ai-hero-grid__left-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk');
-        
-        if (imageWrapper && backgroundBox && leftColumn) {
-          const overlap = 100;
-          const boxHeight = backgroundBox.offsetHeight;
-          const imageHeight = imageWrapper.offsetHeight;
-          
-          if (imageHeight > boxHeight + overlap) {
-            const totalHeight = boxHeight + overlap;
-            leftColumn.style.minHeight = totalHeight + 'px';
-          }
+      .ai-hero-grid__row-1-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        position: relative;
+        z-index: 10;
+        margin-top: 50px;
+        margin-bottom: -100px;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: max(20px, calc((100vw - 1115px) / 2));
+        padding-right: max(20px, calc((100vw - 1087px) / 2));
+      }
+
+      .ai-hero-grid__headline-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        color: #000000;
+        font-size: 50px;
+        text-align: right;
+        line-height: normal;
+        margin: 0;
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      .ai-hero-grid__row-2-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        display: grid;
+        grid-template-columns: 65% 35%;
+        gap: 40px;
+        position: relative;
+        z-index: 1;
+        padding-right: max(20px, calc((100vw - 1200px) / 2));
+      }
+
+      .ai-hero-grid__left-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .ai-hero-grid__background-box-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        background-color: #e7edeb;
+        width: 100%;
+        height: 500px;
+        border-radius: 0px;
+      }
+
+      .ai-hero-grid__image-wrapper-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        position: absolute;
+        top: 120px;
+        left: 170px;
+        width: 55%;
+        z-index: 2;
+      }
+
+      .ai-hero-grid__image-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 0px;
+      }
+
+      .ai-hero-grid__image-placeholder-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        background-color: #f4f4f4;
+        border-radius: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .ai-hero-grid__image-placeholder-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk svg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .ai-hero-grid__right-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        justify-content: center;
+      }
+
+      .ai-hero-grid__body-text-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        color: #000000;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-top: 35px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+
+      .ai-hero-grid__button-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 32px;
+        background-color: #000000;
+        color: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: fit-content;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+
+      .ai-hero-grid__button-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk:hover {
+        background-color: #333333;
+        color: #ffffff;
+        border-color: #333333;
+      }
+
+      @media screen and (max-width: 749px) {
+        .ai-hero-grid__row-1-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+          margin-top: 50px;
+          margin-bottom: -40px;
+          margin-left: 0px;
+          margin-right: 0px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+
+        .ai-hero-grid__headline-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+          color: #000000;
+          font-size: 36px;
+          text-align: left;
+        }
+
+        .ai-hero-grid__row-2-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+          grid-template-columns: 1fr;
+          gap: 30px;
+          padding-right: 20px;
+        }
+
+        .ai-hero-grid__background-box-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+          height: 350px;
+        }
+
+        .ai-hero-grid__image-wrapper-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+          top: 75px;
+          left: 55px;
+          width: 75%;
+        }
+
+        .ai-hero-grid__body-text-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+          font-size: 16px;
+          margin-top: 100px;
+          margin-bottom: 15px;
+          margin-left: 30px;
+          margin-right: 0px;
+        }
+
+        .ai-hero-grid__right-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+          gap: 20px;
+        }
+
+        .ai-hero-grid__button-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
+          font-size: 14px;
+          padding: 12px 24px;
+          margin-top: 10px;
+          margin-bottom: 50px;
+          margin-left: 55px;
+          margin-right: 0px;
         }
       }
-    }
+    </style>
 
-    customElements.define('hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk', HeroGridaostdmfhrmuhhywxhraigenblockbe4dacdjckifk);
-  })();
-</script>
+    <hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk class="ai-hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
+      <div class="ai-hero-grid__container-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
+        <div class="ai-hero-grid__row-1-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
+
+          <h1 class="ai-hero-grid__headline-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">Помогаю брендам воплощать
+            философию и ценности в визуал</h1>
+
+        </div>
+
+        <div class="ai-hero-grid__row-2-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
+          <div class="ai-hero-grid__left-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
+            <div class="ai-hero-grid__background-box-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk"></div>
+            <div class="ai-hero-grid__image-wrapper-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
+
+              <img src="marianstudio/pics/73.jpg" alt="" loading="lazy" width="1856" height="2464"
+                class="ai-hero-grid__image-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
+
+            </div>
+          </div>
+
+          <div class="ai-hero-grid__right-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
+
+            <div class="ai-hero-grid__body-text-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
+              <p>Брендинг<br />Графический дизайн<br />UX/UI-дизайн<br />Разработка с нуля</p>
+              <p>Привет! Меня зовут Мария. Я дизайнер и программист. Занимаюсь разработкой фирменного стиля, брендингом,
+                разработкой дизайна интерфейсов - UX/UI-дизайн, созданием сайта с нуля под ключ - от идеи и дизайна до
+                готового продукта, работающего на хостинге</p>
+            </div>
+
+
+
+            <a href="https://t.me/marianneu" class="ai-hero-grid__button-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
+              СВЯЗАТЬСЯ СО МНОЙ
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk>
+
+    <script>
+      (function () {
+        class HeroGridaostdmfhrmuhhywxhraigenblockbe4dacdjckifk extends HTMLElement {
+          constructor() {
+            super();
+          }
+
+          connectedCallback() {
+            this.adjustImageOverlap();
+            window.addEventListener('resize', () => this.adjustImageOverlap());
+          }
+
+          adjustImageOverlap() {
+            const imageWrapper = this.querySelector('.ai-hero-grid__image-wrapper-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk');
+            const backgroundBox = this.querySelector('.ai-hero-grid__background-box-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk');
+            const leftColumn = this.querySelector('.ai-hero-grid__left-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk');
+
+            if (imageWrapper && backgroundBox && leftColumn) {
+              const overlap = 100;
+              const boxHeight = backgroundBox.offsetHeight;
+              const imageHeight = imageWrapper.offsetHeight;
+
+              if (imageHeight > boxHeight + overlap) {
+                const totalHeight = boxHeight + overlap;
+                leftColumn.style.minHeight = totalHeight + 'px';
+              }
+            }
+          }
+        }
+
+        customElements.define('hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk', HeroGridaostdmfhrmuhhywxhraigenblockbe4dacdjckifk);
+      })();
+    </script>
 
 
 
 
-    </div>
-    <div class="divider divider-template--21648781213731__divider_QLdNT9 spacing-style" style=" height: 250px;
+  </div>
+  <div class="divider divider-template--21648781213731__divider_QLdNT9 spacing-style" style=" height: 250px;
     --divider-justify-content: center;
     --padding-block-start: max(20px, calc(var(--spacing-scale) * 100px));--padding-block-end: max(20px, calc(var(--spacing-scale) * 100px));
   ">
-  <span class="divider__line" style="
+    <span class="divider__line" style="
       --divider-border-thickness: 0.5px;
       
       --divider-flex-basis: 100%;
     "></span>
-</div>
-<section data-aos="fade-up" style="display:none">
-  <div class="about">
-    <div class="about-grid">
-      <div>
-        <img src="https://images.unsplash.com/photo-1494790108777-2961285c0e9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Мария">
-        <h2 class="section-title">Обо мне</h2>
-        <p>
-          Я UX/UI дизайнер и фронтенд-разработчик с сильным визуальным вкусом
-          и инженерным мышлением.
-        </p>
-        <p>
-          Специализируюсь на кроссбраузерной адаптивной верстке по макетам Figma,
-          создании интерфейсов и сборке проектов под реальные бизнес-задачи.
-        </p>
-        <p>
-          <strong>Опыт в веб-разработке — 5 лет</strong>, включая коммерческие проекты,
-          работу в IT-компании и собственные pet-проекты.
-        </p>
-      </div>
-
-      <div class="skills">
-        <h4>Дизайн</h4>
-        <ul>
-          <li>UX/UI дизайн, сетки, композиция</li>
-          <li>Figma (AutoLayout, компоненты, UI-Kit)</li>
-          <li>Adobe Photoshop, Illustrator</li>
-          <li>Скетчинг и графический планшет</li>
-        </ul>
-
-        <h4>Фронтенд</h4>
-        <ul>
-          <li>HTML, CSS, JavaScript</li>
-          <li>Vue, Nuxt, Angular, React</li>
-          <li>Анимации и интерактив</li>
-        </ul>
-
-        <h4>Web / CMS</h4>
-        <ul>
-          <li>WordPress (ACF, WooCommerce, плагины)</li>
-          <li>Laravel, PHP</li>
-          <li>1C-Битрикс (сертификат)</li>
-        </ul>
-      </div>
-    </div>
   </div>
-</section>
-<!-- ========== Анимированный блок на всю ширину с iframe Figma ========== -->
-<div class="figma-full" data-aos="fade-up" data-aos-duration="1000">
-  <div class="figma-container">
-    <div class="figma-header">
-      <h2>Портфолио дизайнера</h2>
-      <div class="figma-design-line"><img src="img/line.svg" alt="">
-      </div>
-      <div class="project-badge">Figma • Дизайн</div>
-    </div>
+  <section data-aos="fade-up" style="display:none">
+    <div class="about">
+      <div class="about-grid">
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1494790108777-2961285c0e9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+            alt="Мария">
+          <h2 class="section-title">Обо мне</h2>
+          <p>
+            Я UX/UI дизайнер и фронтенд-разработчик с сильным визуальным вкусом
+            и инженерным мышлением.
+          </p>
+          <p>
+            Специализируюсь на кроссбраузерной адаптивной верстке по макетам Figma,
+            создании интерфейсов и сборке проектов под реальные бизнес-задачи.
+          </p>
+          <p>
+            <strong>Опыт в веб-разработке — 5 лет</strong>, включая коммерческие проекты,
+            работу в IT-компании и собственные pet-проекты.
+          </p>
+        </div>
 
-    <div class="figma-iframe-wrapper">
-      <!-- Встроенный Figma еслйм с портфолио.
+        <div class="skills">
+          <h4>Дизайн</h4>
+          <ul>
+            <li>UX/UI дизайн, сетки, композиция</li>
+            <li>Figma (AutoLayout, компоненты, UI-Kit)</li>
+            <li>Adobe Photoshop, Illustrator</li>
+            <li>Скетчинг и графический планшет</li>
+          </ul>
+
+          <h4>Фронтенд</h4>
+          <ul>
+            <li>HTML, CSS, JavaScript</li>
+            <li>Vue, Nuxt, Angular, React</li>
+            <li>Анимации и интерактив</li>
+          </ul>
+
+          <h4>Web / CMS</h4>
+          <ul>
+            <li>WordPress (ACF, WooCommerce, плагины)</li>
+            <li>Laravel, PHP</li>
+            <li>1C-Битрикс (сертификат)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ========== Анимированный блок на всю ширину с iframe Figma ========== -->
+  <div class="figma-full" data-aos="fade-up" data-aos-duration="1000">
+    <div class="figma-container">
+      <div class="figma-header">
+        <h2>Дизайн-портфолио</h2>
+        <div class="figma-design-line"><img src="img/line.svg" alt="">
+        </div>
+        <div class="project-badge">Figma • Дизайн</div>
+      </div>
+      
+      <div class="figma-iframe-wrapper">
+        <!-- Встроенный Figma еслйм с портфолио.
            Ссылка ведет на публичный файл, где показаны несколько страниц (проектов).
            Чтобы было наглядно — используем пример портфолио с разными экранами.
            При необходимости ссылку можно заменить на актуальную. -->
-     <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="800" src="https://embed.figma.com/design/naylRQNgoICbEoQEqLPJ0t/%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE-%D0%9C%D0%B0%D1%80%D0%B8%D1%8F?node-id=3-35876&embed-host=share" allowfullscreen></iframe>
-    </div>
+        <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="800"
+          src="https://embed.figma.com/design/naylRQNgoICbEoQEqLPJ0t/%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE-%D0%9C%D0%B0%D1%80%D0%B8%D1%8F?node-id=3-35876&embed-host=share"
+          allowfullscreen></iframe>
+      </div>
+      <div class="figma-note">
+        <span>В Figma каждый проект на отдельной странице — коммерческие и личные проекты</span>
+      </div>
+      <div class="figma-btn-wrapper">
+        <a href="https://www.figma.com/design/naylRQNgoICbEoQEqLPJ0t/%D0%9F%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE-%D0%9C%D0%B0%D1%80%D0%B8%D1%8F?node-id=3-35876&t=kotZy2VH9JnlyZb9-1" class="back-btn">
+          <i class="fas fa-arrow-left"></i> Открыть в Figma
+        </a>
+      </div>
+      
 
-    <div class="figma-note">
-      <span>⬇️ В Figma каждый проект на отдельной странице — коммерческие и личные проекты</span>
     </div>
   </div>
-</div>
-<section data-aos="fade-up">
-  <div class="figma-header figma-header--cases">
-      <h2>Проекты</h2>
-      <div class="project-badge">Кейсы • Дизайн • Разработка</div>
+  <section data-aos="fade-up">
+    <div class="figma-header figma-header--cases">
+      <h2>Кейсы UX/UI</h2>
+      <div class="project-badge">Кейсы • Дизайн</div>
     </div>
 
-  <div class="swiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <div class="project-image">
-          <img src="img/Cover-fashionshop.JPG" alt="Интернет-магазин одежды">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="project-image">
+            <img src="img/Cover-fashionshop.JPG" alt="Интернет-магазин одежды">
+          </div>
+          <div class="project-content">
+            <h3>
+              <a href="design/fashion-shop.html">Интернет-магазин одежды</a>
+            </h3>
+            <p>UX/UI дизайн для интернет-магазина женской одежды</p>
+            <div class="project-badge project-badge--case">Коммерческий</div>
+          </div>
         </div>
-        <div class="project-content">
-          <h3>
-            <a href="design/fashion-shop.html">Интернет-магазин одежды</a>
-          </h3>
-          <p>UX/UI дизайн для интернет-магазина женской одежды</p>
-          <div class="project-badge project-badge--case">Коммерческий</div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="project-image">
-          <img src="img/Cover-mobile.JPG" alt="Верстка и интеграция">
-        </div>
-        <div class="project-content">
-          <h3>
-            <a href="design/mobile-app.html">UX/UI-дизайн мобильного приложения</a>
-          </h3>
-          
+        <div class="swiper-slide">
+          <div class="project-image">
+            <img src="img/Cover-mobile.JPG" alt="Верстка и интеграция">
+          </div>
+          <div class="project-content">
+            <h3>
+              <a href="design/mobile-app.html">UX/UI-дизайн мобильного приложения</a>
+            </h3>
+
             <p>UX/UI дизайн для мобильного приложения Управления дорожного движения</p>
-          <div class="project-badge project-badge--case">Коммерческий</div>
-        </div>
-      </div>
-<div class="swiper-slide">
-        <div class="project-image">
-          <img src="img/Cover.png" alt="Калькулятор комбикорма">
-        </div>
-        <div class="project-content">
-          <h3>
-            <a href="calculator.html">Калькулятор комбикорма</a>
-          </h3>
-          <p>Разработка кастомного WordPress-плагина с логикой расчётов</p>
-          <div class="project-badge project-badge--case">Коммерческий</div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="project-image">
-          <img src="img/Cover-1eska.JPG" alt="Верстка и интеграция">
-        </div>
-        <div class="project-content">
-          <h3>
-            <a href="layout/1eska.html">Верстка и интеграция</a>
-          </h3>
-          <p>Верстка многостраничного сайта и интеграция в CMS 1С Битрикс</p>
-          <div class="project-badge project-badge--case">Коммерческий</div>
+            <div class="project-badge project-badge--case">Коммерческий</div>
+          </div>
         </div>
       </div>
 
-      <div class="swiper-slide">
-        <div class="project-image">
-          <img src="img/Cover-diamed.JPG" alt="WordPress ACF">
-        </div>
-        <div class="project-content">
-          <h3>
-            <a href="invitro.html">Расширение функционала WordPress</a>
-          </h3>
-          <p>ACF, кастомные разделы админки, доработка Elementor</p>
-          <div class="project-badge project-badge--case">Коммерческий</div>
-        </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+  <div class="figma-full" data-aos="fade-up" data-aos-duration="1000">
+    <div class="figma-container">
+      <div class="figma-header">
+        <h2>Баннеры</h2>
+
+        <div class="project-badge">Графический дизайн • Инфографика • Соцсети и маркетплейсы</div>
       </div>
 
+
+
+      <div class="gallery" id="gallery">
+        <!-- Элементы будут добавлены через JavaScript -->
+      </div>
     </div>
 
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-</section>
-<div class="figma-full" data-aos="fade-up" data-aos-duration="1000">
-  <div class="figma-container">
-    <div class="figma-header">
-      <h2>Баннеры</h2>
-      
-      <div class="project-badge">Графический дизайн • Инфографика • Соцсети и маркетплейсы</div>
-    </div>
+    <!-- ========== Секция: Разработка сайта под ключ ========== -->
+    <section data-aos="fade-up" style="padding: 100px 20px;">
+      <div style="max-width: 1200px; margin: 0 auto;">
 
-    
-
-     <div class="gallery" id="gallery">
-            <!-- Элементы будут добавлены через JavaScript -->
+        <!-- Заголовок и описание -->
+        <div style="text-align: center; margin-bottom: 70px;">
+          <h2 class="section-title" style="margin-bottom: 20px;">Сайт под ключ</h2>
+          <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 680px; margin: 0 auto;">
+            Создание сайта с нуля: от идеи до запуска в браузере
+          </p>
         </div>
-  </div>
 
-  <!-- ========== Секция: Разработка сайта под ключ ========== -->
-<section data-aos="fade-up" style="padding: 100px 20px;">
-  <div style="max-width: 1200px; margin: 0 auto;">
-    
-    <!-- Заголовок и описание -->
-    <div style="text-align: center; margin-bottom: 70px;">
-      <h2 class="section-title" style="margin-bottom: 20px;">Сайт под ключ</h2>
-      <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 680px; margin: 0 auto;">
-        Создание сайта с нуля: от идеи до запуска в браузере
-      </p>
-    </div>
+        <!-- Инфографика этапов -->
+        <div class="process-steps">
 
-    <!-- Инфографика этапов -->
-    <div class="process-steps">
-      
-      <!-- Шаг 1 -->
-      <div class="process-step" data-aos="fade-up" data-aos-delay="100">
-        <div class="step-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <!-- Шаг 1 -->
+          <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="step-number">01</div>
+            <h3>Обсуждение</h3>
+            <p>ТЗ, цели проекта и идея</p>
+          </div>
+
+          <!-- Шаг 2 -->
+          <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <line x1="3" y1="9" x2="21" y2="9" />
+                <line x1="9" y1="21" x2="9" y2="9" />
+              </svg>
+            </div>
+            <div class="step-number">02</div>
+            <h3>Прототип и дизайн</h3>
+            <p>Структура, макеты в Figma</p>
+          </div>
+
+          <!-- Шаг 3 -->
+          <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            </div>
+            <div class="step-number">03</div>
+            <h3>Программирование</h3>
+            <p>Чистый код, адаптивность, анимации</p>
+          </div>
+
+          <!-- Шаг 4 -->
+          <div class="process-step" data-aos="fade-up" data-aos-delay="400">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="step-number">04</div>
+            <h3>Тестирование</h3>
+            <p>Кроссбраузерность, скорость, UX</p>
+          </div>
+
+          <!-- Шаг 5 -->
+          <div class="process-step" data-aos="fade-up" data-aos-delay="500">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="step-number">05</div>
+            <h3>Контент</h3>
+            <p>Наполнение текстами и медиа</p>
+          </div>
+
+          <!-- Шаг 6 -->
+          <div class="process-step" data-aos="fade-up" data-aos-delay="600">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="step-number">06</div>
+            <h3>Запуск</h3>
+            <p>Хостинг, домен, поддержка</p>
+          </div>
+
         </div>
-        <div class="step-number">01</div>
-        <h3>Обсуждение</h3>
-        <p>ТЗ, цели проекта и идея</p>
+        <section data-aos="fade-up">
+          <div class="figma-header figma-header--cases">
+            <h2>Проекты</h2>
+            <div class="project-badge">Сайт с нуля • Разработка</div>
+          </div>
+
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="project-image">
+                  <img src="img/Cover.png" alt="Калькулятор комбикорма">
+                </div>
+                <div class="project-content">
+                  <h3>
+                    <a href="calculator.html">Калькулятор комбикорма</a>
+                  </h3>
+                  <p>Разработка кастомного WordPress-плагина с логикой расчётов</p>
+                  <div class="project-badge project-badge--case">Коммерческий</div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="project-image">
+                  <img src="img/Cover-1eska.JPG" alt="Верстка и интеграция">
+                </div>
+                <div class="project-content">
+                  <h3>
+                    <a href="layout/1eska.html">Верстка и интеграция</a>
+                  </h3>
+                  <p>Верстка многостраничного сайта и интеграция в CMS 1С Битрикс</p>
+                  <div class="project-badge project-badge--case">Коммерческий</div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="project-image">
+                  <img src="img/Cover-diamed.JPG" alt="WordPress ACF">
+                </div>
+                <div class="project-content">
+                  <h3>
+                    <a href="invitro.html">Расширение функционала WordPress</a>
+                  </h3>
+                  <p>ACF, кастомные разделы админки, доработка Elementor</p>
+                  <div class="project-badge project-badge--case">Коммерческий</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+        </section>
+        <!-- Соединительная линия (для десктопа) -->
+        <div class="process-line"></div>
+
       </div>
+    </section>
 
-      <!-- Шаг 2 -->
-      <div class="process-step" data-aos="fade-up" data-aos-delay="200">
-        <div class="step-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-            <line x1="3" y1="9" x2="21" y2="9"/>
-            <line x1="9" y1="21" x2="9" y2="9"/>
-          </svg>
-        </div>
-        <div class="step-number">02</div>
-        <h3>Прототип и дизайн</h3>
-        <p>Структура, макеты в Figma</p>
-      </div>
-
-      <!-- Шаг 3 -->
-      <div class="process-step" data-aos="fade-up" data-aos-delay="300">
-        <div class="step-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <polyline points="16 18 22 12 16 6"/>
-            <polyline points="8 6 2 12 8 18"/>
-          </svg>
-        </div>
-        <div class="step-number">03</div>
-        <h3>Программирование</h3>
-        <p>Чистый код, адаптивность, анимации</p>
-      </div>
-
-      <!-- Шаг 4 -->
-      <div class="process-step" data-aos="fade-up" data-aos-delay="400">
-        <div class="step-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="step-number">04</div>
-        <h3>Тестирование</h3>
-        <p>Кроссбраузерность, скорость, UX</p>
-      </div>
-
-      <!-- Шаг 5 -->
-      <div class="process-step" data-aos="fade-up" data-aos-delay="500">
-        <div class="step-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="step-number">05</div>
-        <h3>Контент</h3>
-        <p>Наполнение текстами и медиа</p>
-      </div>
-
-      <!-- Шаг 6 -->
-      <div class="process-step" data-aos="fade-up" data-aos-delay="600">
-        <div class="step-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="step-number">06</div>
-        <h3>Запуск</h3>
-        <p>Хостинг, домен, поддержка</p>
-      </div>
-
-    </div>
-
-    <!-- Соединительная линия (для десктопа) -->
-    <div class="process-line"></div>
-
-  </div>
-</section>
-
-<style>
-  /* Стили для секции процессов */
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 24px;
-    position: relative;
-    padding: 20px 0 40px;
-  }
-
-  .process-step {
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    padding: 24px 16px;
-    background: var(--bg-soft);
-    border-radius: var(--radius);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .process-step:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(58,108,244,0.15);
-  }
-
-  .step-icon {
-    width: 56px;
-    height: 56px;
-    margin: 0 auto 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, rgba(58,108,244,0.12), rgba(58,108,244,0.04));
-    border-radius: 16px;
-    color: var(--accent);
-  }
-
-  .step-number {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    background: rgba(0,0,0,0.03);
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-
-  .process-step h3 {
-    font-size: 1rem;
-    font-weight: 500;
-    margin: 0 0 8px;
-    color: var(--text-main);
-  }
-
-  .process-step p {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    margin: 0;
-    line-height: 1.5;
-  }
-
-  /* Соединительная линия */
-  .process-line {
-    position: absolute;
-    top: 60px;
-    left: 8%;
-    right: 8%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--line), transparent);
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  /* Анимация появления линии */
-  @keyframes lineDraw {
-    from { width: 0; opacity: 0; }
-    to { width: 84%; opacity: 1; }
-  }
-
-  .process-line {
-    animation: lineDraw 1.2s ease-out forwards;
-    animation-delay: 0.3s;
-    width: 0;
-    opacity: 0;
-  }
-
-  /* Адаптивность */
-  @media (max-width: 1200px) {
-    .process-steps {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-    }
-    .process-line {
-      display: none;
-    }
-    .process-step {
-      padding: 32px 20px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .process-steps {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    .process-step {
-      display: flex;
-      align-items: center;
-      text-align: left;
-      gap: 16px;
-      padding: 20px;
-    }
-    .step-icon {
-      margin: 0;
-      flex-shrink: 0;
-    }
-    .step-number {
-      position: static;
-      margin-left: auto;
-    }
-    .process-step h3 {
-      margin-bottom: 4px;
-    }
-    .process-step p {
-      font-size: 0.9rem;
-    }
-  }
-</style>
-</div>
-<footer>
-  © 2026 Мария — Design, Frontend & Web Developer
-</footer>
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
-    
-    <!-- Модули LightGallery (опционально) -->
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/fullscreen/lg-fullscreen.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/share/lg-share.min.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Массив с данными для галереи
-            const galleryData = [
-                {
-                    src: 'banners/1.jpg',
-                    thumb: 'banners/1.jpg',
-                    alt: 'Рекламный баннер',
-                    caption: 'Рекламный баннер'
-                },
-                {
-                    src: 'banners/2.jpg',
-                    thumb: 'banners/2.jpg',
-                    alt: 'Инфографика для маркетплейсов',
-                    caption: 'Инфографика для маркетплейсов'
-                },
-                {
-                    src: 'banners/ozon-smart.png',
-                    thumb: 'banners/ozon-smart.png',
-                    alt: 'Рекламный баннер Ozon',
-                    caption: 'Рекламный баннер Ozon'
-                },
-                {
-                    src: 'banners/Осеннее_меню.jpg',
-                    thumb: 'banners/Осеннее_меню.jpg',
-                    alt: 'Рекламная вывеска',
-                    caption: 'Рекламная вывеска'
-                },
-            ];
-            
-            const galleryContainer = document.getElementById('gallery');
-            
-            // Создаем элементы галереи
-            galleryData.forEach((item, index) => {
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item';
-                galleryItem.setAttribute('data-src', item.src);
-                galleryItem.setAttribute('data-sub-html', `.${item.caption}`);
-                
-                const img = document.createElement('img');
-                img.src = item.thumb;
-                img.alt = item.alt;
-                
-                // Добавляем подпись (опционально)
-                const caption = document.createElement('div');
-                caption.className = 'caption';
-                caption.textContent = item.caption;
-                
-                galleryItem.appendChild(img);
-                galleryItem.appendChild(caption);
-                galleryContainer.appendChild(galleryItem);
-            });
-            
-            // Инициализация Masonry
-            const masonry = new Masonry(galleryContainer, {
-                itemSelector: '.gallery-item',
-                columnWidth: '.gallery-item',
-                gutter: 20,
-                fitWidth: true,
-                transitionDuration: '0.3s'
-            });
-            
-            // Инициализация LightGallery
-            const lightGalleryInstance = lightGallery(galleryContainer, {
-                selector: '.gallery-item',
-                plugins: [lgZoom, lgThumbnail, lgFullscreen, lgShare],
-                speed: 500,
-                download: false,
-                thumbnail: true,
-                zoom: true,
-                fullscreen: true,
-                share: true,
-                counter: true,
-                controls: true,
-                loop: true,
-                preload: 2,
-                mousewheel: true,
-               
-            });
-            
-            // Обновляем Masonry после загрузки всех изображений
-            imagesLoaded(galleryContainer, function() {
-                masonry.layout();
-            });
-            
-            // Перестраиваем Masonry при изменении размера окна
-            window.addEventListener('resize', function() {
-                masonry.layout();
-            });
-        });
-    </script>
-    
-    <!-- Дополнительный скрипт для отслеживания загрузки изображений -->
-    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
-<script>
-  AOS.init({
-    duration: 900,
-    easing: 'ease-out-cubic',
-    once: true
-  });
-
-  new Swiper('.swiper', {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    loop: true,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-      900: {
-        slidesPerView: 2
+    <style>
+      /* Стили для секции процессов */
+      .process-steps {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 24px;
+        position: relative;
+        padding: 20px 0 40px;
       }
-    }
-  });
-</script>
+
+      .process-step {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        padding: 24px 16px;
+        background: var(--bg-soft);
+        border-radius: var(--radius);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .process-step:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(58, 108, 244, 0.15);
+      }
+
+      .step-icon {
+        width: 56px;
+        height: 56px;
+        margin: 0 auto 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(58, 108, 244, 0.12), rgba(58, 108, 244, 0.04));
+        border-radius: 16px;
+        color: var(--accent);
+      }
+
+      .step-number {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        background: rgba(0, 0, 0, 0.03);
+        padding: 4px 10px;
+        border-radius: 20px;
+      }
+
+      .process-step h3 {
+        font-size: 1rem;
+        font-weight: 500;
+        margin: 0 0 8px;
+        color: var(--text-main);
+      }
+
+      .process-step p {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      /* Соединительная линия */
+      .process-line {
+        position: absolute;
+        top: 60px;
+        left: 8%;
+        right: 8%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--line), transparent);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      /* Анимация появления линии */
+      @keyframes lineDraw {
+        from {
+          width: 0;
+          opacity: 0;
+        }
+
+        to {
+          width: 84%;
+          opacity: 1;
+        }
+      }
+
+      .process-line {
+        animation: lineDraw 1.2s ease-out forwards;
+        animation-delay: 0.3s;
+        width: 0;
+        opacity: 0;
+      }
+
+      /* Адаптивность */
+      @media (max-width: 1200px) {
+        .process-steps {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
+        }
+
+        .process-line {
+          display: none;
+        }
+
+        .process-step {
+          padding: 32px 20px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .process-steps {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .process-step {
+          display: flex;
+          align-items: center;
+          text-align: left;
+          gap: 16px;
+          padding: 20px;
+        }
+
+        .step-icon {
+          margin: 0;
+          flex-shrink: 0;
+        }
+
+        .step-number {
+          position: static;
+          margin-left: auto;
+        }
+
+        .process-step h3 {
+          margin-bottom: 4px;
+        }
+
+        .process-step p {
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </div>
+  <footer>
+    © 2026 Мария — Design, Frontend & Web Developer
+  </footer>
+  <!-- Блок с контактными ссылками -->
+<div class="contact-links">
+  <a href="mailto:mariandesign@mail.ru" class="contact-link">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+      <polyline points="22,6 12,13 2,6"></polyline>
+    </svg>
+    mariandesign@mail.ru
+  </a>
+  
+  <a href="https://t.me/marianneu" class="contact-link" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21.5 4.5L2.5 12.5L9.5 15.5L12.5 22.5L21.5 4.5Z"></path>
+      <path d="M9.5 15.5L16.5 8.5"></path>
+    </svg>
+    Telegram
+  </a>
+  
+  <a style="display:none" href="https://behance.net/marianneu" class="contact-link" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="6" cy="12" r="2"></circle>
+      <path d="M12 10v4c0 1.5 1 3 3.5 3s3.5-1.5 3.5-3v-4"></path>
+      <path d="M18 10h-5"></path>
+      <path d="M15 6h3"></path>
+    </svg>
+    Behance
+  </a>
+</div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
+
+  <!-- Модули LightGallery (опционально) -->
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/fullscreen/lg-fullscreen.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/share/lg-share.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Массив с данными для галереи
+      const galleryData = [
+        {
+          src: 'banners/1.jpg',
+          thumb: 'banners/1.jpg',
+          alt: 'Рекламный баннер',
+          caption: 'Рекламный баннер'
+        },
+        {
+          src: 'banners/2.jpg',
+          thumb: 'banners/2.jpg',
+          alt: 'Инфографика для маркетплейсов',
+          caption: 'Инфографика для маркетплейсов'
+        },
+        {
+          src: 'banners/ozon-smart.png',
+          thumb: 'banners/ozon-smart.png',
+          alt: 'Рекламный баннер Ozon',
+          caption: 'Рекламный баннер Ozon'
+        },
+        {
+          src: 'banners/Осеннее_меню.jpg',
+          thumb: 'banners/Осеннее_меню.jpg',
+          alt: 'Рекламная вывеска',
+          caption: 'Рекламная вывеска'
+        },
+      ];
+
+      const galleryContainer = document.getElementById('gallery');
+
+      // Создаем элементы галереи
+      galleryData.forEach((item, index) => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        galleryItem.setAttribute('data-src', item.src);
+        galleryItem.setAttribute('data-sub-html', `.${item.caption}`);
+
+        const img = document.createElement('img');
+        img.src = item.thumb;
+        img.alt = item.alt;
+
+        // Добавляем подпись (опционально)
+        const caption = document.createElement('div');
+        caption.className = 'caption';
+        caption.textContent = item.caption;
+
+        galleryItem.appendChild(img);
+        galleryItem.appendChild(caption);
+        galleryContainer.appendChild(galleryItem);
+      });
+
+      // Инициализация Masonry
+      const masonry = new Masonry(galleryContainer, {
+        itemSelector: '.gallery-item',
+        columnWidth: '.gallery-item',
+        gutter: 20,
+        fitWidth: true,
+        transitionDuration: '0.3s'
+      });
+
+      // Инициализация LightGallery
+      const lightGalleryInstance = lightGallery(galleryContainer, {
+        selector: '.gallery-item',
+        plugins: [lgZoom, lgThumbnail, lgFullscreen, lgShare],
+        speed: 500,
+        download: false,
+        thumbnail: true,
+        zoom: true,
+        fullscreen: true,
+        share: true,
+        counter: true,
+        controls: true,
+        loop: true,
+        preload: 2,
+        mousewheel: true,
+
+      });
+
+      // Обновляем Masonry после загрузки всех изображений
+      imagesLoaded(galleryContainer, function () {
+        masonry.layout();
+      });
+
+      // Перестраиваем Masonry при изменении размера окна
+      window.addEventListener('resize', function () {
+        masonry.layout();
+      });
+    });
+  </script>
+
+  <!-- Дополнительный скрипт для отслеживания загрузки изображений -->
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+  <script>
+    AOS.init({
+      duration: 900,
+      easing: 'ease-out-cubic',
+      once: true
+    });
+
+    new Swiper('.swiper', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        900: {
+          slidesPerView: 2
+        }
+      }
+    });
+  </script>
 
 </body>
+
 </html>
