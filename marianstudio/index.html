@@ -151,14 +151,15 @@
 <style data-shopify="">
 
 
-  @font-face {
+
+  /* @font-face {
   font-family: Lato;
   font-weight: 300;
   font-style: normal;
   font-display: swap;
   src: url("fonts/lato_n3.a7080ececf6191f1dd5b0cb021691ca9b855c876.woff2") format("woff2"),
        url("fonts/lato_n3.61e34b2ff7341f66543eb08e8c47eef9e1cde558.woff") format("woff");
-}
+} */
 
   @font-face {
   font-family: Lato;
@@ -187,7 +188,12 @@
        url("fonts/lato_i7.4c07c2b3b7e64ab516aa2f2081d2bb0366b9dce8.woff") format("woff");
 }
 
-
+@font-face {
+  font-family: Lato;
+  src: url(fonts/Lato-rus/Lato-Thin.ttf);
+  font-weight: 300;
+  font-style: normal;
+}
   
 
   
@@ -1756,7 +1762,7 @@ uppercase;
 
 
               <li class="menu-drawer__list-item" style="--menu-drawer-animation-index: 1;"><a id="HeaderDrawer-about" href="/pages/about" class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset">
-                    <span class="menu-drawer__menu-item-text wrap-text">About</span>
+                    <span class="menu-drawer__menu-item-text wrap-text">Обо мне</span>
                   </a></li>
               <li class="menu-drawer__list-item" style="--menu-drawer-animation-index: 2;"><details id="Details-menu-drawer-menu-item-2" class="menu-drawer__menu-container">
                     <summary id="HeaderDrawer-what-we-do" class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset" on:click="header-drawer/open">
@@ -2099,7 +2105,7 @@ uppercase;
   ">
   
 
-  <span class="header-logo__image-container header-logo__image-container--original" data-testid="header-logo">
+  <span class="header-logo__image-container header-logo__image-container--original" data-testid="header-logo" style="margin-top: 25px">
     
   
   
@@ -2111,7 +2117,7 @@ uppercase;
 
   
 
-  <img src="pics/Logo_Full_Black_1_copy.png" alt="" width="252" height="100" class="header-logo__image" srcset="pics/Logo_Full_Black_1_copy.png 1x, pics/Logo_Full_Black_1_copy_2.png 2x, pics/Logo_Full_Black_1_copy_1.png 3x" style="--header-logo-image-width: 253px;--header-logo-image-width-mobile: 202px; --header-logo-image-height: 100px; --header-logo-image-height-mobile: 80px;">
+  <img src="pics/logo4.svg" alt="" width="252" height="100" class="header-logo__image" style="--header-logo-image-width: 253px;--header-logo-image-width-mobile: 239px; --header-logo-image-height: 141px; --header-logo-image-height-mobile: 80px;">
 
 
   </span>
@@ -2408,8 +2414,8 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
 
     
     
-      <div class="header__row header__row--bottom color-scheme-1 section section--full-width-margin section--page-width mobile:hidden" ref="headerRowTop" style="--border-bottom-width: 0px;">
-        <div class="header__columns spacing-style">
+      <div class="header__row header__row--bottom color-scheme-1 section section--full-width-margin section--page-width mobile:hidden" ref="headerRowTop" style="--margin-top: 40px;">
+        <div class="header__columns spacing-style" style="margin-top: 35px">
           <div class="header__column header__column--center" data-testid="header-bottom-center">
       
         
@@ -2460,12 +2466,12 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
   
     <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
       <a href="/pages/about" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
-        <span class="menu-list__link-title">About</span>
+        <span class="menu-list__link-title">Обо мне</span>
       </a></li>
   
     <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
       <a href="#" data-skip-node-update="true" class="menu-list__link" aria-controls="submenu-2" aria-haspopup="true" aria-expanded="false" ref="menuitem">
-        <span class="menu-list__link-title">What We Do</span>
+        <span class="menu-list__link-title">Проекты</span>
       </a><div class="menu-list__submenu color-scheme-matches-parent" ref="submenu[]">
           <div id="submenu-2" class="menu-list__submenu-inner" style="--menu-parent-font-family: var(--font-subheading--family); --menu-parent-font-style:
 var(--font-subheading--style); --menu-parent-font-weight: var(--font-subheading--weight); --menu-parent-font-case:
@@ -2602,7 +2608,7 @@ uppercase;
   
     <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
       <a href="/pages/collections" data-skip-node-update="true" class="menu-list__link" aria-controls="submenu-3" aria-haspopup="true" aria-expanded="false" ref="menuitem">
-        <span class="menu-list__link-title">Collections</span>
+        <span class="menu-list__link-title">Коллекции</span>
       </a><div class="menu-list__submenu color-scheme-matches-parent" ref="submenu[]">
           <div id="submenu-3" class="menu-list__submenu-inner" style="--menu-parent-font-family: var(--font-subheading--family); --menu-parent-font-style:
 var(--font-subheading--style); --menu-parent-font-weight: var(--font-subheading--weight); --menu-parent-font-case:
@@ -3198,6 +3204,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
     font-size: 56px;
     text-align: right;
     margin: 0;
+    font-family: "Cormorant Garamond", serif;
   }
 
   .ai-hero-grid__row-2-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
@@ -3310,6 +3317,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
       color: #000000;
       font-size: 36px;
       text-align: left;
+      font-family: "Cormorant Garamond", serif;
     }
 
     .ai-hero-grid__row-2-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk {
@@ -3371,7 +3379,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 
       <div class="ai-hero-grid__right-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
         
-          <div class="ai-hero-grid__body-text-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk"><p>Branding, Digital and Creative Direction.</p><p>Our work is guided by strategy, shaped with <br>intention, and grounded in clarity.</p></div>
+          <div class="ai-hero-grid__body-text-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk"><p>Дизайн • Брендинг • Разработка сайта под ключ</p><p>Our work is guided by strategy, shaped with <br>intention, and grounded in clarity.</p></div>
         
 
         
