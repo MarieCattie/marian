@@ -5,4 +5,16 @@ collection-links-component{--alignment: flex-start;display:grid;align-items:cent
     font-size: 20px;
     text-transform: uppercase;
 }
+/* Отключаем эффекты opacity при наведении */
+@media (hover: hover) {
+  .header__column:has(header-menu:hover) header-menu:not(:hover),
+  .header__column:has(.header-actions__action:hover) .header-actions__action:not(:hover) {
+    opacity: 1 !important;
+  }
+}
+
+/* Убираем transition */
+header-menu, .header-actions__action {
+  transition: none !important;
+}
 /*# sourceMappingURL=/cdn/shop/t/2/compiled_assets/styles.css.map?v=2042 */
