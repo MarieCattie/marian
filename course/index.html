@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MARIANÉ · Познай себя | Авторский курс</title>
+    <!-- Google Fonts & smooth behavior -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fefaf5;
+            color: #2c2418;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.4;
+            scroll-behavior: smooth;
+        }
+
+        /* эстетика творчества, легкая воздушность */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* типографика с философским настроением */
+        h1, h2, h3, .serif {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        h1 {
+            font-size: clamp(3.2rem, 8vw, 5.5rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: #2b1f12;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+            position: relative;
+            display: inline-block;
+        }
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: #d9b48b;
+        }
+
+        .hero-sub {
+            font-size: 1.3rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: #5e4b34;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.85rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            font-size: 1rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            background: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: #2b1f12;
+            color: #fff9f2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .btn-primary:hover {
+            background: #4a3520;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border-color: #2b1f12;
+            color: #2b1f12;
+            background: transparent;
+        }
+        .btn-outline:hover {
+            background: #f0e5da;
+            transform: translateY(-2px);
+        }
+
+        .btn-light {
+            background: #e8ddd0;
+            color: #2b1f12;
+        }
+        .btn-light:hover {
+            background: #dfd0be;
+        }
+
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid #f0e4d8;
+        }
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .card-module {
+            background: #ffffffd9;
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            padding: 2rem;
+            box-shadow: 0 12px 28px -8px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            border: 1px solid #f5e9df;
+        }
+
+        .module-badge {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #b87c4a;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .list-styled {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        .list-styled li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .list-styled li:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            color: #d9a066;
+        }
+
+        .quote-block {
+            background: #f9f1e9;
+            padding: 2rem;
+            border-radius: 48px;
+            font-style: italic;
+            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            border-left: 6px solid #d9b48b;
+        }
+
+        .badge-small {
+            background: #efe0d4;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .footer-meme {
+            background: #f4ede5;
+            border-radius: 48px;
+            padding: 2rem 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 800px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .container {
+                padding: 0 24px;
+            }
+            section {
+                padding: 3rem 0;
+            }
+        }
+
+        /* эстетика архетипов */
+        .icon-stars {
+            font-size: 1.8rem;
+            letter-spacing: 4px;
+            color: #d9b48b;
+        }
+
+        .community-block {
+            background: linear-gradient(115deg, #fff7f0 0%, #faf1e6 100%);
+            border-radius: 48px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #8f735a;
+            border-top: 1px solid #ede0d4;
+        }
+    </style>
+</head>
+<body>
+
+<main>
+    <!-- Hero / Главный экран -->
+    <section style="padding-top: 5rem; padding-bottom: 4rem;">
+        <div class="container">
+            <div class="badge-small">Авторский курс MARIANÉ</div>
+            <h1>ПОЗНАЙ СЕБЯ</h1>
+            <div class="hero-sub">Найди свой путь. Верни вдохновение. Научись слышать себя.</div>
+            <p style="max-width: 680px; font-size: 1.1rem; line-height: 1.5; margin-bottom: 2rem;">
+                Для женщин, которые хотят найти себя, понять кто ты, найти вдохновение и раскрывать свои уникальные таланты. Этот курс поможет услышать свои истинные желания, увидеть внутренние возможности и найти собственный путь через творчество, философию, архетипы и практики самопознания.
+            </p>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary" id="startJourneyBtn">Начать путь</a>
+                <a href="https://vk.com/marianedesign" class="btn btn-outline" id="vkCommunityBtn">Перейти в сообщество ВК</a>
+                <a href="#about-course" class="btn btn-light">О курсе</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Искусство быть собой / философский блок -->
+    <section id="about-course">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <span class="icon-stars">✦ ✦ ✦</span>
+                    <h2>Искусство быть собой</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.5; margin: 1rem 0 1rem 0;">
+                        Мы живём в мире, где нас с детства учат быть удобными, правильными и соответствовать ожиданиям других людей. <br><br>
+                        Но счастье начинается там, где человек начинает слышать себя.
+                    </p>
+                    <p style="margin-bottom: 1rem;">
+                        Творчество — это не просто рисование, музыка или писательство. Это естественное состояние человека. Именно творчество двигает мир вперёд.
+                        Любой бизнес, изобретение, книга, картина, бренд или технология когда-то были чьей-то идеей. Всё великое начинается с вдохновения.
+                    </p>
+                    <p>
+                        Когда человек творит, он перестаёт жить на автомате. Он возвращается в состояние детского интереса к жизни, начинает замечать красоту вокруг, чувствовать себя живым и настоящим.
+                    </p>
+                </div>
+                <div class="quote-block">
+                    «Творчество — это мост между тем, кем тебя научили быть, и тем, кем ты являешься на самом деле.»
+                    <div style="margin-top: 12px; font-style: normal; font-weight: 500;">— MARIANÉ</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <h2>Курс «Познай себя» создан для женщин, которые хотят:</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem;">
+                    <span class="badge-small">✨ найти своё предназначение</span>
+                    <span class="badge-small">✨ понять свои истинные желания</span>
+                    <span class="badge-small">✨ раскрыть творческий потенциал</span>
+                    <span class="badge-small">✨ научиться уделять время себе без чувства вины</span>
+                    <span class="badge-small">✨ выйти из зависимости от чужого мнения</span>
+                    <span class="badge-small">✨ понять повторяющиеся жизненные уроки</span>
+                    <span class="badge-small">✨ жить в гармонии со своей природой</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Для кого этот курс -->
+    <section style="background-color: #fef8f2;">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h2>Для кого этот курс</h2>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 2rem 0;">
+                    <div style="background: white; border-radius: 60px; padding: 0.6rem 1.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">постоянно заняты работой и обязанностями</div>
+                    <div style="background: white; border-radius: 60px; padding: 0.6rem 1.8rem;">чувствуете внутреннюю пустоту</div>
+                    <div style="background: white; border-radius: 60px; padding: 0.6rem 1.8rem;">не понимаете, чего хотите на самом деле</div>
+                    <div style="background: white; border-radius: 60px; padding: 0.6rem 1.8rem;">повторяющиеся ситуации и уроки</div>
+                    <div style="background: white; border-radius: 60px; padding: 0.6rem 1.8rem;">потеряли вдохновение</div>
+                    <div style="background: white; border-radius: 60px; padding: 0.6rem 1.8rem;">хотите найти дело по душе</div>
+                    <div style="background: white; border-radius: 60px; padding: 0.6rem 1.8rem;">ищете свой путь и своё место в мире</div>
+                </div>
+                <div class="quote-block" style="background: #f2e8df;">✨ Тогда этот курс для вас. ✨</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Программа курса 3 модуля -->
+    <section>
+        <div class="container">
+            <h2 style="margin-bottom: 2rem;">Программа курса</h2>
+            <div class="grid-2">
+                <div class="card-module">
+                    <div class="module-badge">МОДУЛЬ 1</div>
+                    <h3 style="font-size: 1.9rem; font-family: 'Cormorant Garamond', serif;">Путь к себе</h3>
+                    <p><em>Утренняя практика по мотивам книги «Путь художника»</em></p>
+                    <ul class="list-styled">
+                        <li>Утренние страницы</li>
+                        <li>Как услышать свой внутренний голос</li>
+                        <li>Как отличить свои желания от навязанных</li>
+                        <li>Эмоциональная независимость</li>
+                        <li>Работа со страхом оценки</li>
+                        <li>Поиск вдохновения · Поиск своего дела</li>
+                        <li>Хобби, творчество и предназначение</li>
+                        <li>Что действительно приносит радость именно вам</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-weight: 500;">📘 Результат: Вы начнёте понимать, чего хотите именно вы, а не окружающие.</p>
+                </div>
+                <div class="card-module">
+                    <div class="module-badge">МОДУЛЬ 2</div>
+                    <h3 style="font-size: 1.9rem; font-family: 'Cormorant Garamond', serif;">Горячая Алхимия</h3>
+                    <p>Глубокое исследование своей личности.</p>
+                    <ul class="list-styled">
+                        <li>Архетипы личности</li>
+                        <li>Женские сценарии</li>
+                        <li>Теневая сторона личности</li>
+                        <li>Предназначение</li>
+                        <li>Внутренние конфликты</li>
+                        <li>Жизненные уроки</li>
+                        <li>Путь трансформации</li>
+                        <li>Алхимия изменений</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-weight: 500;">🔥 Результат: Понимание своих сильных сторон, внутренних ресурсов и направлений развития.</p>
+                </div>
+                <div class="card-module" style="grid-column: span 1;">
+                    <div class="module-badge">МОДУЛЬ 3</div>
+                    <h3 style="font-size: 1.9rem; font-family: 'Cormorant Garamond', serif;">Магия намерения</h3>
+                    <p>Исследование символических и психологических инструментов самопознания.</p>
+                    <ul class="list-styled">
+                        <li>Симорон-практики</li>
+                        <li>Герметические принципы</li>
+                        <li>Работа с подсознанием</li>
+                        <li>Сублиминалы</li>
+                        <li>Матрица судьбы как инструмент рефлексии</li>
+                        <li>Создание карты желаемого будущего</li>
+                        <li>Личный путь и намерение</li>
+                    </ul>
+                    <p style="margin-top: 1rem; font-weight: 500;">🌙 Результат: Вы создадите собственную систему поддержки и движения к своим целям.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Что вы получите -->
+    <section style="background: #fff6ef;">
+        <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <h2>Что вы получите</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 2rem 0;">
+                    <div class="badge-small" style="background:#e8d9cd;">🌙 Ясность в своих желаниях</div>
+                    <div class="badge-small" style="background:#e8d9cd;">🌙 Новое вдохновение</div>
+                    <div class="badge-small" style="background:#e8d9cd;">🌙 Уверенность в выборе пути</div>
+                    <div class="badge-small" style="background:#e8d9cd;">🌙 Инструменты самопознания</div>
+                    <div class="badge-small" style="background:#e8d9cd;">🌙 Творческие практики на каждый день</div>
+                    <div class="badge-small" style="background:#e8d9cd;">🌙 Более глубокое понимание себя</div>
+                    <div class="badge-small" style="background:#e8d9cd;">🌙 Сообщество единомышленниц</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Сообщество / Искусство быть собой -->
+    <section>
+        <div class="container">
+            <div class="community-block">
+                <h2 style="margin-bottom: 0.5rem;">Сообщество «Искусство быть собой»</h2>
+                <p style="font-size: 1.1rem; max-width: 600px; margin: 1rem auto;">Пространство для женщин, которые хотят жить в согласии с собой, развивать творчество, раскрывать свою индивидуальность и идти собственным путём.</p>
+                <p style="margin: 1rem 0;">Здесь мы говорим о вдохновении, архетипах, предназначении, творчестве, философии жизни и внутренней свободе.</p>
+                <a href="https://vk.com/marianedesign" class="btn btn-primary" id="communityVKbtn" style="background:#b88b5c; border: none;">✨ Перейти в сообщество ВК ✨</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Финальный блок + уникальное оформление мема "Жизнь внезапно перестала быть квестом" -->
+    <section style="padding-bottom: 3rem;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h2>Твой путь начинается с одного решения</h2>
+                <p style="font-size: 1.2rem;">Перестать жить на автомате.<br>Начать слышать себя. Познать себя.</p>
+                <div class="btn-group" style="justify-content: center;">
+                    <a href="#" class="btn btn-primary" id="finalStartBtn">Начать путь ✦</a>
+                </div>
+            </div>
+
+            <!-- Мем-блок в эстетике MARIANÉ, с завершающей философией -->
+            <div class="footer-meme">
+                <div style="font-size: 1.3rem; font-family: 'Cormorant Garamond', serif; font-weight: 500; letter-spacing: -0.2px;">
+                    «Когда знаешь свои архетипы, матрицу на год, предназначение и наконец понимаешь, почему всё происходило именно так...»
+                </div>
+                <div style="font-size: 4rem; margin: 1rem 0; line-height: 1;">✨ 777 ✨</div>
+                <div style="background: #fff3ea; border-radius: 60px; padding: 1.5rem; margin-top: 0.5rem;">
+                    <p style="font-size: 1.4rem; font-family: 'Cormorant Garamond', serif; font-weight: 600; margin-bottom: 0.5rem;">🌙 Жизнь внезапно перестала быть квестом с неизвестными правилами.</p>
+                    <p style="font-size: 1.2rem; font-style: italic; color: #4f3a26;">а стала твоей личной историей, где ты — главный персонаж и автор игры.<br> Ты задаешь ей течение и варианты развития, как истинная создательница своего пути.</p>
+                    <div style="margin-top: 1rem; font-size: 1rem;">✨ MARIANÉ · Искусство быть собой ✨</div>
+                </div>
+                <div style="margin-top: 1.5rem; font-size: 0.9rem;">
+                    Авторский курс MARIANÉ «Познай себя» · Найди свой путь. Раскрой свою природу.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            © 2026 MARIANÉ · авторский курс «Познай себя» · пространство внутренней свободы и творчества
+        </div>
+    </footer>
+</main>
+
+<!-- простые интерактивные алерты для кнопок (имитация связи) -->
+<script>
+    (function() {
+        // все кнопки, которые имитируют начало пути или переход в сообщество
+        const startButtons = document.querySelectorAll('#startJourneyBtn, #finalStartBtn');
+        const vkButtons = document.querySelectorAll('#vkCommunityBtn, #communityVKbtn');
+        
+        const handleStart = (e) => {
+            e.preventDefault();
+            alert("✨ Добро пожаловать на курс «Познай себя»! ✨\n\nСвязь с MARIANÉ: напишите нам в сообщество ВК для записи и подробной программы. Вы на правильном пути.");
+        };
+        
+        const handleVK = (e) => {
+            e.preventDefault();
+            alert("🌙 Сообщество «Искусство быть собой» ВКонтакте\nПрисоединяйтесь к пространству вдохновения, архетипов и философии жизни. (ссылка-заглушка, в реальном проекте ведет на VK)");
+        };
+        
+        startButtons.forEach(btn => btn.addEventListener('click', handleStart));
+        vkButtons.forEach(btn => btn.addEventListener('click', handleVK));
+        
+        // кнопка "О курсе" плавный скролл к блоку about-course
+        const aboutBtn = document.querySelector('a[href="#about-course"]');
+        if(aboutBtn) {
+            aboutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('about-course').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+        
+        // дополнительные стили для красивого hover эффектов
+    })();
+</script>
+</body>
+</html>
