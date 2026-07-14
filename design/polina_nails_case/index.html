@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Кейс бренд-дизайна для студии маникюра Polina Nails" />
+  <title>Polina Nails — кейс бренд-дизайна</title>
+  <style>
+    :root{
+      --forest:#0d241a;
+      --forest-2:#153526;
+      --forest-3:#1f4a35;
+      --gold:#d4b66f;
+      --gold-soft:#ead9a8;
+      --ivory:#f5f0e7;
+      --text:#f7f2e8;
+      --muted:#c8c1b4;
+      --line:rgba(212,182,111,.28);
+      --card:rgba(15,43,30,.78);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(67,121,77,.22), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(203,168,80,.12), transparent 22%),
+        linear-gradient(180deg,#07140e 0%,var(--forest) 35%,#0a1d15 100%);
+      font-family:Inter,Arial,sans-serif;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.28;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.24) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(212,182,111,.28) 0 1px, transparent 1.5px);
+      background-size:90px 90px,140px 140px;
+      background-position:0 0,35px 20px;
+      mask-image:linear-gradient(to bottom,black,transparent 85%);
+    }
+
+    h1,h2,h3,.serif{font-family:Georgia,'Times New Roman',serif;font-weight:500}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+
+    .nav{
+      position:sticky;top:0;z-index:10;
+      backdrop-filter:blur(16px);
+      background:rgba(6,20,14,.7);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      width:min(1180px,92vw);margin:auto;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:18px 0;
+    }
+    .brand{letter-spacing:.18em;color:var(--gold);font-family:Georgia,serif}
+    .nav-links{display:flex;gap:24px;font-size:14px;color:var(--muted)}
+
+    .hero{
+      min-height:92vh;
+      display:grid;place-items:center;
+      padding:80px 4vw 40px;
+      position:relative;
+    }
+    .hero-grid{
+      width:min(1180px,92vw);
+      display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;
+    }
+    .eyebrow{color:var(--gold);letter-spacing:.22em;text-transform:uppercase;font-size:13px}
+    h1{font-size:clamp(58px,8vw,118px);line-height:.86;margin:18px 0 28px;letter-spacing:-.03em}
+    .hero p{font-size:20px;line-height:1.7;color:var(--muted);max-width:650px}
+    .hero-card{
+      border:1px solid var(--line);
+      background:linear-gradient(160deg,rgba(43,80,57,.5),rgba(8,25,17,.8));
+      border-radius:30px;padding:26px;
+      box-shadow:0 30px 80px rgba(0,0,0,.35), inset 0 1px rgba(255,255,255,.06);
+      transform:rotate(1.5deg);
+    }
+    .monogram{
+      width:100%;aspect-ratio:1/1;border-radius:50%;
+      border:1px solid var(--gold);
+      display:grid;place-items:center;
+      font-family:Georgia,serif;font-size:180px;color:var(--gold);
+      background:radial-gradient(circle at 50% 45%,rgba(212,182,111,.16),transparent 60%);
+    }
+
+    .section{width:min(1180px,92vw);margin:0 auto;padding:110px 0}
+    .section-head{display:grid;grid-template-columns:.6fr 1.4fr;gap:36px;margin-bottom:50px}
+    .section h2{font-size:clamp(42px,5vw,76px);margin:0;color:var(--gold-soft)}
+    .section-head p{font-size:19px;line-height:1.8;color:var(--muted);margin:0}
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .card{
+      min-height:260px;padding:28px;border-radius:22px;
+      border:1px solid var(--line);background:var(--card);
+      box-shadow:0 18px 60px rgba(0,0,0,.18);
+    }
+    .card h3{font-size:30px;margin:0 0 14px;color:var(--gold-soft)}
+    .card p,.card li{color:var(--muted);line-height:1.7}
+
+    .quote{
+      margin:40px 0 0;padding:42px;border-left:2px solid var(--gold);
+      font-family:Georgia,serif;font-size:clamp(28px,4vw,54px);line-height:1.25;color:var(--ivory);
+      background:linear-gradient(90deg,rgba(212,182,111,.08),transparent);
+    }
+
+    .palette{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+    .swatch{border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#0d241a}
+    .swatch-color{height:180px}
+    .swatch-info{padding:16px;font-size:14px;color:var(--muted)}
+    .swatch-info strong{display:block;color:var(--text);margin-bottom:5px}
+
+    .case-image{
+      width:min(1440px,100%);margin:40px auto 0;
+      border-radius:28px;overflow:hidden;border:1px solid var(--line);
+      box-shadow:0 40px 120px rgba(0,0,0,.45);
+      background:#0b1c14;
+    }
+
+    .deliverables{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .deliverable{padding:18px 20px;border-bottom:1px solid var(--line);color:var(--muted)}
+    .deliverable span{color:var(--gold);margin-right:10px}
+
+    .footer{padding:100px 4vw;text-align:center;border-top:1px solid var(--line);background:rgba(3,14,9,.6)}
+    .footer h2{font-size:clamp(46px,6vw,82px);margin:0 0 18px;color:var(--gold-soft)}
+    .footer p{color:var(--muted)}
+
+    @media (max-width:900px){
+      .hero-grid,.section-head{grid-template-columns:1fr}
+      .hero{min-height:auto;padding-top:70px}
+      .monogram{font-size:120px}
+      .grid-3{grid-template-columns:1fr}
+      .palette{grid-template-columns:repeat(2,1fr)}
+      .nav-links{display:none}
+      .deliverables{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">POLINA NAILS</div>
+      <div class="nav-links">
+        <a href="#about">О проекте</a>
+        <a href="#concept">Концепция</a>
+        <a href="#identity">Айдентика</a>
+        <a href="#result">Результат</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Кейс бренд-дизайна · студия маникюра</div>
+        <h1>POLINA<br>NAILS</h1>
+        <p>Феерическая айдентика, в которой свежесть травянистого сада встречается с магией золота, мягкого света и ежедневного ритуала красоты.</p>
+      </div>
+      <div class="hero-card">
+        <div class="monogram">P</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="section">
+      <div class="section-head">
+        <h2>О проекте</h2>
+        <p>Polina Nails — современная студия маникюра для девушек, которые ценят эстетику, качество и атмосферу спокойной роскоши. Задача проекта — создать выразительный бренд, который выглядит премиально, узнаваемо и не теряется среди однотипных beauty-концепций.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Задача</h3><p>Разработать логотип, цветовую систему, типографику, графические элементы, носители, оформление социальных сетей и базовый брендбук.</p></article>
+        <article class="card"><h3>Аудитория</h3><p>Современные женщины, выбирающие осознанный уход, красивое пространство, деликатный сервис и визуально цельный бренд.</p></article>
+        <article class="card"><h3>Образ</h3><p>Не салон в привычном понимании, а волшебный зелёный ритуал свежести, восстановления и внимания к деталям.</p></article>
+      </div>
+      <div class="quote">«Маникюр — это не услуга. Это маленький ежедневный ритуал красоты».</div>
+    </section>
+
+    <section id="concept" class="section">
+      <div class="section-head">
+        <h2>Концепция</h2>
+        <p>В основе визуального языка — чистота, женственность и минимализм. Глубокий зелёный передаёт свежесть, спокойствие и природную силу. Золото добавляет ощущение магии, света и премиальности. Вместо прямых изображений ногтей бренд строится на атмосфере и эмоциональном опыте.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Свежесть</h3><p>Травянистые оттенки, мох, листья, мягкий свет и ощущение живого сада.</p></article>
+        <article class="card"><h3>Магия</h3><p>Золотые искры, плавные линии, хрустальные детали и образ маленького личного ритуала.</p></article>
+        <article class="card"><h3>Роскошь</h3><p>Сдержанная типографика, глубокие тёмные фоны и премиальные материалы без визуальной перегрузки.</p></article>
+      </div>
+    </section>
+
+    <section id="identity" class="section">
+      <div class="section-head">
+        <h2>Цветовая палитра</h2>
+        <p>Палитра построена на контрасте воздушных нейтральных оттенков и насыщенного лесного зелёного. Золото работает как сияющий акцент, а не как постоянный декоративный шум.</p>
+      </div>
+      <div class="palette">
+        <div class="swatch"><div class="swatch-color" style="background:#F8F6F3"></div><div class="swatch-info"><strong>Milk White</strong>#F8F6F3</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#E8DDD3"></div><div class="swatch-info"><strong>Nude Beige</strong>#E8DDD3</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#CBB8AA"></div><div class="swatch-info"><strong>Warm Taupe</strong>#CBB8AA</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#1F3A2E"></div><div class="swatch-info"><strong>Forest Green</strong>#1F3A2E</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#C8A96A"></div><div class="swatch-info"><strong>Gold Accent</strong>#C8A96A</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Визуальная система</h2>
+        <p>Логотип строится вокруг изящной монограммы P и мягких линий, напоминающих движение кисти, контур ногтя и рост растения. Для заголовков используется Cormorant Garamond, для основного текста — современный и спокойный Manrope.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card"><h3>Логотип</h3><p>Минималистичная монограмма, легко масштабируемая для вывески, упаковки, Instagram и печатной продукции.</p></article>
+        <article class="card"><h3>Типографика</h3><p>Cormorant Garamond создаёт ощущение изысканной классики, Manrope поддерживает современность и читаемость.</p></article>
+        <article class="card"><h3>Графика</h3><p>Плавные золотые линии, искры и ботанические мотивы формируют узнаваемую декоративную систему бренда.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Полный кейс</h2>
+        <p>Ниже размещена готовая длинная презентация, собранная как Behance-кейс: от концепции и палитры до фирменных носителей, Instagram и результата.</p>
+      </div>
+      <div class="case-image"><img src="polina-nails-case.png" alt="Полный кейс Polina Nails" /></div>
+    </section>
+
+    <section id="result" class="section">
+      <div class="section-head">
+        <h2>Результат</h2>
+        <p>Получилась цельная визуальная айдентика, которая выглядит дорого без перегруженности, вызывает доверие и одинаково хорошо работает в digital и печати. Бренд можно масштабировать для новых точек, продуктов и рекламных кампаний.</p>
+      </div>
+      <div class="deliverables">
+        <div class="deliverable"><span>✦</span>Исследование и позиционирование</div>
+        <div class="deliverable"><span>✦</span>Moodboard и арт-направление</div>
+        <div class="deliverable"><span>✦</span>Логотип и монограмма</div>
+        <div class="deliverable"><span>✦</span>Цветовая система</div>
+        <div class="deliverable"><span>✦</span>Типографика и фирменная графика</div>
+        <div class="deliverable"><span>✦</span>Дизайн носителей и упаковки</div>
+        <div class="deliverable"><span>✦</span>Оформление Instagram</div>
+        <div class="deliverable"><span>✦</span>Базовый брендбук</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <h2>Спасибо за просмотр</h2>
+    <p>Polina Nails — свежесть, магия и эстетика ежедневного ритуала.</p>
+  </footer>
+</body>
+</html>

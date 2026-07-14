@@ -1,0 +1,231 @@
+<section class="advantages-section">
+    <div class="maxwidth-theme">
+        <h2 class="section-title">Преимущества / почему выбирают нас</h2>
+        <p class="section-subtitle">Карточки должны подтверждать надежность, а не повторять общие фразы</p>
+        
+        <div class="advantages-grid">
+            <div class="advantage-card">
+                <div class="advantage-card__dot advantage-card__dot--orange"></div>
+                <h3 class="advantage-card__title">Документы</h3>
+                <p class="advantage-card__desc">договор и закрывающие</p>
+            </div>
+            
+            <div class="advantage-card">
+                <div class="advantage-card__dot advantage-card__dot--green"></div>
+                <h3 class="advantage-card__title">Сроки</h3>
+                <p class="advantage-card__desc">понятные условия отправки</p>
+            </div>
+            
+            <div class="advantage-card">
+                <div class="advantage-card__dot advantage-card__dot--green"></div>
+                <h3 class="advantage-card__title">Контроль</h3>
+                <p class="advantage-card__desc">статус и сопровождение</p>
+            </div>
+            
+            <div class="advantage-card">
+                <div class="advantage-card__dot advantage-card__dot--orange"></div>
+                <h3 class="advantage-card__title">Ответственность</h3>
+                <p class="advantage-card__desc">условия сохранности</p>
+            </div>
+            
+            <div class="advantage-card">
+                <div class="advantage-card__dot advantage-card__dot--green"></div>
+                <h3 class="advantage-card__title">Опыт</h3>
+                <p class="advantage-card__desc">профильные перевозки</p>
+            </div>
+            
+            <div class="advantage-card">
+                <div class="advantage-card__dot advantage-card__dot--green"></div>
+                <h3 class="advantage-card__title">География</h3>
+                <p class="advantage-card__desc">Сибирь и Дальний Восток</p>
+            </div>
+            
+            <div class="advantage-card">
+                <div class="advantage-card__dot advantage-card__dot--orange"></div>
+                <h3 class="advantage-card__title">Температура</h3>
+                <p class="advantage-card__desc">контроль режима</p>
+            </div>
+            
+            <div class="advantage-card">
+                <div class="advantage-card__dot advantage-card__dot--green"></div>
+                <h3 class="advantage-card__title">Связь</h3>
+                <p class="advantage-card__desc">быстрый ответ менеджера</p>
+            </div>
+        </div>
+        
+        <div class="advantages-note">
+            <h4 class="advantages-note__title">Требование к тексту карточек</h4>
+            <p class="advantages-note__text">
+                Не писать «высокое качество» и «индивидуальный подход» без подтверждения. 
+                Лучше использовать проверяемые преимущества: документы, сроки, ответственность, 
+                отслеживание, SLA, страхование, закрывающие.
+            </p>
+        </div>
+    </div>
+</section>
+
+<style>
+.advantages-section {
+    padding: 60px 0;
+    background-color: #faf9f6;
+}
+
+.advantages-section .maxwidth-theme {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-family: 'Literata', serif;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.2;
+    color: #1f2937;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #6b7280;
+    margin-bottom: 40px;
+}
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.advantage-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.advantage-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.advantage-card__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-bottom: 16px;
+}
+
+.advantage-card__dot--orange {
+    background: #F97316;
+}
+
+.advantage-card__dot--green {
+    background: #10B981;
+}
+
+.advantage-card__title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.3;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+}
+
+.advantage-card__desc {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #9ca3af;
+    margin: 0;
+}
+
+.advantages-note {
+    background: #fff7ed;
+    border: 2px solid #fed7aa;
+    border-radius: 12px;
+    padding: 24px 32px;
+}
+
+.advantages-note__title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.3;
+    color: #9a3412;
+    margin: 0 0 12px 0;
+}
+
+.advantages-note__text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #c2410c;
+    margin: 0;
+}
+
+@media (max-width: 992px) {
+    .advantages-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .advantages-section {
+        padding: 40px 0;
+    }
+    
+    .section-title {
+        font-size: 32px;
+    }
+    
+    .section-subtitle {
+        font-size: 13px;
+        margin-bottom: 30px;
+    }
+    
+    .advantages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .advantage-card {
+        padding: 20px;
+    }
+    
+    .advantage-card__title {
+        font-size: 16px;
+    }
+    
+    .advantage-card__desc {
+        font-size: 12px;
+    }
+    
+    .advantages-note {
+        padding: 20px 24px;
+    }
+    
+    .advantages-note__title {
+        font-size: 16px;
+    }
+    
+    .advantages-note__text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .advantages-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
