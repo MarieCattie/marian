@@ -21,4 +21,37 @@ collection-links-component{--alignment: flex-start;display:grid;align-items:cent
 header-menu, .header-actions__action {
   transition: none !important;
 }
+.custom-textbar {
+  font-family: 'Montserrat';
+  font-weight: 100 !important;
+  color: #000;
+}
+.custom-textbar-aside {
+  background-color: transparent;
+  background-image: none;
+}
+
+
+.hero-slider__slide:nth-of-type(2) .video-hero-banner__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      180deg,
+      rgba(2, 7, 18, 0.6)
+    );
+  }
+  .hero-slider__slide:nth-of-type(2) .video-hero-banner__title {
+    width: 300px;
+    color: white;
+  }
+  .hero-slider__slide .video-hero-banner__content p {
+    width: 300px;
+  }
+  .hero-slider__slide:nth-of-type(2) .video-hero-banner__content p {
+    width: 300px;
+    color: white;
+    /* font: 100;
+    font: caption; */
+  }
 /*# sourceMappingURL=/cdn/shop/t/2/compiled_assets/styles.css.map?v=2042 */
