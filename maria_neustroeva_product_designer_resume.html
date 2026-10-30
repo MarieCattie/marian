@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мария Неустроева — Product Designer UX/UI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root {
+  --bg: #f4f3f0;
+  --paper: #ffffff;
+  --ink: #20211f;
+  --muted: #666963;
+  --line: #e7e6e1;
+  --accent: #b58a50;
+  --accent-soft: #f5eee4;
+  --green: #426b58;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; padding: 32px 16px;
+  background: var(--bg); color: var(--ink);
+  font: 14px/1.65 "Inter", Arial, sans-serif;
+}
+.resume-container {
+  width: min(100%, 1000px); margin: 0 auto; padding: 54px 62px;
+  background: var(--paper); border: 1px solid #eceae5;
+  box-shadow: 0 18px 60px rgba(36, 31, 23, .07);
+}
+header { padding-bottom: 30px; border-bottom: 1px solid var(--line); }
+.eyebrow {
+  color: var(--accent); text-transform: uppercase; letter-spacing: .16em;
+  font-size: 10px; font-weight: 800; margin-bottom: 12px;
+}
+.name { font-size: clamp(32px, 5vw, 46px); font-weight: 800; line-height: 1.12; letter-spacing: -.045em; }
+.position { margin-top: 12px; color: var(--muted); font-size: 16px; font-weight: 500; }
+.contact-info { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 22px; }
+.contact-item { color: var(--muted); font-size: 12px; }
+.contact-item i { color: var(--accent); margin-right: 7px; }
+a { color: inherit; text-decoration: none; border-bottom: 1px solid #dedbd3; }
+a:hover { color: var(--accent); }
+section { margin-top: 32px; break-inside: avoid; }
+h2 {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 17px; line-height: 1.3; margin: 0 0 16px; letter-spacing: -.025em;
+}
+h2 i { color: var(--accent); font-size: 14px; width: 18px; }
+h3 { margin: 0; font-size: 14px; line-height: 1.45; }
+.summary { font-size: 13px; color: #41433e; }
+.metrics {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  margin-top: 24px;
+}
+.metric { padding: 17px 14px; border: 1px solid var(--line); border-radius: 10px; background: #fdfcfb; }
+.metric-value { font-size: 25px; line-height: 1.2; font-weight: 800; letter-spacing: -.05em; }
+.metric-label { margin-top: 7px; color: var(--muted); font-size: 10px; line-height: 1.45; }
+.highlight {
+  background: var(--accent-soft); border-left: 3px solid var(--accent);
+  padding: 16px 18px; border-radius: 0 8px 8px 0; color: #464038; font-size: 12px;
+}
+.highlight strong { color: var(--ink); }
+.chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+.chip { border: 1px solid var(--line); background: #fff; padding: 5px 9px; border-radius: 5px; font-size: 10px; color: #4c4e48; }
+.project-item { padding: 19px 0; border-bottom: 1px solid var(--line); }
+.project-item:last-child { border-bottom: 0; }
+.project-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.project-title { font-size: 14px; font-weight: 800; letter-spacing: -.015em; }
+.project-type { flex-shrink: 0; color: var(--accent); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.project-meta { margin-top: 3px; font-size: 11px; color: var(--muted); }
+.project-description { margin: 10px 0 8px; color: #50524c; font-size: 12px; }
+.job-details { padding-left: 17px; margin: 8px 0 0; color: #454741; font-size: 12px; }
+.job-details li { padding-left: 2px; margin: 4px 0; }
+.job-details li::marker { color: var(--accent); }
+.edit-field {
+  margin-top: 10px; padding: 10px 12px; border: 1px dashed #d9d4ca;
+  background: #fdfbf8; border-radius: 6px; color: #77766f; font-size: 11px;
+}
+.edit-field strong { color: #5b5a53; }
+.skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.skills-category { padding: 15px 16px; border: 1px solid var(--line); border-radius: 9px; }
+.skills-category h3 { margin-bottom: 8px; }
+.skills-category h3 i { color: var(--accent); margin-right: 7px; font-size: 12px; }
+.skills-category ul { margin: 0; padding-left: 16px; color: var(--muted); font-size: 11px; }
+.skills-category li { margin: 4px 0; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.timeline { display: grid; grid-template-columns: 105px 1fr; gap: 12px; margin: 12px 0; }
+.timeline-date { color: var(--accent); font-weight: 700; font-size: 11px; }
+.timeline-copy { color: #4d4f49; font-size: 12px; }
+.placeholder { color: #77766f; font-style: italic; }
+footer { margin-top: 38px; padding-top: 18px; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: 10px; }
+footer p { margin: 4px 0; }
+.note { color: #89877f; font-size: 10px; margin-top: 8px; }
+@media (max-width: 700px) {
+  body { padding: 0; background: #fff; }
+  .resume-container { padding: 30px 22px; border: 0; box-shadow: none; }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .skills-grid, .two-col { grid-template-columns: 1fr; }
+  .project-heading { display: block; }
+  .project-type { display: inline-block; margin-top: 5px; }
+  .timeline { grid-template-columns: 82px 1fr; }
+}
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { padding: 0; background: white; font-size: 11px; }
+  .resume-container { width: 100%; max-width: none; padding: 0; border: 0; box-shadow: none; }
+  section { margin-top: 22px; }
+  .metric, .skills-category, .project-item { break-inside: avoid; }
+  a { border: 0; }
+}
+</style>
+</head>
+<body>
+<div class="resume-container">
+  <header>
+    <div class="eyebrow">Product design · UX/UI · Digital products</div>
+    <div class="name">Мария Неустроева</div>
+    <div class="position">Продуктовый дизайнер (UX/UI) · Клиентские сервисы · 5+ лет опыт в продакшене</div>
+    <div class="contact-info">
+      <div class="contact-item"><i class="fas fa-envelope"></i><span class="placeholder">mariandesign@mail.ru</span></div>
+      <div class="contact-item"><i class="fab fa-telegram"></i><a href="https://t.me/marianneu" target="_blank" rel="noopener">@marianneu</a></div>
+      <div class="contact-item"><i class="fas fa-globe"></i><span class="placeholder"><a href="https://mariecattie.github.io/marian/productdesignerportfolio/">Портфолио</a></span></div>
+      <!-- <div class="contact-item"><i class="fab fa-figma"></i><span class="placeholder">[Figma / Behance — при наличии]</span></div> -->
+    </div>
+  </header>
+
+  <div class="metrics">
+    <div class="metric"><div class="metric-value">2018</div><div class="metric-label">Начало пути в дизайне</div></div>
+    <div class="metric"><div class="metric-value">50+</div><div class="metric-label">Реализовано проектов и задач</div></div>
+    <div class="metric"><div class="metric-value">8+</div><div class="metric-label">Крупных проектов завершено</div></div>
+    <div class="metric"><div class="metric-value">200+</div><div class="metric-label">разработанных макетов (визитки, флаеры, инфографика, карточки товаров)</div></div>
+  </div>
+
+  <section>
+    <h2><i class="fas fa-user-tie"></i> Профессиональный профиль</h2>
+    <div class="summary">
+      Продуктовый дизайнер с опытом в дизайне с 2018 года и фокусом на цифровых продуктах с 2020 года. Прошла путь от графического дизайна до UX/UI и продуктового проектирования. Работаю на стыке пользовательского опыта, бизнес-задач и визуального качества: рассматриваю интерфейс как систему сценариев и точек контакта, а не набор отдельных экранов. В портфолио — мобильные приложения, сервисы, платформы и собственные продукты. Умею переводить сложную задачу в понятную структуру, выстраивать интерфейсную логику и доводить дизайн до цельной визуальной системы.
+    </div>
+    <div class="edit-field">Проектирую <strong>понятные интерфейсы</strong> для <strong>сложных продуктов</strong></div>
+  </section>
+
+  <section>
+    <h2><i class="fas fa-bullseye"></i> Ключевая экспертиза</h2>
+    <div class="highlight">
+      <strong>Мой подход:</strong> понять потребность пользователя и цель бизнеса → разложить путь на сценарии и состояния → найти точки, где интерфейс может снять барьер или усилить ценность → проверить логику → довести решение до аккуратного UI в рамках дизайн-системы.
+    </div>
+    <div class="chips">
+      <span class="chip">Product thinking</span><span class="chip">UX/UI</span><span class="chip">User flows</span>
+      <span class="chip">Customer journey</span><span class="chip">Информационная архитектура</span>
+      <span class="chip">Wireframes</span><span class="chip">Прототипирование</span><span class="chip">UI-системы</span>
+      <span class="chip">Адаптивные интерфейсы</span><span class="chip">Визуальная иерархия</span>
+      <span class="chip">Гипотезы и итерации</span><span class="chip">Бизнес-ориентированный дизайн</span>
+    </div>
+  </section>
+
+  <section>
+    <h2><i class="fas fa-route"></i> Как я работаю с продуктом</h2>
+    <div class="two-col">
+      <div>
+        <div class="timeline"><div class="timeline-date">01 / Понять</div><div class="timeline-copy"><strong>Контекст и задача</strong><br>Цели бизнеса, потребности пользователей, ограничения продукта и критерии успеха.</div></div>
+        <div class="timeline"><div class="timeline-date">02 / Исследовать</div><div class="timeline-copy"><strong>Сценарии и барьеры</strong><br>Путь пользователя, точки контакта, состояния интерфейса и потенциальные причины отказа.</div></div>
+        <div class="timeline"><div class="timeline-date">03 / Спроектировать</div><div class="timeline-copy"><strong>Логика и гипотезы</strong><br>Структура, пользовательские потоки, варианты решения и интерактивный прототип.</div></div>
+      </div>
+      <div>
+        <div class="timeline"><div class="timeline-date">04 / Оформить</div><div class="timeline-copy"><strong>Качественный UI</strong><br>Визуальная иерархия, компоненты, состояния, адаптивность и согласованность с дизайн-системой.</div></div>
+        <div class="timeline"><div class="timeline-date">05 / Проверить</div><div class="timeline-copy"><strong>Обратная связь и улучшения</strong><br>Уточнение решения по результатам тестирования, аналитики и обсуждения с командой.</div></div>
+        <div class="edit-field"><strong>Навыки:</strong><br><span class="placeholder">User Flow, прототипирование, юзабилити-тестирование, адаптивные веб- и мобильные
+интерфейсы, UI-kit, дизайн-системы, передача макетов в разработку, дизайн-ревью</span></div>
+        <br>
+        <div class="edit-field"><strong>Инструменты:</strong><br><span class="placeholder">Figma (Auto Layout, компоненты, варианты), Framer, Photoshop, Illustrator, Corel Draw</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><i class="fas fa-layer-group"></i>Проекты</h2>
+
+    <div class="project-item">
+      <div class="project-heading"><div class="project-title">Приложение для обучения дизайну в формате игры</div><div class="project-type">Стартап · EdTech</div></div>
+      <div class="project-meta"></div>
+      <p class="project-description">Мобильное приложение на пересечении обучения и игрового опыта. Приложение получило более 800 отзывов со средней оценкой 4,6.</p>
+      <ul class="job-details">
+        <li>Создала библиотеку SWOP из 21 группы компонентов для 8 продуктовых сценариев.
+Проработала цвета, типографику и состояния элементов по Atomic Design</li>
+        <li> Совместно с UX-исследователем участвовала в юзабилити-тестировании на 7 участниках:
+готовила вопросы, участвовала в сессиях и анализе. По наблюдениям доработала
+сценарии обучения и обработку неверных ответов</li>
+        <li> Спроектировала систему прохождения обучения в игровой форме с понятным интерактивом и анимациями, Prototype, UserFlow, пользовательские сценарии</li>
+      </ul>
+      <!-- <div class="edit-field"><strong>Кейс / ссылка:</strong> [Добавьте ссылку] &nbsp; <strong>Команда:</strong> [Состав команды] &nbsp; <strong>Инструменты:</strong> [Укажите]</div> -->
+    </div>
+
+    <div class="project-item">
+      <div class="project-heading"><div class="project-title">Dental Portal — портал-маркетплейс</div><div class="project-type">Marketplace · Healthcare</div></div>
+      <div class="project-meta">Портал для поиска заказов, товаров и услуг и стоматологической сфере</div>
+      <p class="project-description">Проблема: отсутствие единой системы стоматологических заказов, товаров и услуг, разрозненность информации, все хранится на бумаге и различных носителях</p>
+      <ul class="job-details">
+        <li>Спроектировала UI KIT и дизайн систему</li>
+        <li>Спроектировала редактируемый и настраиваемый личный кабинет</li>
+        <li>Объединила трех участников рынка в одном портале Клиники и врачи, Лаборатории и техники, Торгующие компании, благодаря каталогам и уменьшению действий клиента до 2-х шагов: создание карточки - просмотр откликов</li>
+        <li>Спроектировала 6 каталогов с фильтрацией и сменой отображения вида карточек</li>
+      </ul>
+    </div>
+
+    <div class="project-item">
+      <div class="project-heading"><div class="project-title">Foodle — редизайн приложения для предзаказа</div><div class="project-type">FoodTech · E-commerce</div></div>
+      <div class="project-meta">Приложение для кафе и ресторанов</div>
+      <p class="project-description">Задача: переработать существующий дизайн, сделать его более удобным и приятным</p>
+      <ul class="job-details">
+        <li>Разработала детальный UserFlow и варианты пользовательских сценариев</li>
+        <li>Прототипирование: разработала детальный wireframe с разбивкой по экранам</li>
+        <li>Поиск с удобной функцией автодополнения и замены адреса</li>
+        <li>UX/UI: проработала новый вид карточки товара и дизайн основных элементов интерфейса</li>
+      </ul>
+    </div>
+
+    <!-- <div class="project-item">
+      <div class="project-heading"><div class="project-title">FlatChat — мобильное приложение в сфере недвижимости</div><div class="project-type">Real Estate</div></div>
+      <p class="project-description">[Целевая аудитория, пользовательская задача и контекст продукта.]</p>
+      <ul class="job-details">
+        <li>[Ваша зона ответственности и основные сценарии.]</li>
+        <li>[Принятые UX/UI-решения и работа с состояниями.]</li>
+        <li>[Результат или выводы по проекту.]</li>
+      </ul>
+      <div class="edit-field"><strong>Роль / сроки / команда / ссылка:</strong> [Заполнить]</div>
+    </div> -->
+
+    <div class="project-item">
+      <div class="project-heading"><div class="project-title">HR-D — мобильное приложение в сфере HR</div><div class="project-type">HRTech</div></div>
+      <p class="project-description">Задача - спроектировать с нуля мобильное приложение в сфере HR</p>
+      <ul class="job-details">
+        <li>Проанализировала рынок и создала удобный UX/UI интерфейс</li>
+        <li>Спроектировала приложение для 2-х ролей: кандидат и работодатель</li>
+        <li>Более 100 экранов</li>
+        <li>Спроектировала Activity diagram, UML и UserFlow пользовательских сценариев</li>
+      </ul>
+    </div>
+
+    <div class="project-item">
+      <div class="project-heading"><div class="project-title">Узналюб — мобильное приложение</div><div class="project-type">EdTech</div></div>
+      <div class="project-meta">Карманный репетитор для школьника!</div>
+      <p class="project-description">Задача спроектировать с нуля приложение карманного репетитора для школьников</p>
+      <ul class="job-details">
+        <li>Провела исследование и формирование карты продукта</li>
+        <li>Спроектировала UX/UI архитектуру приложения с нуля</li>
+        <li>Разработала LMS и личный кабинет с удобным просмотром обучающих видео</li>
+      </ul>
+    </div>
+
+    <!-- <div class="project-item">
+      <div class="project-heading"><div class="project-title">Олимпиада — платформа для проведения олимпиады</div><div class="project-type">EdTech · Platform</div></div>
+      <p class="project-description">Задача: спроектировать с нуля платформу для проведения олимпиады от Пятерочки</p>
+      <ul class="job-details">
+        <li>[Сценарии участников и/или организаторов.]</li>
+        <li>[Структура платформы, интерфейсные состояния и ограничения.]</li>
+        <li>[Результат / обратная связь / ссылка на кейс.]</li>
+      </ul>
+      <div class="edit-field"><strong>Роль / сроки / команда / ссылка:</strong> [Заполнить]</div>
+    </div> -->
+
+    <!-- <div class="project-item">
+      <div class="project-heading"><div class="project-title">DeliMoney — приложение для совместных закупок</div><div class="project-type">FinTech / Consumer app</div></div>
+      <p class="project-description">[Опишите основную ценность сервиса, пользовательский контекст и задачу дизайна.]</p>
+      <ul class="job-details">
+        <li>[Ключевые сценарии и принципы взаимодействия.]</li>
+        <li>[Решения, помогающие пользователю понимать процесс и следующий шаг.]</li>
+        <li>[Подтверждённый результат / ссылка на кейс.]</li>
+      </ul>
+      <div class="edit-field"><strong>Роль / сроки / команда / ссылка:</strong> [Заполнить]</div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-heading"><div class="project-title">Автостэлс — редизайн платформы продажи автозапчастей</div><div class="project-type">E-commerce</div></div>
+      <p class="project-description">[Опишите покупательский сценарий, структуру каталога и бизнес-задачу редизайна.]</p>
+      <ul class="job-details">
+        <li>[Как пользователь ищет, сравнивает и выбирает товар.]</li>
+        <li>[Какие элементы интерфейса переработали и почему.]</li>
+        <li>[Результат, метрики или качественные улучшения — при наличии.]</li>
+      </ul>
+      <div class="edit-field"><strong>Роль / сроки / команда / ссылка:</strong> [Заполнить]</div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-heading"><div class="project-title">Забота 2.0 — редизайн Windows-приложения</div><div class="project-type">HealthTech</div></div>
+      <p class="project-description">[Опишите пользователей, рабочий контекст и ключевую задачу редизайна.]</p>
+      <ul class="job-details">
+        <li>[Как анализировали структуру и сценарии существующего интерфейса.]</li>
+        <li>[Какие UX/UI-изменения предложили.]</li>
+        <li>[Результат / ограничения / ссылка на кейс.]</li>
+      </ul>
+      <div class="edit-field"><strong>Роль / сроки / команда / ссылка:</strong> [Заполнить]</div>
+    </div>
+  </section> -->
+
+  <section>
+    <h2><i class="fas fa-wand-magic-sparkles"></i> AI и новые способы проектирования</h2>
+    <div class="summary">Для этой вакансии важно конкретно показать, как ИИ помогает ускорять исследование, генерацию вариантов, прототипирование и проверку решений. Укажите только те инструменты и сценарии, которые действительно используете.</div>
+    <div class="skills-grid" style="margin-top: 12px;">
+      <div class="skills-category"><h3><i class="fas fa-brain"></i> AI-инструменты</h3><ul><li>ChatGPT (GPT-4o), Claude, Perplexity — ресерч, конкурентный анализ, суммаризация интервью, генерация гипотез и текстов интерфейса</li><li>Midjourney / Firefly — мудборды, визуальные референсы, быстрые концепты</li><li>Встроенные AI-функции Figma (AI-плагины) — автолейауты, переименование слоёв, генерация вариаций</li></ul></div>
+      <div class="skills-category"><h3><i class="fas fa-code"></i> Вайбкодинг / прототипирование</h3><ul><li>Инструменты: Cursor, Claude (Artifacts), v0.dev, GitHub Copilot; для статики — HTML/CSS + Tailwind, для интерактива — React. Figma — только для финальной полировки визуала.</li><li>Что создаю: простые интерактивные макеты (формы, списки, модальные окна) для проверки идей и демонстрации команде. Использую как дополнение к Figma, а не замену.
+</li><li>Как проверяю качество и ограничения: ручной просмотр результата, тест в браузере и на телефоне; понимаю, что сгенерированный код требует ревью разработчика и не годится для продакшена. Ограничения проговариваю вслух команде до показа.
+
+</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><i class="fas fa-toolbox"></i> Инструменты и навыки</h2>
+    <div class="skills-grid">
+      <div class="skills-category"><h3><i class="fab fa-figma"></i> Проектирование</h3><ul><li>Figma</li><li>Компоненты, варианты и дизайн-системы</li><li>Прототипы и интерактивные состояния</li><li>Адаптивные интерфейсы и UI-спецификации</li></ul></div>
+      <div class="skills-category"><h3><i class="fas fa-compass"></i> UX и продукт</h3><ul><li>User flows и CJM</li><li>Информационная архитектура</li><li>Формулирование и проверка гипотез</li><li>Работа с обратной связью и аналитикой</li></ul></div>
+      <div class="skills-category"><h3><i class="fas fa-palette"></i> UI и визуальный дизайн</h3><ul><li>Визуальная иерархия и типографика</li><li>Сетка, композиция и цвет</li><li>Состояния, ошибки и пустые экраны</li><li>Консистентность интерфейса</li></ul></div>
+      <div class="skills-category"><h3><i class="fas fa-people-group"></i> Командная работа</h3><ul><li>Аргументация дизайн-решений</li><li>Совместная проработка задач с продуктом и разработкой: [уточнить]</li><li>Презентация решений и работа с обратной связью</li><li>Самостоятельность в условиях неопределённости</li></ul></div>
+    </div>
+  </section>
+
+  <!-- <section>
+    <h2><i class="fas fa-chart-line"></i> Результаты и достижения</h2>
+    <ul class="job-details">
+      <li><strong>Lyra:</strong> более 800 отзывов и средняя оценка 4,6 — укажите площадку, период и свою роль в достижении результата.</li>
+      <li><strong>Продуктовый опыт:</strong> работа над цифровыми продуктами с 2020 года в нескольких доменах — мобильные приложения, EdTech, HRTech, маркетплейсы и сервисы.</li>
+      <li><strong>Развитие в дизайне:</strong> путь от графического дизайна к UX/UI и продуктовому подходу с 2018 года.</li>
+      <li><strong>Дополнительные результаты:</strong> [Добавьте проверяемые метрики: конверсия, завершение сценария, снижение ошибок, активация, удержание, скорость выполнения задачи или результаты тестирования.]</li>
+    </ul> -->
+  </section>
+
+  <section>
+    <h2><i class="fas fa-graduation-cap"></i> Образование и развитие</h2>
+    <div class="timeline"><div class="timeline-date">2019-2023</div><div class="timeline-copy"><strong>Программист</strong><br>Академия профессионального образования</div></div>
+    <div class="timeline"><div class="timeline-date">2023-2026</div><div class="timeline-copy"><strong>Графический дизайнер</strong><br>Курс полного графического дизайна, Академия TOP</div></div>
+  </section>
+
+  <!-- <section>
+    <h2><i class="fas fa-globe"></i> Формат работы</h2>
+    <div class="two-col">
+      <div class="summary"><strong>Формат:</strong> удалённо<br><strong>Роль:</strong> продуктовый дизайнер / UX/UI<br><strong>Часовой пояс:</strong> [Укажите]<br><strong>Дата выхода:</strong> [Укажите]</div>
+      <div class="summary"><strong>Языки:</strong> [Укажите уровни]<br><strong>Связь:</strong> <a href="https://t.me/marianneu">Telegram</a><br><strong>Портфолио:</strong> [Добавьте ссылку]<br><strong>Резюме обновлено:</strong> октябрь 2026</div>
+    </div>
+  </section> -->
+
+  <footer>
+    <p><strong>Мария Неустроева</strong> · Product Designer (UX/UI)</p>
+    <p>mariandesign@mail.ru · Telegram: @marianneu · <a href="https://mariecattie.github.io/marian/productdesignerportfolio/">Портфолио</a></p>
+  </footer>
+</div>
+</body>
+</html>
