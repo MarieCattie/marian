@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Анимированная KPI-плитка — Tailwind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#4F46E5', hover: '#4338CA', soft: 'rgba(79,70,229,.12)' },
+            surface: { DEFAULT: '#FFFFFF', dark: '#111827' },
+            muted:   { DEFAULT: '#6B7280', dark: '#9CA3AF' },
+            border:  { DEFAULT: '#E5E7EB', dark: '#1F2937' },
+          },
+          borderRadius: { xl2: '1rem' },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root {
+      --color-primary: #4F46E5;
+      --color-surface: #FFFFFF;
+      --color-muted: #6B7280;
+      --color-border: #E5E7EB;
+    }
+    .dark {
+      --color-primary: #6366F1;
+      --color-surface: #111827;
+      --color-muted: #9CA3AF;
+      --color-border: #1F2937;
+    }
+
+    /* Появление карточки */
+    .kpi {
+      opacity: 0;
+      transform: translateY(24px) scale(.98);
+      transition: opacity .8s cubic-bezier(.22,1,.36,1),
+                  transform .8s cubic-bezier(.22,1,.36,1);
+      will-change: opacity, transform;
+    }
+    .kpi.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Прогресс-бар: ширина задаётся через --target */
+    .kpi-bar {
+      width: 0;
+      transition: width 1.4s cubic-bezier(.22,1,.36,1) .2s;
+    }
+    .kpi.is-visible .kpi-bar {
+      width: var(--target, 0%);
+    }
+
+    /* Мягкая пульсация «живого» индикатора */
+    @keyframes livePulse {
+      0%   { box-shadow: 0 0 0 0 rgba(16,185,129,.55); }
+      70%  { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+      100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+    }
+    .live-dot { animation: livePulse 2s infinite; }
+
+    /* Уважаем настройку «уменьшить движение» */
+    @media (prefers-reduced-motion: reduce) {
+      .kpi, .kpi-bar { transition: none !important; }
+      .live-dot { animation: none !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 font-sans antialiased p-6 md:p-12">
+
+  <!-- Переключатель темы -->
+  <button
+    id="themeToggle"
+    type="button"
+    aria-label="Переключить тему"
+    class="mb-8 inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)]
+           px-3 py-2 text-sm text-[var(--color-muted)] transition
+           hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2">
+    <span aria-hidden="true">◐</span> Тема
+  </button>
+
+  <section class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+
+    <!-- KPI-плитка 1 -->
+    <article
+      class="kpi group relative overflow-hidden rounded-xl2 border border-[var(--color-border)]
+             bg-[var(--color-surface)] p-6 shadow-sm transition
+             hover:-translate-y-0.5 hover:shadow-md
+             focus-within:ring-2 focus-within:ring-[var(--color-primary)]"
+      data-value="86" data-suffix="%" data-target="86%">
+      <div class="flex items-start justify-between mb-4">
+        <div class="w-10 h-10 rounded-xl bg-primary-soft text-[var(--color-primary)]
+                    flex items-center justify-center transition group-hover:rotate-6">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 8-8" />
+          </svg>
+        </div>
+        <span class="inline-flex items-center gap-1.5 text-[11px] font-medium text-emerald-600">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 live-dot"></span> live
+        </span>
+      </div>
+
+      <p class="text-sm text-[var(--color-muted)]">Конверсия</p>
+      <p class="mt-1 text-3xl font-bold text-gray-900 dark:text-gray-100">
+        <span class="kpi-number">0</span><span class="text-[var(--color-primary)]">%</span>
+      </p>
+
+      <div class="mt-5 h-1.5 rounded-full bg-[var(--color-border)] overflow-hidden">
+        <div class="kpi-bar h-full rounded-full bg-[var(--color-primary)]" style="--target:86%"></div>
+      </div>
+    </article>
+
+    <!-- KPI-плитка 2 -->
+    <article
+      class="kpi group relative overflow-hidden rounded-xl2 border border-[var(--color-border)]
+             bg-[var(--color-surface)] p-6 shadow-sm transition
+             hover:-translate-y-0.5 hover:shadow-md
+             focus-within:ring-2 focus-within:ring-[var(--color-primary)]"
+      data-value="12480" data-suffix="" data-target="72%">
+      <div class="flex items-start justify-between mb-4">
+        <div class="w-10 h-10 rounded-xl bg-primary-soft text-[var(--color-primary)]
+                    flex items-center justify-center transition group-hover:rotate-6">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4z" />
+          </svg>
+        </div>
+        <span class="text-[11px] font-medium text-[var(--color-muted)]">за месяц</span>
+      </div>
+
+      <p class="text-sm text-[var(--color-muted)]">Активные пользователи</p>
+      <p class="mt-1 text-3xl font-bold text-gray-900 dark:text-gray-100">
+        <span class="kpi-number">0</span>
+      </p>
+
+      <div class="mt-5 h-1.5 rounded-full bg-[var(--color-border)] overflow-hidden">
+        <div class="kpi-bar h-full rounded-full bg-gradient-to-r from-indigo-500 to-emerald-400" style="--target:72%"></div>
+      </div>
+    </article>
+
+    <!-- KPI-плитка 3 -->
+    <article
+      class="kpi group relative overflow-hidden rounded-xl2 border border-[var(--color-border)]
+             bg-[var(--color-surface)] p-6 shadow-sm transition
+             hover:-translate-y-0.5 hover:shadow-md
+             focus-within:ring-2 focus-within:ring-[var(--color-primary)]"
+      data-value="4.9" data-suffix="★" data-target="98%">
+      <div class="flex items-start justify-between mb-4">
+        <div class="w-10 h-10 rounded-xl bg-primary-soft text-[var(--color-primary)]
+                    flex items-center justify-center transition group-hover:rotate-6">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.5l2.1 4.26 4.7.68-3.4 3.31.8 4.68-4.2-2.2-4.2 2.2.8-4.68-3.4-3.31 4.7-.68 2.1-4.26z" />
+          </svg>
+        </div>
+        <span class="text-[11px] font-medium text-[var(--color-muted)]">рейтинг</span>
+      </div>
+
+      <p class="text-sm text-[var(--color-muted)]">Средняя оценка</p>
+      <p class="mt-1 text-3xl font-bold text-gray-900 dark:text-gray-100">
+        <span class="kpi-number">0</span><span class="text-amber-400">★</span>
+      </p>
+
+      <div class="mt-5 h-1.5 rounded-full bg-[var(--color-border)] overflow-hidden">
+        <div class="kpi-bar h-full rounded-full bg-amber-400" style="--target:98%"></div>
+      </div>
+    </article>
+
+  </section>
+
+  <script>
+    /* Тема */
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      root.classList.toggle('dark');
+      root.classList.toggle('light');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+    if (localStorage.getItem('theme') === 'dark') {
+      root.classList.add('dark');
+      root.classList.remove('light');
+    }
+
+    /* Появление карточек + анимация чисел */
+    const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+    function animateNumber(el, to, decimals, suffix) {
+      const duration = 1200;
+      const start = performance.now();
+      function frame(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const value = to * easeOut(p);
+        el.textContent = decimals
+          ? value.toFixed(decimals)
+          : Math.round(value).toLocaleString('ru-RU');
+        if (p < 1) requestAnimationFrame(frame);
+        else el.textContent = decimals ? to.toFixed(decimals) : to.toLocaleString('ru-RU');
+      }
+      requestAnimationFrame(frame);
+    }
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const card = entry.target;
+        card.classList.add('is-visible');
+
+        const numEl = card.querySelector('.kpi-number');
+        const raw = card.dataset.value;
+        const to = parseFloat(raw);
+        const decimals = raw.includes('.') ? 1 : 0;
+
+        if (reduce) {
+          numEl.textContent = decimals ? to.toFixed(1) : to.toLocaleString('ru-RU');
+        } else {
+          animateNumber(numEl, to, decimals, card.dataset.suffix || '');
+        }
+
+        io.unobserve(card);
+      });
+    }, { threshold: 0.35 });
+
+    document.querySelectorAll('.kpi').forEach(card => io.observe(card));
+  </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESTETICA — Студия косметологии</title>
+    <!-- Tailwind CSS через CDN (Play CDN для прототипирования) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Настройка кастомной палитры в бежевых тонах -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        beige: {
+                            50: '#fdfbf7',
+                            100: '#f9f4ec',
+                            200: '#f0e6d8',
+                            300: '#e3d2bd',
+                            400: '#d1b89c',
+                            500: '#bf9d7a',
+                            600: '#a8815c',
+                            700: '#8c6648',
+                            800: '#73533c',
+                            900: '#5e4533',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Подключение шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Плавный скролл и базовые настройки */
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #fdfbf7; color: #4a3b32; }
+        
+        /* Стили для анимации появления (Reveal) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Параллакс-элементы */
+        .parallax-bg {
+            will-change: transform;
+            transition: transform 0.1s linear;
+        }
+
+        /* Кастомный скроллбар для эстетики */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f9f4ec; }
+        ::-webkit-scrollbar-thumb { background: #d1b89c; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #bf9d7a; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- НАВИГАЦИЯ -->
+    <nav class="fixed w-full top-0 z-50 bg-beige-50/90 backdrop-blur-md border-b border-beige-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl tracking-widest text-beige-800">ESTETICA</a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-beige-700">
+                <a href="#services" class="hover:text-beige-900 transition">Услуги</a>
+                <a href="#about" class="hover:text-beige-900 transition">О студии</a>
+                <a href="#results" class="hover:text-beige-900 transition">Результаты</a>
+                <a href="#contact" class="hover:text-beige-900 transition">Контакты</a>
+            </div>
+            <a href="#contact" class="hidden md:inline-block bg-beige-800 hover:bg-beige-900 text-beige-50 px-6 py-2.5 rounded-full text-sm font-medium transition shadow-lg shadow-beige-800/20">
+                Записаться
+            </a>
+            <!-- Мобильное меню (упрощенно) -->
+            <button class="md:hidden text-beige-800 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-beige-50 px-6 pb-4 space-y-3">
+            <a href="#services" class="block text-beige-800">Услуги</a>
+            <a href="#about" class="block text-beige-800">О студии</a>
+            <a href="#results" class="block text-beige-800">Результаты</a>
+            <a href="#contact" class="block text-beige-800">Контакты</a>
+        </div>
+    </nav>
+
+    <!-- HERO СЕКЦИЯ С ПАРАЛЛАКСОМ -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Фоновое изображение (заглушка) с параллаксом -->
+        <div class="absolute inset-0 z-0">
+            <img src="images-2/d4f837664dea9a2fcd561088316b5b18.png" 
+                 alt="Косметология" 
+                 class="w-full h-full object-cover opacity-40 parallax-bg"
+                 data-speed="0.3">
+        </div>
+        
+        <!-- Декоративный градиент -->
+        <div class="absolute inset-0 bg-gradient-to-b from-beige-50/60 via-transparent to-beige-50 z-10"></div>
+        
+        <!-- Контент -->
+        <div class="relative z-20 text-center px-6 max-w-4xl mx-auto">
+            <p class="text-beige-600 tracking-[0.3em] uppercase text-xs md:text-sm font-semibold mb-6 reveal">Премиальная косметология</p>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-beige-900 leading-[1.1] mb-8 reveal delay-100">
+                Искусство <br> <span class="italic text-beige-700">естественной</span> красоты
+            </h1>
+            <p class="text-beige-700 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed reveal delay-200">
+                Профессиональный уход, современное оборудование и индивидуальный подход. Подчеркнем вашу уникальность без радикальных изменений.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal delay-300">
+                <a href="#contact" class="bg-beige-800 hover:bg-beige-900 text-beige-50 px-8 py-4 rounded-full text-base font-medium transition shadow-xl shadow-beige-800/30 transform hover:-translate-y-1">
+                    Бесплатная консультация
+                </a>
+                <a href="#services" class="bg-transparent border border-beige-400 hover:border-beige-600 text-beige-800 px-8 py-4 rounded-full text-base font-medium transition">
+                    Наши услуги
+                </a>
+            </div>
+        </div>
+
+        <!-- Индикатор скролла -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+            <svg class="w-6 h-6 text-beige-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ УСЛУГ (Компоненты) -->
+    <section id="services" class="py-24 bg-beige-50 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-beige-500 tracking-widest text-xs font-bold uppercase">Наши направления</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-beige-900 mt-3 mb-4">Эстетическая косметология</h2>
+                <div class="w-16 h-0.5 bg-beige-400 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Карточка 1 -->
+                <div class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-beige-100 reveal">
+                    <div class="w-14 h-14 bg-beige-100 rounded-full flex items-center justify-center mb-6 text-beige-600 group-hover:bg-beige-800 group-hover:text-beige-50 transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-beige-900 mb-3">Уход за лицом</h3>
+                    <p class="text-beige-600 leading-relaxed mb-6 text-sm">Глубокое очищение, пилинги, массаж и питательные маски для сияния вашей кожи.</p>
+                    <span class="text-beige-800 font-semibold text-sm group-hover:underline cursor-pointer">Подробнее →</span>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-beige-100 reveal delay-100">
+                    <div class="w-14 h-14 bg-beige-100 rounded-full flex items-center justify-center mb-6 text-beige-600 group-hover:bg-beige-800 group-hover:text-beige-50 transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-beige-900 mb-3">Инъекционные методики</h3>
+                    <p class="text-beige-600 leading-relaxed mb-6 text-sm">Ботулинотерапия, биоревитализация и контурная пластика от ведущих специалистов.</p>
+                    <span class="text-beige-800 font-semibold text-sm group-hover:underline cursor-pointer">Подробнее →</span>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div class="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-beige-100 reveal delay-200">
+                    <div class="w-14 h-14 bg-beige-100 rounded-full flex items-center justify-center mb-6 text-beige-600 group-hover:bg-beige-800 group-hover:text-beige-50 transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-beige-900 mb-3">Аппаратная косметология</h3>
+                    <p class="text-beige-600 leading-relaxed mb-6 text-sm">Лазерные технологии, RF-лифтинг и ультразвуковая чистка для стойкого результата.</p>
+                    <span class="text-beige-800 font-semibold text-sm group-hover:underline cursor-pointer">Подробнее →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ О СТУДИИ С ПАРАЛЛАКС-ИЗОБРАЖЕНИЕМ -->
+    <section id="about" class="py-24 bg-beige-100 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <!-- Изображение с параллаксом -->
+            <div class="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl reveal">
+                <img src="images-2/d4f837664dea9a2fcd561088316b5b18.png" 
+                     alt="Интерьер студии" 
+                     class="absolute w-full h-[180%] object-cover parallax-bg -top-0"
+                     data-speed="-0.15">
+                
+            </div>
+            
+            <!-- Текст -->
+            <div class="reveal delay-200">
+                <span class="text-beige-500 tracking-widest text-xs font-bold uppercase">О нас</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-beige-900 mt-3 mb-6 leading-tight">Место, где <br> <span class="italic text-beige-600">наука</span> встречает <br> заботу</h2>
+                <p class="text-beige-700 leading-relaxed mb-6 font-light">
+                    ESTETICA — это пространство тишины и профессионализма. Мы объединили передовые методики доказательной медицины с атмосферой уюта и приватности.
+                </p>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-beige-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                        <span class="text-beige-700">Сертифицированные врачи-косметологи с опытом от 5 лет</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-beige-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                        <span class="text-beige-700">Только оригинальные препараты и оборудование экспертного класса</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-beige-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                        <span class="text-beige-700">Индивидуальный план лечения после диагностики кожи</span>
+                    </li>
+                </ul>
+                <a href="#contact" class="inline-block border-b-2 border-beige-800 text-beige-900 font-medium pb-1 hover:text-beige-600 hover:border-beige-500 transition">Записаться на диагностику</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ РЕЗУЛЬТАТОВ / ОТЗЫВОВ (Простая) -->
+    <section id="results" class="py-24 bg-beige-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-beige-500 tracking-widest text-xs font-bold uppercase">Доверие</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-beige-900 mt-3 mb-4">Отзывы наших гостей</h2>
+                <div class="w-16 h-0.5 bg-beige-400 mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Отзыв 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-beige-100 shadow-sm reveal">
+                    <div class="flex text-beige-400 mb-4">★★★★★</div>
+                    <p class="text-beige-700 italic mb-6 leading-relaxed">"Впервые попала в ESTETICA год назад. Кожа преобразилась, ушли следы усталости. Очень нравится, что здесь не навязывают лишние процедуры, а работают на результат."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-beige-200 rounded-full flex items-center justify-center text-beige-600 font-bold">А</div>
+                        <div><p class="font-medium text-beige-900 text-sm">Анна М.</p><p class="text-xs text-beige-500">Клиент с 2024 года</p></div>
+                    </div>
+                </div>
+                <!-- Отзыв 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-beige-100 shadow-sm reveal delay-100">
+                    <div class="flex text-beige-400 mb-4">★★★★★</div>
+                    <p class="text-beige-700 italic mb-6 leading-relaxed">"Делала биоревитализацию у Екатерины. Результат заметила сразу, но главное — стойкость. Ощущение ухоженности не покидает уже несколько месяцев. Спасибо!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-beige-200 rounded-full flex items-center justify-center text-beige-600 font-bold">М</div>
+                        <div><p class="font-medium text-beige-900 text-sm">Марина К.</p><p class="text-xs text-beige-500">Процедура: Биоревитализация</p></div>
+                    </div>
+                </div>
+                <!-- Отзыв 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-beige-100 shadow-sm reveal delay-200">
+                    <div class="flex text-beige-400 mb-4">★★★★★</div>
+                    <p class="text-beige-700 italic mb-6 leading-relaxed">"Атмосфера — как в дорогом спа, но при этом чувствуется медицинский подход. Все стерильно, четко по времени. Хожу на аппаратные процедуры, очень довольна."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-beige-200 rounded-full flex items-center justify-center text-beige-600 font-bold">Е</div>
+                        <div><p class="font-medium text-beige-900 text-sm">Елена В.</p><p class="text-xs text-beige-500">Аппаратная косметология</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / КОНТАКТЫ -->
+    <section id="contact" class="py-24 bg-beige-800 text-beige-50 relative overflow-hidden">
+        <!-- Декор -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-beige-700 rounded-full blur-3xl opacity-30 -mr-20 -mt-20"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
+            <span class="text-beige-300 tracking-widest text-xs font-bold uppercase">Запись</span>
+            <h2 class="font-serif text-4xl md:text-6xl mt-4 mb-6">Начните путь к <br> <span class="italic text-beige-300">сияющей коже</span></h2>
+            <p class="text-beige-200 mb-10 max-w-xl mx-auto font-light">Оставьте заявку, и наш администратор свяжется с вами для подбора удобного времени и бесплатной консультации.</p>
+            
+            <form class="max-w-md mx-auto space-y-4" onsubmit="event.preventDefault(); alert('Спасибо! Заявка отправлена (демо).');">
+                <div>
+                    <input type="text" placeholder="Ваше имя" required class="w-full px-6 py-4 bg-beige-700/50 border border-beige-600 rounded-full text-beige-50 placeholder-beige-300 focus:outline-none focus:border-beige-400 focus:bg-beige-700 transition backdrop-blur-sm">
+                </div>
+                <div>
+                    <input type="tel" placeholder="Номер телефона" required class="w-full px-6 py-4 bg-beige-700/50 border border-beige-600 rounded-full text-beige-50 placeholder-beige-300 focus:outline-none focus:border-beige-400 focus:bg-beige-700 transition backdrop-blur-sm">
+                </div>
+                <button type="submit" class="w-full bg-beige-100 hover:bg-white text-beige-900 font-semibold py-4 rounded-full transition shadow-lg transform hover:-translate-y-0.5">
+                    Записаться на консультацию
+                </button>
+                <p class="text-xs text-beige-400 pt-2">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer class="bg-beige-900 text-beige-300 py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="font-serif text-2xl tracking-widest text-beige-100">ESTETICA</div>
+            <div class="flex gap-8 text-sm">
+                <a href="#" class="hover:text-beige-100 transition">Instagram</a>
+                <a href="#" class="hover:text-beige-100 transition">Telegram</a>
+                <a href="#" class="hover:text-beige-100 transition">WhatsApp</a>
+            </div>
+            <div class="text-xs text-beige-500">© 2026 ESTETICA. Все права защищены.</div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT: Параллакс и Анимации появления -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Параллакс эффект при скролле
+            const parallaxElements = document.querySelectorAll('.parallax-bg');
+            
+            const updateParallax = () => {
+                const scrolled = window.pageYOffset;
+                parallaxElements.forEach(el => {
+                    const speed = parseFloat(el.dataset.speed) || 0.2;
+                    // Двигаем элемент в зависимости от скорости
+                    el.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            };
+
+            // Используем requestAnimationFrame для плавности
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateParallax();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Инициализация позиции при загрузке
+            updateParallax();
+
+            // 2. Анимация появления элементов (Intersection Observer)
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Опционально: можно отключить наблюдение после появления
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1, // Срабатывает, когда видно 10% элемента
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+
+            // 3. Небольшой эффект для навигации при скролле (смена фона)
+            const nav = document.querySelector('nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('shadow-md', 'bg-beige-50/95');
+                    nav.classList.remove('bg-beige-50/90');
+                } else {
+                    nav.classList.remove('shadow-md', 'bg-beige-50/95');
+                    nav.classList.add('bg-beige-50/90');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>STRIDE — коллекция кроссовок</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink-950: #0f1115;
+    --ink-700: #2b2f3a;
+    --ink-400: #8a90a0;
+    --ink-200: #d8dbe3;
+    --ink-100: #eef0f4;
+    --accent: #ff5c3d;
+    --accent-soft: rgba(255, 92, 61, 0.12);
+    --topbar-h: 80px;
+    --bottom-h: 120px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #fff; overflow: hidden; }
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    color: var(--ink-950);
+  }
+
+  .banner {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* Верхняя панель */
+  .topbar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: var(--topbar-h);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    pointer-events: none;
+  }
+  .topbar a, .topbar button { pointer-events: auto; }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--ink-950);
+  }
+  .brand-mark {
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    background: var(--ink-950);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+  }
+
+  .nav-links {
+    display: none;
+    gap: 28px;
+    font-size: 13px;
+    color: var(--ink-400);
+  }
+  @media (min-width: 900px) { .nav-links { display: flex; } }
+  .nav-links a { text-decoration: none; color: inherit; transition: color .2s; }
+  .nav-links a:hover { color: var(--ink-950); }
+
+  .cart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--ink-950);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform .2s, background .2s;
+  }
+  .cart-btn:hover { transform: translateY(-1px); background: var(--ink-700); }
+
+  /* Слайды */
+  .slides {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .7s cubic-bezier(.22,1,.36,1), visibility .7s;
+    pointer-events: none;
+  }
+  .slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Карточка с моделью — ограничена сверху и снизу */
+  .card {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--topbar-h) + (100vh - var(--topbar-h) - var(--bottom-h)) / 2);
+    transform: translate(-50%, -50%) scale(.96);
+    width: min(760px, 82vw);
+    height: min(560px, calc(100vh - var(--topbar-h) - var(--bottom-h)));
+    transition: transform .8s cubic-bezier(.22,1,.36,1);
+  }
+  .slide.is-active .card {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .card-frame {
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    border-radius: 32px;
+    border: 1px solid var(--ink-100);
+    box-shadow:
+      0 40px 80px -40px rgba(15,17,21,.25),
+      0 0 0 1px rgba(15,17,21,.02);
+    overflow: hidden;
+  }
+
+  .card-canvas { position: absolute; inset: 0; }
+  .card-canvas canvas { display: block; width: 100%; height: 100%; }
+
+  .card-shadow {
+    position: absolute;
+    left: 50%;
+    bottom: 16%;
+    transform: translateX(-50%);
+    width: 58%;
+    height: 28px;
+    background: radial-gradient(ellipse at center, rgba(15,17,21,.15) 0%, transparent 70%);
+    filter: blur(8px);
+    pointer-events: none;
+  }
+
+  /* Аннотации */
+  .annotation {
+    position: absolute;
+    z-index: 6;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .6s cubic-bezier(.22,1,.36,1);
+  }
+  .slide.is-active .annotation { opacity: 1; }
+  /* явные задержки по классам, а не nth-child */
+  .slide.is-active .ann-1 { transition-delay: .35s; }
+  .slide.is-active .ann-2 { transition-delay: .50s; }
+  .slide.is-active .ann-3 { transition-delay: .65s; }
+
+  .pointer-line {
+    position: absolute;
+    background: transparent;
+    border-top: 1.5px dashed var(--ink-400);
+    transform-origin: left center;
+    height: 0;
+  }
+  .pointer-line.is-vertical {
+    border-top: none;
+    border-left: 1.5px dashed var(--ink-400);
+    width: 0;
+    transform-origin: top center;
+  }
+
+  .pointer-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .pointer-dot::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+    opacity: 0;
+    animation: dotPulse 2s ease-out infinite;
+  }
+  @keyframes dotPulse {
+    0%   { transform: scale(.6); opacity: .8; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+
+  .annotation-label {
+    position: absolute;
+    background: #fff;
+    border: 1px solid var(--ink-200);
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-950);
+    white-space: nowrap;
+    box-shadow: 0 8px 20px -10px rgba(15,17,21,.15);
+    transform: translateY(-50%);
+    max-width: 220px;
+    white-space: normal;
+    line-height: 1.3;
+  }
+  .annotation-label small {
+    display: block;
+    font-weight: 400;
+    font-size: 10px;
+    color: var(--ink-400);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* Позиции аннотаций */
+  .ann-1 { left: 6%;  top: 38%; }
+  .ann-2 { right: 4%; top: 42%; }
+  .ann-3 { left: 10%; top: 68%; }
+
+  /* Нижняя зона: инфо + навигация, не наезжает на карточку */
+  .bottom-zone {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: var(--bottom-h);
+    z-index: 15;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    pointer-events: none;
+  }
+  .bottom-zone > * { pointer-events: auto; }
+
+  .product-info {
+    max-width: 320px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+    margin-bottom: 130px;
+  }
+  .slide.is-active .product-info {
+    opacity: 1;
+    transform: none;
+    transition-delay: .25s;
+  }
+
+  .product-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .product-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 6px;
+  }
+  .product-desc {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-400);
+    margin: 0 0 8px;
+    max-width: 300px;
+  }
+  .product-price {
+    font-size: 14px;
+    color: var(--ink-700);
+    font-weight: 500;
+  }
+  .product-price span {
+    color: var(--ink-400);
+    font-size: 11px;
+    margin-left: 8px;
+    font-weight: 400;
+  }
+
+  .slider-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--ink-200);
+    background: #fff;
+    color: var(--ink-950);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .nav-btn:hover { background: var(--ink-950); color: #fff; border-color: var(--ink-950); }
+
+  .dots { display: flex; gap: 6px; margin-right: 8px; }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--ink-200);
+    transition: all .3s;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+  }
+  .dot.is-active { width: 20px; border-radius: 3px; background: var(--accent); }
+
+  .bottom-line {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    z-index: 10;
+    font-size: 10px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  @media (max-width: 900px) {
+    :root { --topbar-h: 64px; --bottom-h: 150px; }
+    .bottom-line { display: none; }
+    .topbar { padding: 0 20px; }
+    .bottom-zone {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 20px;
+    }
+    .product-title { font-size: 18px; }
+    .product-desc { font-size: 11px; }
+    .card { width: 92vw; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide, .card, .annotation, .product-info { transition: none !important; }
+    .pointer-dot::before { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<section class="banner" id="banner">
+
+  <header class="topbar">
+    <a href="#" class="brand">
+      <span class="brand-mark">S</span>
+      STRIDE
+    </a>
+    <nav class="nav-links">
+      <a href="#">Коллекция</a>
+      <a href="#">Технологии</a>
+      <a href="#">История</a>
+      <a href="#">Поддержка</a>
+    </nav>
+    <a href="#" class="cart-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      В корзину
+    </a>
+  </header>
+
+  <div class="slides" id="slides">
+
+    <!-- СЛАЙД 1 — Merrell Kid’s Chameleon 7 -->
+    <article class="slide is-active" data-slide="0">
+      <div class="card">
+        <div class="card-frame">
+          <div class="card-canvas" data-canvas="0"></div>
+          <div class="card-shadow"></div>
+        </div>
+
+        <div class="annotation ann-1">
+          <div class="pointer-dot" style="left: 88%; top: 60%;"></div>
+          <div class="pointer-line" style="left: 28%; top: 60%; width: 60%;"></div>
+          <div class="annotation-label" style="left: 0; top: 60%;">
+            Waterproof Membrane
+            <small>Водозащитная мембрана</small>
+          </div>
+        </div>
+
+        <div class="annotation ann-2">
+          <div class="pointer-dot" style="left: 12%; top: 62%;"></div>
+          <div class="pointer-line" style="left: 12%; top: 62%; width: 56%;"></div>
+          <div class="annotation-label" style="left: calc(100% - 4px); top: 62%; transform: translate(-100%, -50%);">
+            M Select GRIP
+            <small>Сцепление на любом покрытии</small>
+          </div>
+        </div>
+
+        <div class="annotation ann-3">
+          <div class="pointer-dot" style="left: 30%; top: 40%;"></div>
+          <div class="pointer-line is-vertical" style="left: 30%; top: 40%; height: 22%;"></div>
+          <div class="annotation-label" style="left: 30%; top: calc(40% + 22%); transform: translate(-50%, 12px);">
+            Kinetic Fit Base
+            <small>Гибкая поддержка стопы</small>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- СЛАЙД 2 — Nike TC 7900 Sail -->
+    <article class="slide" data-slide="1">
+      <div class="card">
+        <div class="card-frame">
+          <div class="card-canvas" data-canvas="1"></div>
+          <div class="card-shadow"></div>
+        </div>
+
+        <div class="annotation ann-1">
+          <div class="pointer-dot" style="left: 86%; top: 58%;"></div>
+          <div class="pointer-line" style="left: 30%; top: 58%; width: 56%;"></div>
+          <div class="annotation-label" style="left: 0; top: 58%;">
+            Mesh Upper
+            <small>Дышащая сетка</small>
+          </div>
+        </div>
+
+        <div class="annotation ann-2">
+          <div class="pointer-dot" style="left: 14%; top: 64%;"></div>
+          <div class="pointer-line" style="left: 14%; top: 64%; width: 52%;"></div>
+          <div class="annotation-label" style="left: calc(100% - 4px); top: 64%; transform: translate(-100%, -50%);">
+            Foam Midsole
+            <small>Мягкая амортизация</small>
+          </div>
+        </div>
+
+        <div class="annotation ann-3">
+          <div class="pointer-dot" style="left: 72%; top: 38%;"></div>
+          <div class="pointer-line is-vertical" style="left: 72%; top: 38%; height: 20%;"></div>
+          <div class="annotation-label" style="left: 72%; top: calc(38% + 20%); transform: translate(-50%, 12px);">
+            Heel Overlay
+            <small>Фиксация пятки</small>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- СЛАЙД 3 — Unused Blue Vans Shoe -->
+    <article class="slide" data-slide="2">
+      <div class="card">
+        <div class="card-frame">
+          <div class="card-canvas" data-canvas="2"></div>
+          <div class="card-shadow"></div>
+        </div>
+
+        <div class="annotation ann-1">
+          <div class="pointer-dot" style="left: 84%; top: 60%;"></div>
+          <div class="pointer-line" style="left: 26%; top: 60%; width: 58%;"></div>
+          <div class="annotation-label" style="left: 0; top: 60%;">
+            Canvas Upper
+            <small>Плотный канвас</small>
+          </div>
+        </div>
+
+        <div class="annotation ann-2">
+          <div class="pointer-dot" style="left: 16%; top: 60%;"></div>
+          <div class="pointer-line" style="left: 16%; top: 60%; width: 50%;"></div>
+          <div class="annotation-label" style="left: calc(100% - 4px); top: 60%; transform: translate(-100%, -50%);">
+            Waffle Sole
+            <small>Вафельная подошва</small>
+          </div>
+        </div>
+
+        <div class="annotation ann-3">
+          <div class="pointer-dot" style="left: 48%; top: 34%;"></div>
+          <div class="pointer-line is-vertical" style="left: 48%; top: 34%; height: 22%;"></div>
+          <div class="annotation-label" style="left: 48%; top: calc(34% + 22%); transform: translate(-50%, 12px);">
+            Padded Collar
+            <small>Мягкий воротник</small>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Нижняя зона -->
+  <div class="bottom-zone">
+    <div>
+      <!-- Инфо меняется через JS по слайду -->
+      <div class="product-info" id="productInfo">
+        <span class="product-tag" id="pTag">Hiking · Kids</span>
+        <h2 class="product-title" id="pTitle">Merrell Kid’s Chameleon 7 Waterproof</h2>
+        <p class="product-desc" id="pDesc">Водонепроницаемые детские треккинговые ботинки Berry/Coral с мембраной и цепкой подошвой.</p>
+        <div class="product-price" id="pPrice">$ 89 <span>в наличии</span></div>
+      </div>
+    </div>
+
+    <div class="slider-nav">
+      <div class="dots" id="dots"></div>
+      <button class="nav-btn" id="prevBtn" aria-label="Предыдущий">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="nav-btn" id="nextBtn" aria-label="Следующий">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="bottom-line">Swipe · 01 / 03</div>
+</section>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canvases = document.querySelectorAll('[data-canvas]');
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('dots');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+let currentSlide = 0;
+const scenes = [];
+
+/* Данные продуктов */
+const products = [
+  {
+    tag: 'Hiking · Kids',
+    title: 'Merrell Kid’s Chameleon 7 Waterproof',
+    desc: 'Водонепроницаемые детские треккинговые ботинки Berry/Coral: мембрана, гибкая поддержка стопы и цепкая подошва M Select GRIP.',
+    price: '$ 89',
+    stock: 'в наличии',
+  },
+  {
+    tag: 'Lifestyle · Unisex',
+    title: 'Nike TC 7900 Sail',
+    desc: 'Кроссовки в стиле ретро-раннер с дышащей сеткой, мягкой пеноматериальной амортизацией и усиленной пяткой.',
+    price: '$ 129',
+    stock: 'в наличии',
+  },
+  {
+    tag: 'Classic · Unisex',
+    title: 'Unused Blue Vans Shoe',
+    desc: 'Классические кеды из плотного канваса с вафельной подошвой и мягким воротником — универсальная повседневная пара.',
+    price: '$ 75',
+    stock: 'осталось мало',
+  },
+];
+
+/* ============================================================
+   СЦЕНА
+   ============================================================ */
+function initScene(container, variant) {
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+  container.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(
+    38, container.clientWidth / container.clientHeight, 0.1, 100
+  );
+  camera.position.set(4.5, 2.6, 4.5);
+  camera.lookAt(0, 0.2, 0);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+
+  const key = new THREE.DirectionalLight(0xffffff, 2.0);
+  key.position.set(5, 8, 5);
+  key.castShadow = true;
+  key.shadow.mapSize.set(1024, 1024);
+  key.shadow.camera.left = -6;
+  key.shadow.camera.right = 6;
+  key.shadow.camera.top = 6;
+  key.shadow.camera.bottom = -6;
+  key.shadow.bias = -0.0003;
+  key.shadow.radius = 3;
+  scene.add(key);
+
+  const fill = new THREE.DirectionalLight(0xe0e8ff, 0.8);
+  fill.position.set(-6, 4, 3);
+  scene.add(fill);
+
+  const rim = new THREE.DirectionalLight(0xffffff, 1.0);
+  rim.position.set(0, 3, -6);
+  scene.add(rim);
+
+  const shadowPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(20, 20),
+    new THREE.ShadowMaterial({ opacity: 0.12 })
+  );
+  shadowPlane.rotation.x = -Math.PI / 2;
+  shadowPlane.position.y = -0.9;
+  shadowPlane.receiveShadow = true;
+  scene.add(shadowPlane);
+
+  const shoe = new THREE.Group();
+  shoe.position.y = 0.1;
+  scene.add(shoe);
+
+  const pivot = new THREE.Group();
+  scene.add(pivot);
+  pivot.add(shoe);
+
+  const modelPaths = [
+    'models/merrell_kids_boot.glb',
+    'models/nike_tc_7900_sail.glb',
+    'models/unused_blue_vans_shoe.glb',
+  ];
+  const loader = new GLTFLoader();
+
+  loader.load(
+    modelPaths[variant],
+    (gltf) => {
+      const model = gltf.scene;
+
+      model.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+
+      const box = new THREE.Box3().setFromObject(model);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+
+      model.position.sub(center);
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const targetSize = 2.4;
+      model.scale.setScalar(targetSize / maxDim);
+
+      shoe.add(model);
+    },
+    undefined,
+    (error) => {
+      console.error(`Не удалось загрузить ${modelPaths[variant]}:`, error);
+    }
+  );
+
+  let isDragging = false;
+  let prevX = 0;
+  let targetRotY = 0;
+  let currentRotY = 0;
+  let autoSpin = reduceMotion ? 0 : 1;
+  let autoSpinTarget = autoSpin;
+
+  container.addEventListener('pointerdown', (e) => {
+    isDragging = true;
+    prevX = e.clientX;
+    autoSpinTarget = 0;
+    container.setPointerCapture?.(e.pointerId);
+  });
+  window.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - prevX;
+    prevX = e.clientX;
+    targetRotY += dx * 0.012;
+  });
+  const endDrag = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    autoSpinTarget = reduceMotion ? 0 : 1;
+  };
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
+  window.addEventListener('pointerleave', endDrag);
+
+  const clock = new THREE.Clock();
+  return {
+    renderer, scene, camera, shoe, pivot,
+    update() {
+      const dt = Math.min(clock.getDelta(), 0.05);
+      const t = clock.getElapsedTime();
+
+      if (!reduceMotion) {
+        autoSpin += (autoSpinTarget - autoSpin) * Math.min(1, dt * 4);
+        targetRotY += dt * 0.4 * autoSpin;
+        pivot.position.y = Math.sin(t * 1.2) * 0.05;
+        pivot.rotation.x = Math.sin(t * 0.7) * 0.03;
+      }
+
+      const lerp = 1 - Math.pow(0.001, dt);
+      currentRotY += (targetRotY - currentRotY) * lerp;
+      pivot.rotation.y = currentRotY;
+
+      renderer.render(scene, camera);
+    },
+    resize() {
+      const w = container.clientWidth, h = container.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+  };
+}
+
+canvases.forEach((c, i) => {
+  scenes.push(initScene(c, i));
+});
+
+window.addEventListener('resize', () => {
+  scenes.forEach(s => s.resize());
+});
+
+function loop() {
+  requestAnimationFrame(loop);
+  scenes.forEach((s, i) => {
+    if (i === currentSlide) s.update();
+  });
+}
+loop();
+
+/* ============================================================
+   СЛАЙДЕР + инфо
+   ============================================================ */
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'dot' + (i === 0 ? ' is-active' : '');
+  dot.setAttribute('aria-label', `Слайд ${i + 1}`);
+  dot.addEventListener('click', () => goToSlide(i));
+  dotsContainer.appendChild(dot);
+});
+
+const pTag = document.getElementById('pTag');
+const pTitle = document.getElementById('pTitle');
+const pDesc = document.getElementById('pDesc');
+const pPrice = document.getElementById('pPrice');
+const productInfo = document.getElementById('productInfo');
+
+function updateProduct(i) {
+  const p = products[i];
+  // анимация смены
+  productInfo.style.opacity = '0';
+  productInfo.style.transform = 'translateY(8px)';
+  setTimeout(() => {
+    pTag.textContent = p.tag;
+    pTitle.textContent = p.title;
+    pDesc.textContent = p.desc;
+    pPrice.innerHTML = `${p.price} <span>${p.stock}</span>`;
+    productInfo.style.opacity = '1';
+    productInfo.style.transform = 'none';
+  }, 200);
+}
+
+function goToSlide(index) {
+  currentSlide = (index + slides.length) % slides.length;
+
+  slides.forEach((s, i) => s.classList.toggle('is-active', i === currentSlide));
+
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('is-active', i === currentSlide);
+  });
+
+  const bottom = document.querySelector('.bottom-line');
+  if (bottom) bottom.textContent = `Swipe · 0${currentSlide + 1} / 0${slides.length}`;
+
+  updateProduct(currentSlide);
+}
+
+prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+/* Свайп */
+let touchStartX = 0;
+const banner = document.getElementById('banner');
+banner.addEventListener('touchstart', (e) => {
+  touchStartX = e.touches[0].clientX;
+}, { passive: true });
+banner.addEventListener('touchend', (e) => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 60) {
+    goToSlide(currentSlide + (dx < 0 ? 1 : -1));
+  }
+}, { passive: true });
+
+/* Клавиатура */
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+  if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+});
+</script>
+
+</body>
+</html>

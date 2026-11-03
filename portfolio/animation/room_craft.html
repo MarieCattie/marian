@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RoomCraft — 3D конструктор интерьера</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink:   { 950:'#0b0f0d', 900:'#111714', 800:'#18201c', 700:'#232d28', 600:'#33403a' },
+          mint:  { 400:'#4fb892', 300:'#84d1b3', 500:'#2c9d78' },
+          sand:  { 300:'#ddc896', 400:'#cfae6c' },
+        },
+        fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['"Space Grotesk"','Inter','sans-serif'] },
+        borderRadius: { '4xl':'2rem' },
+      },
+    },
+  };
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  html, body { margin:0; height:100%; overflow:hidden; background:#0b0f0d; }
+  body { font-family:'Inter',sans-serif; color:#e7e9e7; }
+  .font-display { font-family:'Space Grotesk',sans-serif; }
+
+  #app { display:grid; grid-template-columns: 280px 1fr 300px; grid-template-rows: 64px 1fr; height:100vh; }
+  @media (max-width: 1024px) {
+    #app { grid-template-columns: 1fr; grid-template-rows: 56px 1fr; }
+    .side { display:none; }
+  }
+
+  .side { background:#111714; border-color:#232d28; }
+  #viewport { position:relative; background:radial-gradient(ellipse at 50% 30%, #1a2420 0%, #0b0f0d 70%); overflow:hidden; }
+  #viewport canvas { display:block; width:100%; height:100%; }
+
+  .cat-item {
+    cursor:grab; user-select:none;
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .cat-item:hover { transform: translateY(-2px); border-color:#4fb892; background:#18201c; }
+  .cat-item:active { cursor:grabbing; }
+
+  .tool-btn { transition: all .2s ease; }
+  .tool-btn.is-active { background:#4fb892; color:#0b0f0d; border-color:#4fb892; }
+
+  #loader {
+    position:fixed; inset:0; z-index:100;
+    background:#0b0f0d;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transition: opacity .8s ease, visibility .8s ease;
+  }
+  #loader.is-done { opacity:0; visibility:hidden; }
+  .loader-ring {
+    width:64px; height:64px; border-radius:50%;
+    border:2px solid #232d28;
+    border-top-color:#4fb892;
+    animation:spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .loader-bar { width:240px; height:3px; background:#232d28; border-radius:99px; overflow:hidden; }
+  .loader-bar > i { display:block; height:100%; width:0%; background:linear-gradient(90deg,#4fb892,#84d1b3,#ddc896); transition:width .3s ease; }
+
+  .tutorial-step { display:none; }
+  .tutorial-step.is-active { display:block; }
+
+  #dropHint {
+    position:absolute; inset:0; z-index:5; pointer-events:none;
+    display:none; align-items:center; justify-content:center;
+    background:rgba(79,184,146,.06); border:2px dashed #4fb892; border-radius:12px; margin:16px;
+  }
+  #dropHint.is-on { display:flex; }
+
+  #toast {
+    position:absolute; left:50%; bottom:24px; transform:translateX(-50%) translateY(20px);
+    background:#18201c; border:1px solid #33403a; color:#e7e9e7;
+    padding:10px 18px; border-radius:12px; font-size:13px;
+    opacity:0; transition: all .3s ease; pointer-events:none; z-index:10;
+  }
+  #toast.is-on { opacity:1; transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="font-display text-2xl tracking-tight text-white mb-8">RoomCraft<span class="text-mint-400">.</span></div>
+  <div class="loader-ring mb-6"></div>
+  <div class="loader-bar mb-3"><i id="loaderBar"></i></div>
+  <div class="text-xs text-ink-600 tracking-widest uppercase" id="loaderText">Инициализация сцены</div>
+</div>
+
+<div id="app">
+
+  <header class="col-span-3 flex items-center justify-between px-5 border-b border-ink-700 bg-ink-900">
+    <div class="flex items-center gap-2">
+      <span class="w-8 h-8 rounded-lg bg-mint-400 flex items-center justify-center text-ink-950 font-bold font-display">R</span>
+      <span class="font-display text-lg text-white">RoomCraft<span class="text-mint-400">.</span></span>
+      <span class="ml-3 text-[11px] text-ink-600 uppercase tracking-widest">3D Studio</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="undoBtn" class="tool-btn px-3 py-1.5 text-xs rounded-lg border border-ink-700 text-ink-300 hover:text-white">↶ Отменить</button>
+      <button id="tutorialBtn" class="tool-btn px-3 py-1.5 text-xs rounded-lg border border-ink-700 text-ink-300 hover:text-white">? Обучение</button>
+      <button id="exportBtn" class="tool-btn px-3 py-1.5 text-xs rounded-lg bg-mint-400 text-ink-950 font-semibold">Сохранить</button>
+    </div>
+  </header>
+
+  <aside class="side border-r overflow-y-auto p-4">
+    <div class="text-[10px] text-ink-600 uppercase tracking-[0.3em] mb-3">Каталог</div>
+    <div class="space-y-1 mb-5">
+      <button class="cat-tab tool-btn is-active w-full text-left px-3 py-2 rounded-lg text-sm" data-cat="furniture">Мебель</button>
+      <button class="cat-tab tool-btn w-full text-left px-3 py-2 rounded-lg text-sm" data-cat="decor">Декор</button>
+      <button class="cat-tab tool-btn w-full text-left px-3 py-2 rounded-lg text-sm" data-cat="light">Свет</button>
+    </div>
+    <div id="catalogList" class="space-y-2"></div>
+  </aside>
+
+  <main id="viewport">
+    <div id="dropHint">Отпустите, чтобы разместить</div>
+
+    <div class="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-ink-900/90 backdrop-blur border border-ink-700 rounded-xl p-1.5 z-10">
+      <button class="tool-btn is-active px-3 py-1.5 text-xs rounded-lg" data-tool="move">Перемещение</button>
+      <button class="tool-btn px-3 py-1.5 text-xs rounded-lg" data-tool="rotate">Вращение</button>
+      <button class="tool-btn px-3 py-1.5 text-xs rounded-lg" data-tool="scale">Масштаб</button>
+      <span class="w-px h-5 bg-ink-700 mx-1"></span>
+      <button class="tool-btn px-3 py-1.5 text-xs rounded-lg" data-tool="wall">Стена</button>
+      <button class="tool-btn px-3 py-1.5 text-xs rounded-lg" data-tool="delete">Удалить</button>
+    </div>
+
+    <div id="toast"></div>
+  </main>
+
+  <aside class="side border-l overflow-y-auto p-4">
+    <div class="text-[10px] text-ink-600 uppercase tracking-[0.3em] mb-3">Свойства</div>
+
+    <div id="noSelection" class="text-sm text-ink-600">Выберите объект на сцене</div>
+
+    <div id="selectionPanel" class="hidden space-y-4">
+      <div>
+        <div class="text-[11px] text-ink-600 mb-1">Объект</div>
+        <div id="objName" class="text-sm text-white font-medium">—</div>
+      </div>
+
+      <div>
+        <label class="text-[11px] text-ink-600 flex justify-between mb-1">
+          <span>Поворот</span><span id="rotVal" class="text-ink-300">0°</span>
+        </label>
+        <input id="rotRange" type="range" min="-180" max="180" value="0" class="w-full accent-mint-400" />
+      </div>
+
+      <div>
+        <label class="text-[11px] text-ink-600 flex justify-between mb-1">
+          <span>Размер</span><span id="scaleVal" class="text-ink-300">1.0×</span>
+        </label>
+        <input id="scaleRange" type="range" min="0.5" max="2" step="0.05" value="1" class="w-full accent-mint-400" />
+      </div>
+
+      <div>
+        <label class="text-[11px] text-ink-600 flex justify-between mb-1">
+          <span>Высота</span><span id="yVal" class="text-ink-300">0.00</span>
+        </label>
+        <input id="yRange" type="range" min="0" max="3" step="0.05" value="0" class="w-full accent-mint-400" />
+      </div>
+
+      <div>
+        <div class="text-[11px] text-ink-600 mb-2">Цвет</div>
+        <div class="grid grid-cols-6 gap-2" id="colorSwatches"></div>
+      </div>
+
+      <button id="dupBtn" class="w-full text-xs py-2 rounded-lg border border-ink-700 text-ink-300 hover:text-white">Дублировать</button>
+      <button id="delBtn" class="w-full text-xs py-2 rounded-lg border border-red-900/50 text-red-400 hover:bg-red-950/30">Удалить</button>
+    </div>
+  </aside>
+</div>
+
+<div id="tutorial" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm">
+  <div class="bg-ink-900 border border-ink-700 rounded-2xl p-8 max-w-md w-full mx-4">
+    <div class="text-[10px] text-mint-400 uppercase tracking-[0.3em] mb-2">Обучение</div>
+
+    <div class="tutorial-step is-active" data-step="0">
+      <h3 class="font-display text-2xl text-white mb-2">Добро пожаловать</h3>
+      <p class="text-sm text-ink-300 leading-relaxed">Это 3D-конструктор интерьера. Перетаскивайте мебель из каталога слева прямо на сцену.</p>
+    </div>
+    <div class="tutorial-step" data-step="1">
+      <h3 class="font-display text-2xl text-white mb-2">Управление объектами</h3>
+      <p class="text-sm text-ink-300 leading-relaxed">Кликните по объекту, чтобы выделить. Вращайте, масштабируйте и меняйте цвет в панели справа. Мышью — орбита камеры.</p>
+    </div>
+    <div class="tutorial-step" data-step="2">
+      <h3 class="font-display text-2xl text-white mb-2">Стены</h3>
+      <p class="text-sm text-ink-300 leading-relaxed">Выберите инструмент «Стена» и кликните дважды по полу — стена построится между точками. Стены тоже можно выделять и удалять.</p>
+    </div>
+
+    <div class="flex items-center justify-between mt-6">
+      <div class="flex gap-1.5" id="tutorialDots">
+        <span class="w-1.5 h-1.5 rounded-full bg-mint-400"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-ink-700"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-ink-700"></span>
+      </div>
+      <div class="flex gap-2">
+        <button id="skipTut" class="text-xs px-4 py-2 text-ink-400 hover:text-white">Пропустить</button>
+        <button id="nextTut" class="text-xs px-5 py-2 rounded-lg bg-mint-400 text-ink-950 font-semibold">Далее</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { TransformControls } from 'three/addons/controls/TransformControls.js';
+
+/* ============================================================
+   1. ПРЕЛОАДЕР
+   ============================================================ */
+const loaderEl = document.getElementById('loader');
+const loaderBar = document.getElementById('loaderBar');
+const loaderText = document.getElementById('loaderText');
+
+const steps = [
+  { p: 20, t: 'Инициализация сцены' },
+  { p: 45, t: 'Загрузка материалов' },
+  { p: 70, t: 'Генерация каталога' },
+  { p: 90, t: 'Настройка освещения' },
+  { p: 100, t: 'Готово' },
+];
+
+function setProgress(p, text) {
+  loaderBar.style.width = p + '%';
+  if (text) loaderText.textContent = text;
+}
+
+/* ============================================================
+   2. СЦЕНА
+   ============================================================ */
+const viewport = document.getElementById('viewport');
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(viewport.clientWidth, viewport.clientHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+viewport.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0x0b0f0d, 18, 40);
+
+const camera = new THREE.PerspectiveCamera(45, viewport.clientWidth / viewport.clientHeight, 0.1, 100);
+camera.position.set(6, 6, 8);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.maxPolarAngle = Math.PI / 2.05;
+controls.minDistance = 3;
+controls.maxDistance = 20;
+controls.target.set(0, 0.5, 0);
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+const hemi = new THREE.HemisphereLight(0xffffff, 0x33403a, 0.6);
+scene.add(hemi);
+
+const key = new THREE.DirectionalLight(0xffffff, 1.8);
+key.position.set(8, 12, 6);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.camera.left = -12;
+key.shadow.camera.right = 12;
+key.shadow.camera.top = 12;
+key.shadow.camera.bottom = -12;
+key.shadow.bias = -0.0004;
+scene.add(key);
+
+const fill = new THREE.DirectionalLight(0x84d1b3, 0.5);
+fill.position.set(-8, 6, -6);
+scene.add(fill);
+
+const floorGeo = new THREE.PlaneGeometry(24, 24);
+const floorMat = new THREE.MeshStandardMaterial({ color: 0x18201c, roughness: 0.9, metalness: 0.05 });
+const floor = new THREE.Mesh(floorGeo, floorMat);
+floor.rotation.x = -Math.PI / 2;
+floor.receiveShadow = true;
+floor.name = 'floor';
+scene.add(floor);
+
+const grid = new THREE.GridHelper(24, 24, 0x33403a, 0x232d28);
+grid.material.opacity = 0.5;
+grid.material.transparent = true;
+grid.position.y = 0.001;
+scene.add(grid);
+
+/* ============================================================
+   3. МАТЕРИАЛЫ И КАТАЛОГ
+   ============================================================ */
+const materials = {
+  wood:  new THREE.MeshStandardMaterial({ color: 0x8a6a4a, roughness: 0.7 }),
+  light: new THREE.MeshStandardMaterial({ color: 0xd8cfc0, roughness: 0.8 }),
+  dark:  new THREE.MeshStandardMaterial({ color: 0x2a332e, roughness: 0.6, metalness: 0.2 }),
+  metal: new THREE.MeshStandardMaterial({ color: 0x9aa5a0, roughness: 0.3, metalness: 0.8 }),
+  fabric:new THREE.MeshStandardMaterial({ color: 0x4fb892, roughness: 0.95 }),
+  sand:  new THREE.MeshStandardMaterial({ color: 0xcfae6c, roughness: 0.8 }),
+  glass: new THREE.MeshStandardMaterial({ color: 0x84d1b3, roughness: 0.1, metalness: 0.1, transparent: true, opacity: 0.5 }),
+};
+
+function buildSofa() {
+  const g = new THREE.Group();
+  const base = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.5, 0.9), materials.fabric);
+  base.position.y = 0.25; base.castShadow = true; g.add(base);
+  const back = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.7, 0.2), materials.fabric);
+  back.position.set(0, 0.65, -0.35); back.castShadow = true; g.add(back);
+  const armL = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.5, 0.9), materials.fabric);
+  armL.position.set(-1.0, 0.45, 0); armL.castShadow = true; g.add(armL);
+  const armR = armL.clone(); armR.position.x = 1.0; g.add(armR);
+  return g;
+}
+function buildChair() {
+  const g = new THREE.Group();
+  const seat = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.15, 0.7), materials.sand);
+  seat.position.y = 0.45; seat.castShadow = true; g.add(seat);
+  const back = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.7, 0.1), materials.sand);
+  back.position.set(0, 0.75, -0.3); back.castShadow = true; g.add(back);
+  for (let x of [-0.28, 0.28]) for (let z of [-0.28, 0.28]) {
+    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.4), materials.wood);
+    leg.position.set(x, 0.2, z); leg.castShadow = true; g.add(leg);
+  }
+  return g;
+}
+function buildTable() {
+  const g = new THREE.Group();
+  const top = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.08, 0.8), materials.wood);
+  top.position.y = 0.75; top.castShadow = true; g.add(top);
+  for (let x of [-0.6, 0.6]) for (let z of [-0.3, 0.3]) {
+    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.75), materials.metal);
+    leg.position.set(x, 0.375, z); leg.castShadow = true; g.add(leg);
+  }
+  return g;
+}
+function buildShelf() {
+  const g = new THREE.Group();
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(1.0, 2.0, 0.35), materials.dark);
+  frame.position.y = 1.0; frame.castShadow = true; g.add(frame);
+  for (let i = 0; i < 4; i++) {
+    const shelf = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.04, 0.33), materials.wood);
+    shelf.position.set(0, 0.3 + i * 0.45, 0); g.add(shelf);
+  }
+  return g;
+}
+function buildBed() {
+  const g = new THREE.Group();
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.3, 2.2), materials.wood);
+  frame.position.y = 0.15; frame.castShadow = true; g.add(frame);
+  const mattress = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.25, 2.0), materials.light);
+  mattress.position.y = 0.42; mattress.castShadow = true; g.add(mattress);
+  const pillow = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.15, 0.4), materials.light);
+  pillow.position.set(-0.4, 0.6, -0.7); g.add(pillow);
+  const pillow2 = pillow.clone(); pillow2.position.x = 0.4; g.add(pillow2);
+  return g;
+}
+function buildPlant() {
+  const g = new THREE.Group();
+  const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.16, 0.35, 16), materials.sand);
+  pot.position.y = 0.175; pot.castShadow = true; g.add(pot);
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.5), materials.wood);
+  stem.position.y = 0.55; g.add(stem);
+  for (let i = 0; i < 6; i++) {
+    const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.18, 8, 6), materials.fabric);
+    const a = (i / 6) * Math.PI * 2;
+    leaf.position.set(Math.cos(a) * 0.2, 0.8 + Math.sin(i) * 0.1, Math.sin(a) * 0.2);
+    leaf.scale.set(1, 0.4, 1);
+    leaf.castShadow = true;
+    g.add(leaf);
+  }
+  return g;
+}
+function buildLamp() {
+  const g = new THREE.Group();
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.25, 0.1, 16), materials.metal);
+  base.position.y = 0.05; g.add(base);
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.9), materials.metal);
+  pole.position.y = 0.5; g.add(pole);
+  const shade = new THREE.Mesh(new THREE.ConeGeometry(0.3, 0.35, 16, 1, true), materials.sand);
+  shade.position.y = 1.0; shade.castShadow = true; g.add(shade);
+  return g;
+}
+function buildRug() {
+  const g = new THREE.Group();
+  const rug = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.02, 1.6), materials.fabric);
+  rug.position.y = 0.01; rug.receiveShadow = true; g.add(rug);
+  return g;
+}
+function buildVase() {
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.2, 16, 12), materials.glass);
+  body.position.y = 0.25; body.scale.y = 1.3; body.castShadow = true; g.add(body);
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.1, 0.15, 12), materials.glass);
+  neck.position.y = 0.5; g.add(neck);
+  return g;
+}
+function buildFrame() {
+  const g = new THREE.Group();
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(0.8, 1.0, 0.05), materials.wood);
+  frame.position.y = 0.6; frame.castShadow = true; g.add(frame);
+  const art = new THREE.Mesh(new THREE.PlaneGeometry(0.65, 0.85), materials.sand);
+  art.position.set(0, 0.6, 0.03); g.add(art);
+  return g;
+}
+function buildFloorLamp() {
+  const g = new THREE.Group();
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.3, 0.08, 16), materials.dark);
+  base.position.y = 0.04; g.add(base);
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 1.5), materials.metal);
+  pole.position.y = 0.8; g.add(pole);
+  const shade = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.35, 0.35, 16, 1, true), materials.sand);
+  shade.position.y = 1.6; shade.castShadow = true; g.add(shade);
+  return g;
+}
+function buildPendant() {
+  const g = new THREE.Group();
+  const cord = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.01, 1.2), materials.dark);
+  cord.position.y = 1.8; g.add(cord);
+  const shade = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2), materials.sand);
+  shade.position.y = 1.15; shade.castShadow = true; g.add(shade);
+  return g;
+}
+
+const catalog = {
+  furniture: [
+    { id: 'sofa',   name: 'Диван',    build: buildSofa,     icon: '🛋' },
+    { id: 'chair',  name: 'Кресло',   build: buildChair,    icon: '🪑' },
+    { id: 'table',  name: 'Стол',     build: buildTable,    icon: '🪵' },
+    { id: 'shelf',  name: 'Стеллаж',  build: buildShelf,    icon: '📚' },
+    { id: 'bed',    name: 'Кровать',  build: buildBed,      icon: '🛏' },
+  ],
+  decor: [
+    { id: 'plant',  name: 'Растение', build: buildPlant,    icon: '🌿' },
+    { id: 'lamp',   name: 'Лампа',    build: buildLamp,     icon: '💡' },
+    { id: 'rug',    name: 'Ковёр',    build: buildRug,      icon: '🟫' },
+    { id: 'vase',   name: 'Ваза',     build: buildVase,     icon: '🏺' },
+    { id: 'frame',  name: 'Картина',  build: buildFrame,    icon: '🖼' },
+  ],
+  light: [
+    { id: 'floorlamp', name: 'Торшер', build: buildFloorLamp, icon: '🕯' },
+    { id: 'pendant',   name: 'Люстра', build: buildPendant,   icon: '🔮' },
+  ],
+};
+
+/* ============================================================
+   4. ВЫДЕЛЕНИЕ И ТРАНСФОРМ
+   ============================================================ */
+const selectable = [];
+let selected = null;
+
+const selectionBox = new THREE.BoxHelper(new THREE.Object3D(), 0x4fb892);
+selectionBox.visible = false;
+scene.add(selectionBox);
+
+const transform = new TransformControls(camera, renderer.domElement);
+transform.setSize(0.8);
+transform.addEventListener('dragging-changed', (e) => {
+  controls.enabled = !e.value;
+});
+scene.add(transform);
+
+let currentTool = 'move';
+let wallStart = null;
+
+function setTool(tool) {
+  currentTool = tool;
+  wallStart = null; // сбрасываем незавершённую стену при смене инструмента
+
+  document.querySelectorAll('[data-tool]').forEach(b => {
+    b.classList.toggle('is-active', b.dataset.tool === tool);
+  });
+
+  if (!selected) { transform.detach(); return; }
+
+  if (tool === 'move')    { transform.setMode('translate'); transform.attach(selected); }
+  if (tool === 'rotate')  { transform.setMode('rotate');    transform.attach(selected); }
+  if (tool === 'scale')   { transform.setMode('scale');     transform.attach(selected); }
+  if (tool === 'delete')  { removeObject(selected); transform.detach(); }
+}
+
+function select(obj) {
+  selected = obj;
+  if (obj) {
+    selectionBox.setFromObject(obj);
+    selectionBox.visible = true;
+
+    if (currentTool !== 'delete') {
+      // для стен оставляем только перемещение и поворот
+      if (obj.userData.type === 'wall') {
+        transform.setMode(currentTool === 'rotate' ? 'rotate' : 'translate');
+      } else {
+        transform.setMode(
+          currentTool === 'rotate' ? 'rotate' :
+          currentTool === 'scale'  ? 'scale'  : 'translate'
+        );
+      }
+      transform.attach(obj);
+    }
+    updatePropsPanel(obj);
+  } else {
+    selectionBox.visible = false;
+    transform.detach();
+    updatePropsPanel(null);
+  }
+}
+
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+
+function getIntersections(e) {
+  const rect = renderer.domElement.getBoundingClientRect();
+  pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  return raycaster.intersectObjects(selectable, true);
+}
+
+renderer.domElement.addEventListener('pointerdown', (e) => {
+  if (e.button !== 0) return;
+  if (transform.dragging) return;
+
+  if (currentTool === 'wall') {
+    handleWallClick(e);
+    return;
+  }
+
+  const hits = getIntersections(e);
+  if (hits.length) {
+    let obj = hits[0].object;
+    while (obj.parent && !selectable.includes(obj)) obj = obj.parent;
+    select(selectable.includes(obj) ? obj : null);
+  } else {
+    select(null);
+  }
+});
+
+/* ============================================================
+   5. ДОБАВЛЕНИЕ / УДАЛЕНИЕ ОБЪЕКТОВ
+   ============================================================ */
+const dragState = { active: false, def: null };
+const dropHint = document.getElementById('dropHint');
+
+function addObject(def, position = new THREE.Vector3(0, 0, 0)) {
+  const obj = def.build();
+
+  // Клонируем материалы, чтобы цвет менялся только у этого объекта
+  obj.traverse(child => {
+    if (child.isMesh && child.material) {
+      if (Array.isArray(child.material)) {
+        child.material = child.material.map(m => m.clone());
+      } else {
+        child.material = child.material.clone();
+      }
+    }
+  });
+
+  obj.position.copy(position);
+  obj.position.y = 0;
+  obj.userData.defId = def.id;
+  obj.userData.name = def.name;
+  obj.userData.type = 'furniture';
+  obj.traverse(c => { if (c.isMesh) { c.castShadow = true; c.receiveShadow = true; } });
+
+  scene.add(obj);
+  selectable.push(obj);
+  select(obj);
+  showToast(`Добавлено: ${def.name}`);
+  return obj;
+}
+
+function removeObject(obj) {
+  const i = selectable.indexOf(obj);
+  if (i > -1) selectable.splice(i, 1);
+
+  if (obj.parent) obj.parent.remove(obj);
+  else scene.remove(obj);
+
+  // Чистим геометрию/материалы
+  obj.traverse(child => {
+    if (child.isMesh) {
+      child.geometry?.dispose?.();
+      if (Array.isArray(child.material)) child.material.forEach(m => m.dispose?.());
+      else child.material?.dispose?.();
+    }
+  });
+
+  if (selected === obj) select(null);
+  showToast(obj.userData.type === 'wall' ? 'Стена удалена' : 'Объект удалён');
+}
+
+function startCatalogDrag(def) {
+  dragState.active = true;
+  dragState.def = def;
+  dropHint.classList.add('is-on');
+  document.body.style.cursor = 'grabbing';
+}
+
+function onCatalogDrop(e) {
+  if (!dragState.active) return;
+  dropHint.classList.remove('is-on');
+  document.body.style.cursor = '';
+
+  const rect = renderer.domElement.getBoundingClientRect();
+  if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+    dragState.active = false;
+    return;
+  }
+
+  pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  const hit = raycaster.intersectObject(floor)[0];
+  const pos = hit ? hit.point : new THREE.Vector3(0, 0, 0);
+
+  addObject(dragState.def, pos);
+  dragState.active = false;
+}
+
+document.addEventListener('pointermove', (e) => {
+  if (dragState.active) {
+    const rect = renderer.domElement.getBoundingClientRect();
+    const inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+    dropHint.classList.toggle('is-on', inside);
+  }
+});
+
+document.addEventListener('pointerup', onCatalogDrop);
+
+/* ============================================================
+   6. СТЕНЫ
+   ============================================================ */
+const wallGroup = new THREE.Group();
+scene.add(wallGroup);
+
+function handleWallClick(e) {
+  const rect = renderer.domElement.getBoundingClientRect();
+  pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  const hit = raycaster.intersectObject(floor)[0];
+  if (!hit) return;
+
+  if (!wallStart) {
+    wallStart = hit.point.clone();
+    showToast('Первая точка — кликните вторую');
+  } else {
+    const end = hit.point.clone();
+    createWall(wallStart, end);
+    wallStart = null;
+    showToast('Стена создана');
+  }
+}
+
+function createWall(a, b) {
+  const dir = new THREE.Vector3().subVectors(b, a);
+  const len = dir.length();
+  if (len < 0.2) return; // слишком короткая — игнорируем
+
+  const wall = new THREE.Mesh(
+    new THREE.BoxGeometry(len, 2.8, 0.15),
+    new THREE.MeshStandardMaterial({ color: 0x33403a, roughness: 0.9 })
+  );
+  wall.position.copy(a).add(b).multiplyScalar(0.5);
+  wall.position.y = 1.4;
+  wall.rotation.y = -Math.atan2(dir.z, dir.x);
+  wall.castShadow = true;
+  wall.receiveShadow = true;
+
+  wall.userData.type = 'wall';
+  wall.userData.name = 'Стена';
+
+  wallGroup.add(wall);
+  selectable.push(wall); // стена участвует в выделении и удалении
+  select(wall);
+}
+
+/* ============================================================
+   7. UI: КАТАЛОГ
+   ============================================================ */
+const catalogList = document.getElementById('catalogList');
+
+function renderCatalog(cat) {
+  catalogList.innerHTML = '';
+  catalog[cat].forEach(def => {
+    const el = document.createElement('div');
+    el.className = 'cat-item flex items-center gap-3 p-3 rounded-xl border border-ink-700 bg-ink-800';
+    el.innerHTML = `
+      <div class="w-10 h-10 rounded-lg bg-ink-700 flex items-center justify-center text-xl">${def.icon}</div>
+      <div class="flex-1">
+        <div class="text-sm text-white">${def.name}</div>
+        <div class="text-[10px] text-ink-600">Перетащите на сцену</div>
+      </div>
+      <div class="text-ink-600 text-xs">⠿</div>
+    `;
+    el.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      startCatalogDrag(def);
+    });
+    el.addEventListener('click', () => {
+      addObject(def, new THREE.Vector3((Math.random() - 0.5) * 3, 0, (Math.random() - 0.5) * 3));
+    });
+    catalogList.appendChild(el);
+  });
+}
+
+document.querySelectorAll('.cat-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('is-active'));
+    tab.classList.add('is-active');
+    renderCatalog(tab.dataset.cat);
+  });
+});
+
+renderCatalog('furniture');
+
+/* ============================================================
+   8. UI: ИНСТРУМЕНТЫ
+   ============================================================ */
+document.querySelectorAll('[data-tool]').forEach(btn => {
+  btn.addEventListener('click', () => setTool(btn.dataset.tool));
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Delete' && selected) removeObject(selected);
+  if (e.key === 'Escape') select(null);
+  if (e.key.toLowerCase() === 'w') setTool('move');
+  if (e.key.toLowerCase() === 'e') setTool('rotate');
+  if (e.key.toLowerCase() === 'r') setTool('scale');
+});
+
+/* ============================================================
+   9. UI: СВОЙСТВА
+   ============================================================ */
+const noSelection = document.getElementById('noSelection');
+const selectionPanel = document.getElementById('selectionPanel');
+const objName = document.getElementById('objName');
+const rotRange = document.getElementById('rotRange');
+const rotVal = document.getElementById('rotVal');
+const scaleRange = document.getElementById('scaleRange');
+const scaleVal = document.getElementById('scaleVal');
+const yRange = document.getElementById('yRange');
+const yVal = document.getElementById('yVal');
+const colorSwatches = document.getElementById('colorSwatches');
+
+const palette = ['#4fb892', '#84d1b3', '#ddc896', '#cfae6c', '#8a6a4a', '#d8cfc0'];
+palette.forEach(c => {
+  const sw = document.createElement('button');
+  sw.className = 'w-7 h-7 rounded-lg border border-ink-600';
+  sw.style.background = c;
+  sw.addEventListener('click', () => {
+    if (!selected) return;
+    // Меняем цвет только у выделенного объекта (материалы уже клонированы)
+    selected.traverse(child => {
+      if (child.isMesh && child.material && child.material.color) {
+        child.material.color.set(c);
+      }
+    });
+  });
+  colorSwatches.appendChild(sw);
+});
+
+function updatePropsPanel(obj) {
+  if (!obj) {
+    noSelection.classList.remove('hidden');
+    selectionPanel.classList.add('hidden');
+    return;
+  }
+  noSelection.classList.add('hidden');
+  selectionPanel.classList.remove('hidden');
+  objName.textContent = obj.userData.name || 'Объект';
+
+  const deg = Math.round(THREE.MathUtils.radToDeg(obj.rotation.y));
+  rotRange.value = deg;
+  rotVal.textContent = deg + '°';
+
+  scaleRange.value = obj.scale.x;
+  scaleVal.textContent = obj.scale.x.toFixed(1) + '×';
+
+  yRange.value = obj.position.y;
+  yVal.textContent = obj.position.y.toFixed(2);
+}
+
+rotRange.addEventListener('input', () => {
+  if (!selected) return;
+  selected.rotation.y = THREE.MathUtils.degToRad(+rotRange.value);
+  rotVal.textContent = rotRange.value + '°';
+  selectionBox.setFromObject(selected);
+});
+scaleRange.addEventListener('input', () => {
+  if (!selected) return;
+  selected.scale.setScalar(+scaleRange.value);
+  scaleVal.textContent = (+scaleRange.value).toFixed(1) + '×';
+  selectionBox.setFromObject(selected);
+});
+yRange.addEventListener('input', () => {
+  if (!selected) return;
+  selected.position.y = +yRange.value;
+  yVal.textContent = (+yRange.value).toFixed(2);
+  selectionBox.setFromObject(selected);
+});
+
+document.getElementById('delBtn').addEventListener('click', () => { if (selected) removeObject(selected); });
+document.getElementById('dupBtn').addEventListener('click', () => {
+  if (!selected) return;
+  if (selected.userData.type === 'wall') {
+    showToast('Стену нельзя дублировать');
+    return;
+  }
+  const def = Object.values(catalog).flat().find(d => d.id === selected.userData.defId);
+  if (!def) return;
+  const pos = selected.position.clone().add(new THREE.Vector3(1, 0, 1));
+  addObject(def, pos);
+});
+
+/* ============================================================
+   10. ОБУЧЕНИЕ
+   ============================================================ */
+const tutorial = document.getElementById('tutorial');
+const tutSteps = document.querySelectorAll('.tutorial-step');
+const tutDots = document.querySelectorAll('#tutorialDots span');
+let tutIndex = 0;
+
+function openTutorial() {
+  tutIndex = 0;
+  tutorial.classList.remove('hidden');
+  tutorial.classList.add('flex');
+  updateTutorial();
+}
+function closeTutorial() {
+  tutorial.classList.add('hidden');
+  tutorial.classList.remove('flex');
+}
+function updateTutorial() {
+  tutSteps.forEach((s, i) => s.classList.toggle('is-active', i === tutIndex));
+  tutDots.forEach((d, i) => {
+    d.classList.toggle('bg-mint-400', i === tutIndex);
+    d.classList.toggle('bg-ink-700', i !== tutIndex);
+  });
+  document.getElementById('nextTut').textContent = tutIndex === tutSteps.length - 1 ? 'Начать' : 'Далее';
+}
+document.getElementById('nextTut').addEventListener('click', () => {
+  if (tutIndex < tutSteps.length - 1) { tutIndex++; updateTutorial(); }
+  else closeTutorial();
+});
+document.getElementById('skipTut').addEventListener('click', closeTutorial);
+document.getElementById('tutorialBtn').addEventListener('click', openTutorial);
+
+/* ============================================================
+   11. ТОСТ И ЭКСПОРТ
+   ============================================================ */
+const toast = document.getElementById('toast');
+let toastTimer;
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('is-on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('is-on'), 1800);
+}
+
+document.getElementById('exportBtn').addEventListener('click', () => {
+  showToast('Сцена сохранена (демо)');
+});
+document.getElementById('undoBtn').addEventListener('click', () => {
+  showToast('Отмена (демо)');
+});
+
+/* ============================================================
+   12. РЕСАЙЗ И ЦИКЛ
+   ============================================================ */
+function onResize() {
+  const w = viewport.clientWidth, h = viewport.clientHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+}
+window.addEventListener('resize', onResize);
+
+const clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  if (selected) selectionBox.setFromObject(selected);
+  renderer.render(scene, camera);
+}
+animate();
+
+/* ============================================================
+   13. СТАРТ
+   ============================================================ */
+let stepIndex = 0;
+function runLoader() {
+  const step = steps[stepIndex];
+  setProgress(step.p, step.t);
+  stepIndex++;
+  if (stepIndex < steps.length) {
+    setTimeout(runLoader, 350);
+  } else {
+    setTimeout(() => {
+      loaderEl.classList.add('is-done');
+      setTimeout(openTutorial, 400);
+    }, 400);
+  }
+}
+runLoader();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PROJECTECH — AI для бизнеса и творчества</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        void: { 50:'#f4f6fb',100:'#e6eaf4',200:'#c8d1e6',300:'#9aaad2',400:'#6a7db8',500:'#4a5c9c',600:'#39477d',700:'#2d3863',800:'#1f2749',900:'#12162e',950:'#070a18' },
+        cyan: { 300:'#7ef0ff',400:'#34e0f7',500:'#0ecbe6',600:'#00a8c4' },
+        lime: { 300:'#c6ff8f',400:'#a8ff5c',500:'#8bef34' },
+        magenta: { 400:'#ff5ce0',500:'#e63cc7' },
+      },
+      fontFamily: {
+        sans: ['Inter','system-ui','sans-serif'],
+        mono: ['"JetBrains Mono"','ui-monospace','monospace'],
+        display: ['"Space Grotesk"','Inter','sans-serif'],
+      },
+    },
+  },
+};
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background:#070a18; color:#e6eaf4; font-family:'Inter',sans-serif; overflow-x:hidden; }
+  .font-mono { font-family:'JetBrains Mono',monospace; }
+  .font-display { font-family:'Space Grotesk',sans-serif; }
+
+  /* Reveal */
+  .reveal { opacity:0; transform:translateY(30px); transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); will-change:opacity,transform; }
+  .reveal.active { opacity:1; transform:none; }
+  .d-100{transition-delay:.1s}.d-200{transition-delay:.2s}.d-300{transition-delay:.3s}.d-400{transition-delay:.4s}.d-500{transition-delay:.5s}
+
+  /* Neon */
+  .neon-cyan { text-shadow:0 0 18px rgba(52,224,247,.55); }
+  .glow-border { box-shadow:0 0 0 1px rgba(52,224,247,.18), 0 0 40px -10px rgba(52,224,247,.35) inset; }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(52,224,247,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(52,224,247,.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .scanlines::after {
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.05;
+    background: repeating-linear-gradient(0deg, #fff 0, #fff 1px, transparent 1px, transparent 3px);
+  }
+  /* Blinking cursor */
+  @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+  .cursor::after { content:"▮"; margin-left:4px; color:#34e0f7; animation:blink 1.1s steps(1) infinite; }
+
+  /* Pulse dot */
+  @keyframes pulseDot { 0%{box-shadow:0 0 0 0 rgba(168,255,92,.6)} 70%{box-shadow:0 0 0 8px rgba(168,255,92,0)} 100%{box-shadow:0 0 0 0 rgba(168,255,92,0)} }
+  .pulse-dot { animation:pulseDot 2s infinite; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-track{background:#070a18}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(#34e0f7,#4a5c9c);border-radius:99px;border:2px solid #070a18}
+
+  /* Chart canvas */
+  #chart { width:100%; height:100%; display:block; }
+
+  /* Ticker */
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  .ticker-track { animation:ticker 30s linear infinite; }
+</style>
+</head>
+
+<body class="antialiased">
+
+<!-- ================= BACKGROUND SHADER ================= -->
+<canvas id="bg" class="fixed inset-0 w-full h-full -z-10 opacity-70"></canvas>
+<div class="fixed inset-0 -z-10 bg-gradient-to-b from-void-950/60 via-void-950/80 to-void-950"></div>
+<div class="fixed inset-0 -z-10 grid-bg opacity-40"></div>
+
+<!-- ================= NAV ================= -->
+<header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2">
+      <span class="font-mono text-cyan-400 text-lg">❯</span>
+      <span class="font-display text-lg tracking-tight text-white">projectech<span class="text-cyan-400">.</span></span>
+    </a>
+    <nav class="hidden md:flex items-center gap-1 font-mono text-xs">
+      <a href="#stack" class="px-3 py-2 text-void-300 hover:text-cyan-300 transition">stack</a>
+      <a href="#services" class="px-3 py-2 text-void-300 hover:text-cyan-300 transition">services</a>
+      <a href="#live" class="px-3 py-2 text-void-300 hover:text-cyan-300 transition">live</a>
+      <a href="#news" class="px-3 py-2 text-void-300 hover:text-cyan-300 transition">news</a>
+      <a href="#contact" class="px-3 py-2 text-void-300 hover:text-cyan-300 transition">contact</a>
+    </nav>
+    <a href="#contact" class="hidden sm:inline-flex items-center gap-2 font-mono text-xs bg-cyan-400 hover:bg-cyan-300 text-void-950 font-semibold px-4 py-2.5 rounded-lg transition shadow-lg shadow-cyan-400/20">
+      init --project
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg>
+    </a>
+    <button class="md:hidden text-white p-2" onclick="document.getElementById('mob').classList.toggle('hidden')">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mob" class="hidden md:hidden mx-4 mb-3 rounded-2xl bg-void-900/95 backdrop-blur-xl border border-white/10 p-4 space-y-1 font-mono text-sm">
+    <a href="#stack" class="block px-3 py-2 rounded-lg text-void-200 hover:bg-white/5">stack</a>
+    <a href="#services" class="block px-3 py-2 rounded-lg text-void-200 hover:bg-white/5">services</a>
+    <a href="#live" class="block px-3 py-2 rounded-lg text-void-200 hover:bg-white/5">live</a>
+    <a href="#news" class="block px-3 py-2 rounded-lg text-void-200 hover:bg-white/5">news</a>
+    <a href="#contact" class="block px-3 py-2 rounded-lg bg-cyan-400 text-void-950 font-semibold text-center">contact</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="relative min-h-screen flex items-center pt-28 pb-16 scanlines overflow-hidden">
+  <div class="absolute -top-40 -left-40 w-[520px] h-[520px] rounded-full bg-cyan-500/10 blur-[140px]"></div>
+  <div class="absolute bottom-0 -right-40 w-[520px] h-[520px] rounded-full bg-magenta-500/10 blur-[140px]"></div>
+
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8 w-full">
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+
+      <div class="lg:col-span-7 reveal">
+        <div class="inline-flex items-center gap-2 font-mono text-[11px] text-cyan-300 bg-cyan-400/10 border border-cyan-400/20 rounded-full px-3 py-1.5 mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-lime-400 pulse-dot"></span>
+          принимаем новые проекты
+        </div>
+
+        <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-[5rem] leading-[0.98] tracking-tight text-white">
+          ИИ-решения<br />
+          для <span class="neon-cyan text-cyan-300">бизнеса</span><br />
+          и творчества<span class="text-cyan-400">.</span>
+        </h1>
+
+        <p class="mt-8 text-void-300 text-lg leading-relaxed max-w-xl font-light">
+          Разрабатываем ПО, управляем IT-инфраструктурой, обрабатываем данные,
+          создаём цифровые продукты и запускаем стартапы.
+        </p>
+
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a href="#contact" class="inline-flex items-center gap-2 bg-cyan-400 hover:bg-cyan-300 text-void-950 font-semibold px-6 py-3.5 rounded-lg transition shadow-lg shadow-cyan-400/25 font-mono text-sm">
+            ❯ обсудить проект
+          </a>
+          <a href="#stack" class="inline-flex items-center gap-2 border border-white/15 hover:border-cyan-400/50 text-white px-6 py-3.5 rounded-lg transition font-mono text-sm">
+            tech stack
+          </a>
+        </div>
+
+        <div class="mt-12 grid grid-cols-3 gap-4 max-w-md font-mono">
+          <div><div class="text-2xl text-white">40<span class="text-cyan-400">+</span></div><div class="text-[10px] text-void-400 mt-1 uppercase tracking-wider">проектов</div></div>
+          <div><div class="text-2xl text-white">15<span class="text-cyan-400">+</span></div><div class="text-[10px] text-void-400 mt-1 uppercase tracking-wider">инженеров</div></div>
+          <div><div class="text-2xl text-white">4.9<span class="text-cyan-400">★</span></div><div class="text-[10px] text-void-400 mt-1 uppercase tracking-wider">рейтинг</div></div>
+        </div>
+      </div>
+
+      <!-- Терминальное окно -->
+      <div class="lg:col-span-5 reveal d-200">
+        <div class="rounded-2xl border border-white/10 bg-void-950/90 backdrop-blur-xl overflow-hidden shadow-2xl shadow-cyan-500/10">
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-white/10">
+            <span class="w-2.5 h-2.5 rounded-full bg-magenta-400"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-lime-400"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+            <span class="ml-3 font-mono text-[11px] text-void-400">my_tech_project@dev: ~</span>
+          </div>
+          <div class="p-5 font-mono text-[13px] leading-relaxed min-h-[230px]" id="term">
+            <div class="text-void-400">❯ <span class="text-cyan-300">my_tech_project</span> init --project "ai-solution"</div>
+            <div class="text-lime-400">✓ Проект инициализирован</div>
+            <div class="text-void-400">❯ <span class="text-cyan-300">my_tech_project</span> analyze --stack</div>
+            <div class="text-void-300">✓ PyTorch · FastAPI · Next.js · K8s</div>
+            <div class="text-void-400">❯ <span class="text-cyan-300">my_tech_project</span> deploy --target cloud</div>
+            <div class="text-void-300">✓ Ready in 43s</div>
+            <div class="text-cyan-400 cursor" id="term-cursor"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= TICKER ================= -->
+<section class="border-y border-white/10 bg-void-950/60 py-4 overflow-hidden">
+  <div class="ticker-track flex gap-10 whitespace-nowrap font-mono text-sm text-void-400">
+    <span>webgl</span><span class="text-cyan-400">✦</span>
+    <span>llm-агенты</span><span class="text-cyan-400">✦</span>
+    <span>k8s</span><span class="text-cyan-400">✦</span>
+    <span>wgan</span><span class="text-cyan-400">✦</span>
+    <span>research</span><span class="text-cyan-400">✦</span>
+    <span>data-ops</span><span class="text-cyan-400">✦</span>
+    <span>webgl</span><span class="text-cyan-400">✦</span>
+    <span>llm-агенты</span><span class="text-cyan-400">✦</span>
+    <span>k8s</span><span class="text-cyan-400">✦</span>
+    <span>wgan</span><span class="text-cyan-400">✦</span>
+    <span>research</span><span class="text-cyan-400">✦</span>
+    <span>data-ops</span><span class="text-cyan-400">✦</span>
+  </div>
+</section>
+
+<!-- ================= STACK ================= -->
+<section id="stack" class="relative py-28">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="mb-14 reveal">
+      <div class="font-mono text-[11px] text-cyan-300 uppercase tracking-[0.3em] mb-3">// stack</div>
+      <h2 class="font-display text-4xl sm:text-5xl text-white leading-[1.05] tracking-tight max-w-3xl">
+        Современный стек для быстрой, <span class="text-cyan-300">ИИ-ориентированной</span> разработки
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Frontend -->
+      <div class="group relative rounded-2xl border border-white/10 bg-void-900/60 p-6 hover:border-cyan-400/40 transition reveal">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-[11px] text-void-400 uppercase tracking-wider">// frontend</span>
+          <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+        </div>
+        <h3 class="font-display text-xl text-white mb-3">Пользовательский интерфейс</h3>
+        <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">React</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Next.js</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">TypeScript</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Tailwind</span>
+        </div>
+      </div>
+
+      <!-- Backend -->
+      <div class="group relative rounded-2xl border border-white/10 bg-void-900/60 p-6 hover:border-lime-400/40 transition reveal d-100">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-[11px] text-void-400 uppercase tracking-wider">// backend</span>
+          <span class="w-2 h-2 rounded-full bg-lime-400"></span>
+        </div>
+        <h3 class="font-display text-xl text-white mb-3">Серверная часть и данные</h3>
+        <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">FastAPI</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">PostgreSQL</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Redis</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Kafka</span>
+        </div>
+      </div>
+
+      <!-- Cloud -->
+      <div class="group relative rounded-2xl border border-white/10 bg-void-900/60 p-6 hover:border-magenta-400/40 transition reveal d-200">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-[11px] text-void-400 uppercase tracking-wider">// cloud</span>
+          <span class="w-2 h-2 rounded-full bg-magenta-400"></span>
+        </div>
+        <h3 class="font-display text-xl text-white mb-3">Облачная платформа</h3>
+        <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Kubernetes</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Docker</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">GitLab CI</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Terraform</span>
+        </div>
+      </div>
+
+      <!-- Mobile -->
+      <div class="group relative rounded-2xl border border-white/10 bg-void-900/60 p-6 hover:border-cyan-400/40 transition reveal d-100">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-[11px] text-void-400 uppercase tracking-wider">// mobile</span>
+          <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+        </div>
+        <h3 class="font-display text-xl text-white mb-3">Мобильный продукт</h3>
+        <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">React Native</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Swift</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Kotlin</span>
+        </div>
+      </div>
+
+      <!-- AI -->
+      <div class="group relative rounded-2xl border border-white/10 bg-void-900/60 p-6 hover:border-lime-400/40 transition reveal d-200">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-[11px] text-void-400 uppercase tracking-wider">// ai</span>
+          <span class="w-2 h-2 rounded-full bg-lime-400"></span>
+        </div>
+        <h3 class="font-display text-xl text-white mb-3">Искусственный интеллект</h3>
+        <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">PyTorch</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">LangChain</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">vLLM</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">WGAN</span>
+        </div>
+      </div>
+
+      <!-- Tools -->
+      <div class="group relative rounded-2xl border border-white/10 bg-void-900/60 p-6 hover:border-magenta-400/40 transition reveal d-300">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-mono text-[11px] text-void-400 uppercase tracking-wider">// tools</span>
+          <span class="w-2 h-2 rounded-full bg-magenta-400"></span>
+        </div>
+        <h3 class="font-display text-xl text-white mb-3">Инструменты</h3>
+        <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">GitLab</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Vaultwarden</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Nextcloud</span>
+          <span class="px-2 py-1 rounded bg-white/5 text-void-200">Grafana</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services" class="relative py-28 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="mb-14 reveal">
+      <div class="font-mono text-[11px] text-cyan-300 uppercase tracking-[0.3em] mb-3">// services</div>
+      <h2 class="font-display text-4xl sm:text-5xl text-white leading-[1.05] tracking-tight max-w-3xl">
+        Направления деятельности
+      </h2>
+      <p class="text-void-400 mt-4 max-w-xl">Структурированная система компетенций — программная инженерия, инфраструктура данных, исследования и креативная реализация.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-4">
+
+      <!-- 1 -->
+      <div class="group relative rounded-3xl border border-white/10 bg-void-900/50 p-8 hover:bg-void-900/80 hover:border-cyan-400/30 transition reveal overflow-hidden">
+        <div class="absolute top-0 right-0 font-mono text-[80px] leading-none text-white/[0.03] font-bold">01</div>
+        <div class="relative">
+          <div class="font-mono text-[11px] text-cyan-300 mb-3">// engineering</div>
+          <h3 class="font-display text-2xl text-white mb-3">Разработка ПО</h3>
+          <p class="text-void-300 leading-relaxed mb-5 text-sm">Программная инженерия, IT-консалтинг и сопутствующие технологические работы формируют основной инженерный контур компании.</p>
+          <div class="grid grid-cols-2 gap-3 font-mono text-[11px]">
+            <div><div class="text-void-500 uppercase tracking-wider mb-1">модель</div><div class="text-cyan-300">инжиниринг / консалтинг / внедрение</div></div>
+            <div><div class="text-void-500 uppercase tracking-wider mb-1">фокус</div><div class="text-cyan-300">цифровые продукты, интерфейсы</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="group relative rounded-3xl border border-white/10 bg-void-900/50 p-8 hover:bg-void-900/80 hover:border-lime-400/30 transition reveal d-100 overflow-hidden">
+        <div class="absolute top-0 right-0 font-mono text-[80px] leading-none text-white/[0.03] font-bold">02</div>
+        <div class="relative">
+          <div class="font-mono text-[11px] text-lime-300 mb-3">// infrastructure</div>
+          <h3 class="font-display text-2xl text-white mb-3">Инфраструктура</h3>
+          <p class="text-void-300 leading-relaxed mb-5 text-sm">Управление компьютерным оборудованием, обработка данных, размещение информации и поддержка цифровой инфраструктуры.</p>
+          <div class="grid grid-cols-2 gap-3 font-mono text-[11px]">
+            <div><div class="text-void-500 uppercase tracking-wider mb-1">модель</div><div class="text-lime-300">ops / support / enablement</div></div>
+            <div><div class="text-void-500 uppercase tracking-wider mb-1">фокус</div><div class="text-lime-300">данные, вычислительная среда</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="group relative rounded-3xl border border-white/10 bg-void-900/50 p-8 hover:bg-void-900/80 hover:border-magenta-400/30 transition reveal d-200 overflow-hidden">
+        <div class="absolute top-0 right-0 font-mono text-[80px] leading-none text-white/[0.03] font-bold">03</div>
+        <div class="relative">
+          <div class="font-mono text-[11px] text-magenta-400 mb-3">// research</div>
+          <h3 class="font-display text-2xl text-white mb-3">Исследования и R&D</h3>
+          <p class="text-void-300 leading-relaxed mb-5 text-sm">Исследования в области естественных и технических наук — экспериментальный контур для новых технологических решений и прототипов.</p>
+          <div class="grid grid-cols-2 gap-3 font-mono text-[11px]">
+            <div><div class="text-void-500 uppercase tracking-wider mb-1">модель</div><div class="text-magenta-400">исследования / прототипы</div></div>
+            <div><div class="text-void-500 uppercase tracking-wider mb-1">фокус</div><div class="text-magenta-400">новые подходы и разработки</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="group relative rounded-3xl border border-white/10 bg-void-900/50 p-8 hover:bg-void-900/80 hover:border-cyan-400/30 transition reveal d-300 overflow-hidden">
+        <div class="absolute top-0 right-0 font-mono text-[80px] leading-none text-white/[0.03] font-bold">04</div>
+        <div class="relative">
+          <div class="font-mono text-[11px] text-cyan-300 mb-3">// creative</div>
+          <h3 class="font-display text-2xl text-white mb-3">Креатив и дизайн</h3>
+          <p class="text-void-300 leading-relaxed mb-5 text-sm">Рекламные, дизайнерские, художественные и digital-коммерческие направления усиливают визуальную систему и коммуникацию продуктов.</p>
+          <div class="grid grid-cols-2 gap-3 font-mono text-[11px]">
+            <div><div class="text-void-500 uppercase tracking-wider mb-1">модель</div><div class="text-cyan-300">креатив / дизайн / рост</div></div>
+            <div><div class="text-void-500 uppercase tracking-wider mb-1">фокус</div><div class="text-cyan-300">визуальная ценность</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= LIVE / DASHBOARD ================= -->
+<section id="live" class="relative py-28 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="mb-14 reveal">
+      <div class="font-mono text-[11px] text-cyan-300 uppercase tracking-[0.3em] mb-3">// live</div>
+      <h2 class="font-display text-4xl sm:text-5xl text-white leading-[1.05] tracking-tight max-w-3xl">
+        Модель генерирует <span class="text-cyan-300">синтетический рынок</span>
+      </h2>
+      <p class="text-void-400 mt-4 max-w-xl">Вместо скриншота — живой ценовой ряд, который генератор «дорисовывает» в реальном времени, и дашборд обучения рядом.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-4">
+
+      <!-- График -->
+      <div class="lg:col-span-2 rounded-3xl border border-white/10 bg-void-950/80 backdrop-blur-xl overflow-hidden reveal">
+        <div class="flex items-center justify-between px-5 py-3 border-b border-white/10 font-mono text-[11px]">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-lime-400 pulse-dot"></span>
+            <span class="text-white">QBTR/USD</span>
+            <span class="text-void-400">· Синтетика · WGAN-checkpoint #2840</span>
+          </div>
+          <span class="text-cyan-300">● generation</span>
+        </div>
+        <div class="relative h-64 sm:h-80">
+          <canvas id="chart"></canvas>
+          <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-void-950/30 to-transparent"></div>
+        </div>
+        <div class="grid grid-cols-4 border-t border-white/10 font-mono">
+          <div class="p-4 border-r border-white/10"><div class="text-[10px] text-void-500 uppercase tracking-wider mb-1">last price</div><div class="text-lg text-white" id="price">126.97</div></div>
+          <div class="p-4 border-r border-white/10"><div class="text-[10px] text-void-500 uppercase tracking-wider mb-1">kurtosis</div><div class="text-lg text-cyan-300" id="kurt">-0.57</div></div>
+          <div class="p-4 border-r border-white/10"><div class="text-[10px] text-void-500 uppercase tracking-wider mb-1">skew</div><div class="text-lg text-lime-300" id="skew">0.13</div></div>
+          <div class="p-4"><div class="text-[10px] text-void-500 uppercase tracking-wider mb-1">volatility</div><div class="text-lg text-magenta-400" id="vol">0.96%</div></div>
+        </div>
+      </div>
+
+      <!-- Dashboard -->
+      <div class="rounded-3xl border border-white/10 bg-void-950/80 backdrop-blur-xl p-6 reveal d-200 font-mono">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-[11px] text-void-400 uppercase tracking-wider">// training</span>
+          <span class="text-[11px] text-lime-400">● running</span>
+        </div>
+        <h3 class="font-display text-lg text-white mb-5">TechProjectAI_mm</h3>
+
+        <div class="space-y-4 text-[12px]">
+          <div class="flex justify-between"><span class="text-void-400">epoch</span><span class="text-white">12</span></div>
+          <div class="flex justify-between"><span class="text-void-400">step</span><span class="text-white">2 989</span></div>
+          <div class="flex justify-between"><span class="text-void-400">D-loss</span><span class="text-cyan-300" id="dloss">0.549</span></div>
+          <div class="flex justify-between"><span class="text-void-400">G-loss</span><span class="text-lime-300" id="gloss">0.661</span></div>
+          <div class="flex justify-between"><span class="text-void-400">GPU</span><span class="text-magenta-400" id="gpu">92%</span></div>
+        </div>
+
+        <div class="mt-6">
+          <div class="flex justify-between text-[10px] text-void-500 uppercase tracking-wider mb-2"><span>progress</span><span>checkpoint</span></div>
+          <div class="h-1.5 rounded-full bg-white/5 overflow-hidden">
+            <div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-lime-400" style="width:64%"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Service status -->
+    <div class="mt-4 grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
+      <div class="rounded-2xl border border-white/10 bg-void-900/50 p-4 font-mono reveal">
+        <div class="flex items-center gap-2 mb-1"><span class="w-1.5 h-1.5 rounded-full bg-lime-400"></span><span class="text-[10px] text-void-500 uppercase tracking-wider">online</span></div>
+        <div class="text-sm text-white">QT_GitLab</div>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-void-900/50 p-4 font-mono reveal d-100">
+        <div class="flex items-center gap-2 mb-1"><span class="w-1.5 h-1.5 rounded-full bg-magenta-400"></span><span class="text-[10px] text-void-500 uppercase tracking-wider">down</span></div>
+        <div class="text-sm text-white">QT_Nextcloud</div>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-void-900/50 p-4 font-mono reveal d-200">
+        <div class="flex items-center gap-2 mb-1"><span class="w-1.5 h-1.5 rounded-full bg-lime-400"></span><span class="text-[10px] text-void-500 uppercase tracking-wider">online</span></div>
+        <div class="text-sm text-white">QT_Vaultwarden</div>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-void-900/50 p-4 font-mono reveal d-300">
+        <div class="flex items-center gap-2 mb-1"><span class="w-1.5 h-1.5 rounded-full bg-magenta-400"></span><span class="text-[10px] text-void-500 uppercase tracking-wider">down</span></div>
+        <div class="text-sm text-white">project_technologiesAI.ru</div>
+      </div>
+      <div class="rounded-2xl border border-white/10 bg-void-900/50 p-4 font-mono reveal d-400">
+        <div class="flex items-center gap-2 mb-1"><span class="w-1.5 h-1.5 rounded-full bg-lime-400"></span><span class="text-[10px] text-void-500 uppercase tracking-wider">online</span></div>
+        <div class="text-sm text-white">projecttech.ru</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NEWS ================= -->
+<section id="news" class="relative py-28 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-14 reveal">
+      <div>
+        <div class="font-mono text-[11px] text-cyan-300 uppercase tracking-[0.3em] mb-3">// newsroom</div>
+        <h2 class="font-display text-4xl sm:text-5xl text-white leading-[1.05] tracking-tight">Новости</h2>
+      </div>
+      <a href="#" class="font-mono text-xs text-cyan-300 hover:text-cyan-200 transition">читать все →</a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+
+      <a href="#" class="group rounded-3xl border border-white/10 bg-void-900/50 overflow-hidden hover:border-cyan-400/40 transition reveal">
+        <div class="relative aspect-[16/10] overflow-hidden">
+          <img src="https://placehold.co/800x500/12162e/34e0f7?text=UpgradeReality"
+               class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+          <span class="absolute top-3 left-3 font-mono text-[10px] bg-void-950/80 backdrop-blur px-2 py-1 rounded text-cyan-300">biennale</span>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display text-lg text-white mb-2 group-hover:text-cyan-300 transition">UpgradeReality — биеннале</h3>
+          <p class="text-sm text-void-400 leading-relaxed">Павильоны биеннале с исследованием связей в логограммах языка осознавания.</p>
+        </div>
+      </a>
+
+      <a href="#" class="group rounded-3xl border border-white/10 bg-void-900/50 overflow-hidden hover:border-lime-400/40 transition reveal d-100">
+        <div class="relative aspect-[16/10] overflow-hidden">
+          <img src="https://placehold.co/800x500/12162e/a8ff5c?text=Score+9.2"
+               class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+          <span class="absolute top-3 left-3 font-mono text-[10px] bg-void-950/80 backdrop-blur px-2 py-1 rounded text-lime-300">benchmark</span>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display text-lg text-white mb-2 group-hover:text-lime-300 transition">Честная оценка 9.2</h3>
+          <p class="text-sm text-void-400 leading-relaxed">Чемпионская конфигурация D13 достигла честной средней оценки 9.2 из 11 по целевым признакам.</p>
+        </div>
+      </a>
+
+      <a href="#" class="group rounded-3xl border border-white/10 bg-void-900/50 overflow-hidden hover:border-magenta-400/40 transition reveal d-200">
+        <div class="relative aspect-[16/10] overflow-hidden">
+          <img src="https://placehold.co/800x500/12162e/ff5ce0?text=Score+8.6"
+               class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+          <span class="absolute top-3 left-3 font-mono text-[10px] bg-void-950/80 backdrop-blur px-2 py-1 rounded text-magenta-300">research</span>
+        </div>
+        <div class="p-6">
+          <h3 class="font-display text-lg text-white mb-2 group-hover:text-magenta-400 transition">Честная оценка 8.6</h3>
+          <p class="text-sm text-void-400 leading-relaxed">Добавлен обучаемый скалярный параметр для подстройки моделью градиентного спуска.</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="relative py-28 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="relative rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-void-900 via-void-900 to-cyan-950/30 p-8 sm:p-14 overflow-hidden reveal">
+      <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-cyan-400/10 blur-[120px]"></div>
+      <div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-magenta-500/10 blur-[120px]"></div>
+
+      <div class="relative grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="font-mono text-[11px] text-cyan-300 uppercase tracking-[0.3em] mb-3">// contact</div>
+          <h2 class="font-display text-4xl sm:text-5xl text-white leading-[1.05] tracking-tight">
+            Готовы запустить<br /><span class="text-cyan-300">новый проект</span>?
+          </h2>
+          <p class="text-void-300 mt-6 max-w-md font-light">Оставьте заявку — вернёмся с планом, оценкой сроков и предложением по стеку.</p>
+
+          <div class="mt-8 space-y-3 font-mono text-sm text-void-200">
+            <div class="flex items-center gap-3"><span class="text-cyan-400">❯</span>hello@projecttech.ru</div>
+            <div class="flex items-center gap-3"><span class="text-cyan-400">❯</span>+7 (495) 000-00-00</div>
+            <div class="flex items-center gap-3"><span class="text-cyan-400">❯</span>Москва · удалённо</div>
+          </div>
+        </div>
+
+        <form class="rounded-2xl bg-void-950/70 backdrop-blur-xl border border-white/10 p-6 space-y-4 font-mono" onsubmit="event.preventDefault(); this.reset(); alert('Заявка отправлена (демо).');">
+          <div>
+            <label class="text-[11px] text-void-400 uppercase tracking-wider mb-1.5 block">// имя</label>
+            <input type="text" required placeholder="Иван Иванов"
+                   class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-void-600 focus:outline-none focus:border-cyan-400 focus:bg-white/10 transition text-sm" />
+          </div>
+          <div>
+            <label class="text-[11px] text-void-400 uppercase tracking-wider mb-1.5 block">// email</label>
+            <input type="email" required placeholder="you@company.com"
+                   class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-void-600 focus:outline-none focus:border-cyan-400 focus:bg-white/10 transition text-sm" />
+          </div>
+          <div>
+            <label class="text-[11px] text-void-400 uppercase tracking-wider mb-1.5 block">// задача</label>
+            <textarea rows="3" required placeholder="Коротко о проекте..."
+                      class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-void-600 focus:outline-none focus:border-cyan-400 focus:bg-white/10 transition text-sm resize-none"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-cyan-400 hover:bg-cyan-300 text-void-950 font-semibold py-3.5 rounded-lg transition shadow-lg shadow-cyan-400/25 text-sm">
+            ❯ отправить заявку
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="border-t border-white/10 py-12">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="flex items-center gap-2">
+      <span class="font-mono text-cyan-400">❯</span>
+      <span class="font-display text-lg text-white">projecttech<span class="text-cyan-400">.</span></span>
+    </div>
+    <div class="flex gap-6 font-mono text-xs text-void-400">
+      <a href="#" class="hover:text-cyan-300 transition">telegram</a>
+      <a href="#" class="hover:text-cyan-300 transition">github</a>
+      <a href="#" class="hover:text-cyan-300 transition">gitlab</a>
+    </div>
+    <div class="font-mono text-[11px] text-void-500">© 2026 project tech. all rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ================= SCRIPTS ================= -->
+<script>
+/* =============== 1. WEBGL SHADER ФОН =============== */
+(function () {
+  const canvas = document.getElementById('bg');
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) { canvas.style.display = 'none'; return; }
+
+  const vsSrc = `
+    attribute vec2 aPos;
+    void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }
+  `;
+  const fsSrc = `
+    precision highp float;
+    uniform vec2 uRes;
+    uniform vec2 uMouse;
+    uniform float uTime;
+
+    // Простой хеш-шум
+    float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float noise(vec2 p){
+      vec2 i = floor(p); vec2 f = fract(p);
+      vec2 u = f*f*(3.0-2.0*f);
+      return mix(mix(hash(i), hash(i+vec2(1,0)), u.x),
+                 mix(hash(i+vec2(0,1)), hash(i+vec2(1,1)), u.x), u.y);
+    }
+
+    void main(){
+      vec2 uv = gl_FragCoord.xy / uRes.xy;
+      vec2 p = uv * 3.0;
+      float t = uTime * 0.15;
+
+      // «Кубиты» — интерференция полей
+      float field = 0.0;
+      for (int i = 0; i < 4; i++){
+        float fi = float(i);
+        vec2 center = vec2(1.5 + sin(t + fi*1.7)*1.2, 1.5 + cos(t*0.9 + fi*2.1)*1.2);
+        float d = length(p - center);
+        field += sin(d * 6.0 - t*3.0) / (1.0 + d*2.0);
+      }
+
+      // Реакция на курсор — лёгкая рябь
+      vec2 m = uMouse * 3.0;
+      float md = length(p - m);
+      field += sin(md * 14.0 - uTime*4.0) * exp(-md*2.0) * 0.4;
+
+      // Цвета: cyan / magenta / deep void
+      vec3 c1 = vec3(0.20, 0.88, 0.97);   // cyan
+      vec3 c2 = vec3(1.00, 0.36, 0.88);   // magenta
+      vec3 c3 = vec3(0.06, 0.08, 0.18);   // void
+
+      float v = field * 0.5 + 0.5;
+      vec3 col = mix(c3, mix(c1, c2, v*0.6), pow(v, 1.4) * 0.55);
+      col += noise(uv*8.0 + uTime*0.1) * 0.03;
+
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `;
+
+  function compile(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vsSrc));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fsSrc));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const aPos = gl.getAttribLocation(prog, 'aPos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  const uRes = gl.getUniformLocation(prog, 'uRes');
+  const uMouse = gl.getUniformLocation(prog, 'uMouse');
+  const uTime = gl.getUniformLocation(prog, 'uTime');
+
+  let mouse = { x: 0.5, y: 0.5 };
+  let target = { x: 0.5, y: 0.5 };
+
+  window.addEventListener('mousemove', (e) => {
+    target.x = e.clientX / window.innerWidth;
+    target.y = 1.0 - e.clientY / window.innerHeight;
+  });
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  let start = performance.now();
+  function render(now) {
+    const t = (now - start) / 1000;
+    mouse.x += (target.x - mouse.x) * 0.05;
+    mouse.y += (target.y - mouse.y) * 0.05;
+
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.uniform1f(uTime, t);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+
+/* =============== 2. REVEAL =============== */
+document.addEventListener('DOMContentLoaded', () => {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  els.forEach(el => io.observe(el));
+
+  /* =============== 3. NAV BG =============== */
+  const nav = document.getElementById('nav');
+  const setNav = () => {
+    if (window.scrollY > 40) {
+      nav.classList.add('bg-void-950/80','backdrop-blur-xl','border-b','border-white/10');
+    } else {
+      nav.classList.remove('bg-void-950/80','backdrop-blur-xl','border-b','border-white/10');
+    }
+  };
+  window.addEventListener('scroll', setNav);
+  setNav();
+
+  document.querySelectorAll('#mob a').forEach(l => {
+    l.addEventListener('click', () => document.getElementById('mob').classList.add('hidden'));
+  });
+
+  /* =============== 4. ЖИВОЙ ГРАФИК =============== */
+  const chart = document.getElementById('chart');
+  if (chart) {
+    const ctx = chart.getContext('2d');
+    let data = [];
+    let width = 0, height = 0;
+    const N = 120;
+
+    function resizeChart() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = chart.parentElement.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      chart.width = width * dpr;
+      chart.height = height * dpr;
+      chart.style.width = width + 'px';
+      chart.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function seed() {
+      let v = 126.97;
+      data = [];
+      for (let i = 0; i < N; i++) {
+        v += (Math.random() - 0.5) * 0.9;
+        data.push(v);
+      }
+    }
+
+    function tick() {
+      const last = data[data.length - 1];
+      let next = last + (Math.random() - 0.5) * 0.9;
+      next = Math.max(120, Math.min(134, next));
+      data.push(next);
+      if (data.length > N) data.shift();
+
+      // обновляем метрики
+      const price = next.toFixed(2);
+      document.getElementById('price').textContent = price;
+
+      const mean = data.reduce((a,b)=>a+b,0) / data.length;
+      const variance = data.reduce((a,b)=>a+(b-mean)**2,0) / data.length;
+      const sd = Math.sqrt(variance);
+      const skew = data.reduce((a,b)=>a+((b-mean)/sd)**3,0) / data.length;
+      const kurt = data.reduce((a,b)=>a+((b-mean)/sd)**4,0) / data.length - 3;
+
+      document.getElementById('skew').textContent = skew.toFixed(2);
+      document.getElementById('kurt').textContent = kurt.toFixed(2);
+      document.getElementById('vol').textContent = ((sd / mean) * 100).toFixed(2) + '%';
+
+      document.getElementById('dloss').textContent = (0.5 + Math.random()*0.1).toFixed(3);
+      document.getElementById('gloss').textContent = (0.6 + Math.random()*0.1).toFixed(3);
+      document.getElementById('gpu').textContent = (88 + Math.floor(Math.random()*10)) + '%';
+
+      draw();
+    }
+
+    function draw() {
+      if (!width || !height) return;
+      ctx.clearRect(0, 0, width, height);
+
+      const min = Math.min(...data) - 1;
+      const max = Math.max(...data) + 1;
+      const range = max - min || 1;
+
+      const x = i => (i / (N - 1)) * width;
+      const y = v => height - ((v - min) / range) * height;
+
+      // Сетка
+      ctx.strokeStyle = 'rgba(52,224,247,0.06)';
+      ctx.lineWidth = 1;
+      for (let i = 1; i < 5; i++) {
+        const yy = (height / 5) * i;
+        ctx.beginPath(); ctx.moveTo(0, yy); ctx.lineTo(width, yy); ctx.stroke();
+      }
+
+      // Градиентная заливка
+      const grad = ctx.createLinearGradient(0, 0, 0, height);
+      grad.addColorStop(0, 'rgba(52,224,247,0.25)');
+      grad.addColorStop(1, 'rgba(52,224,247,0)');
+      ctx.beginPath();
+      ctx.moveTo(x(0), y(data[0]));
+      for (let i = 1; i < data.length; i++) ctx.lineTo(x(i), y(data[i]));
+      ctx.lineTo(width, height);
+      ctx.lineTo(0, height);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Линия
+      ctx.beginPath();
+      ctx.moveTo(x(0), y(data[0]));
+      for (let i = 1; i < data.length; i++) ctx.lineTo(x(i), y(data[i]));
+      ctx.strokeStyle = '#34e0f7';
+      ctx.lineWidth = 1.8;
+      ctx.shadowColor = 'rgba(52,224,247,0.8)';
+      ctx.shadowBlur = 12;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Точка на конце
+      const lx = x(data.length - 1);
+      const ly = y(data[data.length - 1]);
+      ctx.beginPath();
+      ctx.arc(lx, ly, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = '#a8ff5c';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(lx, ly, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(168,255,92,0.25)';
+      ctx.fill();
+    }
+
+    seed();
+    resizeChart();
+    window.addEventListener('resize', resizeChart);
+    setInterval(tick, 800);
+    draw();
+  }
+});
+</script>
+
+</body>
+</html>
