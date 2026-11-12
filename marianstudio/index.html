@@ -1668,7 +1668,8 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
 
 
 
-</div><header id="shopify-section-sections--21648781377571__header_section" class="shopify-section shopify-section-group-header-group header-section">
+</div>
+<header id="shopify-section-sections--21648781377571__header_section" class="shopify-section shopify-section-group-header-group header-section" data-hydrated="true">
 
 
 
@@ -2097,8 +2098,13 @@ uppercase;
 
 
 <a href="/" class="size-style spacing-style header-logo" style="
-    --size-style-width: ;--size-style-height: ;
-    --padding-block-start: 0px;--padding-block-end: 0px;--padding-inline-start: 0px;--padding-inline-end: 0px;
+    flex-direction: column;
+    --size-style-width: ;
+    --size-style-height: ;
+    --padding-block-start: 0px;
+    --padding-block-end: 0px;
+    --padding-inline-start: 0px;
+    --padding-inline-end: 0px;
     --font-family: var(--font-body--family);
     --font-style: var(--font-body--style);
     --font-weight: 600;
@@ -2123,7 +2129,15 @@ uppercase;
   </span>
 
   
-</a>
+<p class="announcement-bar__text" style="
+    color: #483737;
+">
+      <strong style="
+    font-family: 'Americana';
+    font-weight: 500;
+    font-size: 23px;
+">Студия эстетичных веб-сайтов</strong>
+    </p></a>
 
 
 
@@ -2188,11 +2202,11 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
   
 </script>
 
-<shop-login-button ux-mode="windoid" return-uri="https://thebrandalchemists.com/account/redirect" proxy="true" proxy-core-idp="true" redirect-type="iframe" response-type="code"></shop-login-button>
+<shop-login-button ux-mode="windoid" return-uri="https://mariecattie.github.io/marian/marianstudio/" proxy="true" proxy-core-idp="true" redirect-type="iframe" response-type="code" data-instance-id="e9c20f12-3822-410c-a9c1-cdd89bfa76a8" full-width="true" persist-after-sign-in="true" analytics-context="loginWithShopSelfServe" flow-version="account-actions-popover"></shop-login-button>
 
         </account-login-actions>
 
-        <a href="/customer_authentication/login?return_to=%2F&locale=en&ui_hint=full" class="account-actions__link button">
+        <a href="/customer_authentication/login?return_to=%2F&amp;locale=en&amp;ui_hint=full" class="account-actions__link button">
           <span class="account-actions__sign-in-text">
             Other sign in options
           </span>
@@ -2276,11 +2290,11 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
   
 </script>
 
-<shop-login-button ux-mode="windoid" return-uri="https://thebrandalchemists.com/account/redirect" proxy="true" proxy-core-idp="true" redirect-type="iframe" response-type="code"></shop-login-button>
+<shop-login-button ux-mode="windoid" return-uri="https://mariecattie.github.io/marian/marianstudio/" proxy="true" proxy-core-idp="true" redirect-type="iframe" response-type="code" data-instance-id="e81e212b-11ba-4c93-a34e-586c224e37ff" full-width="true" persist-after-sign-in="true" analytics-context="loginWithShopSelfServe" flow-version="account-actions-popover"></shop-login-button>
 
         </account-login-actions>
 
-        <a href="/customer_authentication/login?return_to=%2F&locale=en&ui_hint=full" class="account-actions__link button">
+        <a href="/customer_authentication/login?return_to=%2F&amp;locale=en&amp;ui_hint=full" class="account-actions__link button">
           <span class="account-actions__sign-in-text">
             Other sign in options
           </span>
@@ -2380,7 +2394,7 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
 <div class="cart-items__wrapper">
   
 <p>
-        Have an account? <a href="https://thebrandalchemists.com/customer_authentication/redirect?locale=en&region_country=AU">Log in</a> to check out faster.
+        Have an account? <a href="https://thebrandalchemists.com/customer_authentication/redirect?locale=en&amp;region_country=AU">Log in</a> to check out faster.
       </p><a class="button cart-items__empty-button" href="/collections/all">
       Continue shopping
     </a></div>
@@ -2415,7 +2429,7 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
     
     
       <div class="header__row header__row--bottom color-scheme-1 section section--full-width-margin section--page-width mobile:hidden" ref="headerRowTop" style="--margin-top: 40px;">
-        <div class="header__columns spacing-style" style="margin-top: 35px">
+        <div class="header__columns spacing-style" style="margin-top: 14px;">
           <div class="header__column header__column--center" data-testid="header-bottom-center">
       
         
@@ -2424,7 +2438,7 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
 
 
 
-    <header-menu ref="headerMenu" class="header-menu mobile:hidden" data-animation-delay="200" style="--submenu-animation-speed: 200ms;">
+    <header-menu ref="headerMenu" class="header-menu mobile:hidden" data-animation-delay="200" style="--submenu-animation-speed: 200ms; --submenu-height: 0px; --submenu-opacity: 0;" data-overflow-expanded="false" aria-expanded="false">
       <div class="header-menu__inner">
 
 
@@ -2439,37 +2453,13 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
 --menu-top-level-font-color: var(--color-foreground); --menu-top-level-font-color-rgb: var(--color-foreground-rgb);
 ">
     
-    <overflow-list ref="overflowMenu" class="overflow-menu color-scheme-matches-parent" minimum-items="2" defer="">
-  <template shadowrootmode="open">
-    <link href="styles/overflow-list.css" rel="stylesheet" type="text/css" media="all">
-
-    <ul part="list">
-      <slot></slot>
-      <slot name="more" part="more" hidden="">
-        <li part="more">
-          <button class="button" type="button" tabindex="0">
-            More
-          </button>
-        </li>
-      </slot>
-      <li part="placeholder" hidden=""></li>
-    </ul>
-
-    <div part="overflow">
-      <ul part="overflow-list">
-        <slot name="overflow"></slot>
-      </ul>
-    </div>
-  </template>
-
-  
-  
-    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
-      <a href="/pages/about" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
+    <overflow-list ref="overflowMenu" class="overflow-menu color-scheme-matches-parent" minimum-items="2" style="--overflow-count: 0;">
+  <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate" slot="">
+      <a href="/pages/about" data-skip-node-update="true" class="menu-list__link" ref="menuitem" aria-expanded="false">
         <span class="menu-list__link-title">Обо мне</span>
       </a></li>
   
-    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
+    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate" slot="">
       <a href="#" data-skip-node-update="true" class="menu-list__link" aria-controls="submenu-2" aria-haspopup="true" aria-expanded="false" ref="menuitem">
         <span class="menu-list__link-title">Проекты</span>
       </a><div class="menu-list__submenu color-scheme-matches-parent" ref="submenu[]">
@@ -2606,7 +2596,7 @@ uppercase;
           </div>
         </div></li>
   
-    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
+    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate" slot="">
       <a href="/pages/collections" data-skip-node-update="true" class="menu-list__link" aria-controls="submenu-3" aria-haspopup="true" aria-expanded="false" ref="menuitem">
         <span class="menu-list__link-title">Коллекции</span>
       </a><div class="menu-list__submenu color-scheme-matches-parent" ref="submenu[]">
@@ -2759,7 +2749,7 @@ uppercase;
   </a>
   <div class="resource-card__media" style="--resource-card-aspect-ratio: 1 / 1;">
       
-<img src="pics/Island_Dreaming_Collection_-_Stock_Image-18_0d55f681-4318-4710-88b2-2f4256900312.jpg" alt="Mother Earth" srcset="pics/Island_Dreaming_Collection_-_Stock_Image-18_0d55f681-4318-4710-88b2-2f4256900312_3.jpg 240w, pics/Island_Dreaming_Collection_-_Stock_Image-18_0d55f681-4318-4710-88b2-2f4256900312_1.jpg 352w, pics/Island_Dreaming_Collection_-_Stock_Image-18_0d55f681-4318-4710-88b2-2f4256900312_2.jpg 832w, pics/Island_Dreaming_Collection_-_Stock_Image-18_0d55f681-4318-4710-88b2-2f4256900312.jpg 1200w" width="1200" height="1593" loading="lazy" class="resource-card__image" sizes="300px" transitiontoproduct="false" data-media-id="1616508583971" style="">
+<img src="pics/Island_Dreaming_Collection_-_Stock_Image-18_0d55f681-4318-4710-88b2-2f4256900312.jpg" alt="Mother Earth" srcset="pics/Island_Dreaming_Collection_-_Stock_Image-18_0d55f681-4318-4710-88b2-2f4256900312_3.jpg 240w, pics/Island_Dreaming_Collection_-_Stock_Image-18_0d55f681-4318-4710-88b2-2f4256900312_1.jpg 352w, pics/Island_Dreaming_Collection_-_Stock_Image-18_0d55f681-4318-4710-88b2-2f4256900312_2.jpg 832w, pics/Island_Dreaming_Collection_-_Stock_Image-18_0d55f681-4318-4710-88b2-2f4256900312.jpg 1200w" width="1200" height="1593" class="resource-card__image" sizes="300px" transitiontoproduct="false" data-media-id="1616508583971" style="">
 </div>
 
   <div class="resource-card__content">
@@ -2784,7 +2774,7 @@ uppercase;
   </a>
   <div class="resource-card__media" style="--resource-card-aspect-ratio: 1 / 1;">
       
-<img src="pics/Island_Dreaming_Collection_-_Stock_Image-18_4e05e09e-9588-4e80-a0e6-9a09f88613e4.jpg" alt="Golden Hour" srcset="pics/Island_Dreaming_Collection_-_Stock_Image-18_4e05e09e-9588-4e80-a0e6-9a09f88613e4_3.jpg 240w, pics/Island_Dreaming_Collection_-_Stock_Image-18_4e05e09e-9588-4e80-a0e6-9a09f88613e4_1.jpg 352w, pics/Island_Dreaming_Collection_-_Stock_Image-18_4e05e09e-9588-4e80-a0e6-9a09f88613e4_2.jpg 832w, pics/Island_Dreaming_Collection_-_Stock_Image-18_4e05e09e-9588-4e80-a0e6-9a09f88613e4.jpg 1200w" width="1200" height="1500" loading="lazy" class="resource-card__image" sizes="300px" transitiontoproduct="false" data-media-id="1616508616739" style="">
+<img src="pics/Island_Dreaming_Collection_-_Stock_Image-18_4e05e09e-9588-4e80-a0e6-9a09f88613e4.jpg" alt="Golden Hour" srcset="pics/Island_Dreaming_Collection_-_Stock_Image-18_4e05e09e-9588-4e80-a0e6-9a09f88613e4_3.jpg 240w, pics/Island_Dreaming_Collection_-_Stock_Image-18_4e05e09e-9588-4e80-a0e6-9a09f88613e4_1.jpg 352w, pics/Island_Dreaming_Collection_-_Stock_Image-18_4e05e09e-9588-4e80-a0e6-9a09f88613e4_2.jpg 832w, pics/Island_Dreaming_Collection_-_Stock_Image-18_4e05e09e-9588-4e80-a0e6-9a09f88613e4.jpg 1200w" width="1200" height="1500" class="resource-card__image" sizes="300px" transitiontoproduct="false" data-media-id="1616508616739" style="">
 </div>
 
   <div class="resource-card__content">
@@ -2808,7 +2798,7 @@ uppercase;
           </div>
         </div></li>
   
-    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
+    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate" slot="">
       <a href="/collections/shop-all" data-skip-node-update="true" class="menu-list__link" aria-controls="submenu-4" aria-haspopup="true" aria-expanded="false" ref="menuitem">
         <span class="menu-list__link-title">The Shop</span>
       </a><div class="menu-list__submenu color-scheme-matches-parent" ref="submenu[]">
@@ -2928,7 +2918,7 @@ uppercase;
   </a>
   <div class="resource-card__media" style="--resource-card-aspect-ratio: 1 / 1;">
       
-<img src="pics/The_Modern_Alchemist_Grid.jpg" alt="Shop All" srcset="pics/The_Modern_Alchemist_Grid_3.jpg 240w, pics/The_Modern_Alchemist_Grid_1.jpg 352w, pics/The_Modern_Alchemist_Grid_2.jpg 832w, pics/The_Modern_Alchemist_Grid.jpg 1200w" width="1200" height="1800" loading="lazy" class="resource-card__image" sizes="300px" transitiontoproduct="false" data-media-id="1616557735971" style="">
+<img src="pics/The_Modern_Alchemist_Grid.jpg" alt="Shop All" srcset="pics/The_Modern_Alchemist_Grid_3.jpg 240w, pics/The_Modern_Alchemist_Grid_1.jpg 352w, pics/The_Modern_Alchemist_Grid_2.jpg 832w, pics/The_Modern_Alchemist_Grid.jpg 1200w" width="1200" height="1800" class="resource-card__image" sizes="300px" transitiontoproduct="false" data-media-id="1616557735971" style="">
 </div>
 
   <div class="resource-card__content">
@@ -2953,7 +2943,7 @@ uppercase;
   </a>
   <div class="resource-card__media" style="--resource-card-aspect-ratio: 1 / 1;">
       
-<img src="pics/Island-Dreaming-Document-Mockup.png" alt="Mini Brand Kits" srcset="pics/Island-Dreaming-Document-Mockup_3.png 240w, pics/Island-Dreaming-Document-Mockup_1.png 352w, pics/Island-Dreaming-Document-Mockup_2.png 832w, pics/Island-Dreaming-Document-Mockup.png 1200w" width="1200" height="1381" loading="lazy" class="resource-card__image" sizes="300px" transitiontoproduct="false" data-media-id="1616686907427" style="">
+<img src="pics/Island-Dreaming-Document-Mockup.png" alt="Mini Brand Kits" srcset="pics/Island-Dreaming-Document-Mockup_3.png 240w, pics/Island-Dreaming-Document-Mockup_1.png 352w, pics/Island-Dreaming-Document-Mockup_2.png 832w, pics/Island-Dreaming-Document-Mockup.png 1200w" width="1200" height="1381" class="resource-card__image" sizes="300px" transitiontoproduct="false" data-media-id="1616686907427" style="">
 </div>
 
   <div class="resource-card__content">
@@ -2977,7 +2967,7 @@ uppercase;
           </div>
         </div></li>
   
-    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
+    <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate" slot="">
       <a href="#" data-skip-node-update="true" class="menu-list__link" aria-controls="submenu-5" aria-haspopup="true" aria-expanded="false" ref="menuitem">
         <span class="menu-list__link-title">Resources</span>
       </a><div class="menu-list__submenu color-scheme-matches-parent" ref="submenu[]">
@@ -3099,7 +3089,7 @@ uppercase;
 
 
 
-</header><div id="shopify-section-sections--21648781377571__divider_aAWCF4" class="shopify-section shopify-section-group-header-group">
+</header>
 
 
 
@@ -3385,7 +3375,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
           Каждый проект для нас - это целая история, <br/>наполненная философией, эстетикой и смыслами.
         
           <a href="#what-we-do" class="ai-hero-grid__button-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
-            BEAUTIFUL BRANDS START HERE
+            ТВОЯ ПРЕКРАСНАЯ ИСТОРИЯ НАЧИНАЕТСЯ ЗДЕСЬ
           </a>
         
       </div>
@@ -3696,7 +3686,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
     
     
   ">
-    <p><em>CURATED VISUAL EXPERIENCES</em></p>
+    <p style="text-transform: uppercase;">наша миссия</p>
   </rte-formatter>
 
 
@@ -3730,7 +3720,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
     <p style="display:none"><em>Aligned, intentional</em>visual collections and design assets for modern brands, studios, and creative teams.</p>
     <p style="display:none"><em>Согласованные, продуманные</em> визуальные концепции, <br> Креативные решения,<br>
     Дизайнерские материалы, <br> Коллекции для современных <br> брендов, дизайн-студий <br> и креативных команд</p>
-    <p>
+    <p style="font-size: 34px; font-family: Americana, sans-serif;">
       Независимое креативное агентство для брендов, которые хотят превзойти стандарты и показать свою яркость - через смыслы, глубину и эстетику
     </p>
       <p style="text-align: left; padding-left: 55px;">
@@ -3874,91 +3864,6 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 
   </div>
 
-  <div class="border-style custom-section-content" style="--border-width: 0.5px; --border-style: solid; --border-color:
-rgb(var(--color-border-rgb) / 1.0); --border-radius:
-0px; 
-">
-    
-
-    <div class="
-        spacing-style
-        layout-panel-flex
-        layout-panel-flex--column
-        section-content-wrapper
-         mobile-column
-      " style="
-        --flex-direction: column; --flex-wrap: nowrap; --flex-wrap-mobile: wrap;
-
---gap: 12px;
-
---horizontal-alignment: center; --vertical-alignment: flex-start;
---vertical-alignment-mobile: flex-start;
-
-        --padding-block-start: max(20px, calc(var(--spacing-scale) * 25px));--padding-block-end: max(20px, calc(var(--spacing-scale) * 25px));
-      " data-testid="section-content">
-      
-  
-
-
-
-
-
-
-
-  <rte-formatter class=" spacing-style text-block text-block--AZnVXTEJZOVcreDVJM__text_bPefJR rte
-     rte 
-  " style="
-    --padding-block-start: 0px; --padding-block-end:0px; 
---padding-inline-start:0px; --padding-inline-end:0px; 
-
-    
-
-    --width: fit-content;
-    --max-width: var(--max-width--body-normal);
-    
-    
-  ">
-    <h2>Choose your journey</h2>
-  </rte-formatter>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <rte-formatter class=" spacing-style text-block text-block--AdGV5L3V4cFRWOGM3c__text_7idEdm rte
-     rte 
-  " style="
-    --padding-block-start: 0px; --padding-block-end:0px; 
---padding-inline-start:0px; --padding-inline-end:0px; 
-
-    
-
-    --width: fit-content;
-    --max-width: var(--max-width--body-normal);
-    
-    
-  ">
-    <p><em>TO ELEVATE YOUR BRAND</em></p>
-  </rte-formatter>
-
-
-
-
-
-
-
-
-    </div>
-  </div>
 </div>
 
 
@@ -3980,405 +3885,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 
   </div>
 
-  <div class="border-style custom-section-content" style="--border-width: 1px; --border-style: none; --border-color:
-rgb(var(--color-border-rgb) / 1.0); --border-radius:
-0px; 
-">
-    
-
-    <div class="
-        spacing-style
-        layout-panel-flex
-        layout-panel-flex--row
-        section-content-wrapper
-         mobile-column
-      " style="
-        --flex-direction: row; --flex-wrap: nowrap; --flex-wrap-mobile: wrap;
-
---gap: 0px;
-
---horizontal-alignment: flex-start; --vertical-alignment: flex-start;
---vertical-alignment-mobile: flex-start;
-
-        --padding-block-start: 0px;--padding-block-end: 0px;
-      " data-testid="section-content">
-      
-  
-
-
-<div class="
-    group-block
-    group-block--height-fit
-    group-block--width-fill
-    border-style
-    spacing-style
-    size-style
-    
-    
-  " style="
-    --border-width: 0.5px; --border-style: solid; --border-color:
-rgb(var(--color-border-rgb) / 1.0); --border-radius:
-0px; 
-
-    --padding-block-start: max(20px, calc(var(--spacing-scale) * 35px));--padding-block-end: max(20px, calc(var(--spacing-scale) * 35px));--padding-inline-start: max(20px, calc(var(--spacing-scale) * 35px));--padding-inline-end: max(20px, calc(var(--spacing-scale) * 35px));
-    --size-style-width: 100%;--size-style-height: fit;--size-style-width-mobile: 100%; --size-style-width-mobile-min: 5rem;
-    
-  " data-testid="group-block"><div class="group-block__media-wrapper">
-    
-
-    
-  </div>
-
-  <div class="
-      group-block-content
-      
-      layout-panel-flex
-      layout-panel-flex--column
-       mobile-column
-    " style="--flex-direction: column; --flex-wrap: nowrap; --flex-wrap-mobile: wrap;
-
---gap: 8px;
-
---horizontal-alignment: center; --vertical-alignment: flex-start;
---vertical-alignment-mobile: flex-start;
-">
-  
-
-
-
-
-
-
-
-  <div class=" spacing-style text-block text-block--ASHhJeDhZWDBEblVPU__text_4KQEJR h4
-    text-block--align-center
-  " style="
-    --padding-block-start: 0px; --padding-block-end:0px; 
---padding-inline-start:0px; --padding-inline-end:0px; 
-
-    
---color: var(--color-foreground);
-    --width: 100%;
-    --max-width: var(--max-width--body-normal);
-    
-      --text-align: center;
-    
-    
-  ">
-    <p><strong>Build Your Brand</strong></p>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <rte-formatter class=" spacing-style text-block text-block--AN2M3WENvNUN2bmJyT__text_bmfnAd rte
-    text-block--align-center rte 
-  " style="
-    --padding-block-start: 0px; --padding-block-end:25px; 
---padding-inline-start:0px; --padding-inline-end:0px; 
-
-    
-
-    --width: 100%;
-    --max-width: var(--max-width--body-normal);
-    
-      --text-align: center;
-    
-    
-  ">
-    <p>For creators and wellness brands ready for their next evolution.</p><p>Looking to create a brand identity that truly reflects your energy? Explore our pre-made and custom brand design options — crafted to help you show up with confidence and attract aligned clients.</p>
-  </rte-formatter>
-
-
-
-
-
-
-
-
-
-<a href="/collections/semi-custom-brand-kits" class="
-    size-style
-    button
-    button--AUkhEQU4vV0hDbk1SM__button_WnffN9
-  " style="--size-style-width: fit-content;--size-style-height: ;--size-style-width-mobile: fit-content; --size-style-width-mobile-min: fit-content;">
-  Explore Brand Design
-</a>
-
-
-
-
-
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-<div class="
-    group-block
-    group-block--height-fit
-    group-block--width-fill
-    border-style
-    spacing-style
-    size-style
-    
-    
-  " style="
-    --border-width: 0.5px; --border-style: solid; --border-color:
-rgb(var(--color-border-rgb) / 1.0); --border-radius:
-0px; 
-
-    --padding-block-start: max(20px, calc(var(--spacing-scale) * 35px));--padding-block-end: max(20px, calc(var(--spacing-scale) * 35px));--padding-inline-start: max(20px, calc(var(--spacing-scale) * 35px));--padding-inline-end: max(20px, calc(var(--spacing-scale) * 35px));
-    --size-style-width: 100%;--size-style-height: fit;--size-style-width-mobile: 100%; --size-style-width-mobile-min: 5rem;
-    
-  " data-testid="group-block"><div class="group-block__media-wrapper">
-    
-
-    
-  </div>
-
-  <div class="
-      group-block-content
-      
-      layout-panel-flex
-      layout-panel-flex--column
-       mobile-column
-    " style="--flex-direction: column; --flex-wrap: nowrap; --flex-wrap-mobile: wrap;
-
---gap: 8px;
-
---horizontal-alignment: center; --vertical-alignment: flex-start;
---vertical-alignment-mobile: flex-start;
-">
-  
-
-
-
-
-
-
-
-  <div class=" spacing-style text-block text-block--ASHNWQWtQRzJOMWZ4W__text_V8qBmW h4
-    text-block--align-center
-  " style="
-    --padding-block-start: 0px; --padding-block-end:0px; 
---padding-inline-start:0px; --padding-inline-end:0px; 
-
-    
---color: var(--color-foreground);
-    --width: 100%;
-    --max-width: var(--max-width--body-normal);
-    
-      --text-align: center;
-    
-    
-  ">
-    <p><strong>Elevate Your Presence</strong></p>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <rte-formatter class=" spacing-style text-block text-block--AMWc4K0Yyalc4cC9kM__text_GrLdDY rte
-    text-block--align-center rte 
-  " style="
-    --padding-block-start: 0px; --padding-block-end:25px; 
---padding-inline-start:0px; --padding-inline-end:0px; 
-
-    
-
-    --width: 100%;
-    --max-width: var(--max-width--body-normal);
-    
-      --text-align: center;
-    
-    
-  ">
-    <p>For brands who already have the vision, but need a digital home to match.</p><p>Ready to bring your brand to life online? <br>Our website designs blend modern design, strategy, and soul — giving you a space that connects, converts, and feels authentically you.</p>
-  </rte-formatter>
-
-
-
-
-
-
-
-
-
-<a href="/pages/web-design" class="
-    size-style
-    button
-    button--AZ285SDBNWjlTaWc2K__button_cAKVUQ
-  " style="--size-style-width: fit-content;--size-style-height: ;--size-style-width-mobile: fit-content; --size-style-width-mobile-min: fit-content;">
-  Discover Web Design
-</a>
-
-
-
-
-
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-<div class="
-    group-block
-    group-block--height-fit
-    group-block--width-fill
-    border-style
-    spacing-style
-    size-style
-    
-    
-  " style="
-    --border-width: 0.5px; --border-style: solid; --border-color:
-rgb(var(--color-border-rgb) / 1.0); --border-radius:
-0px; 
-
-    --padding-block-start: max(20px, calc(var(--spacing-scale) * 35px));--padding-block-end: max(20px, calc(var(--spacing-scale) * 35px));--padding-inline-start: max(20px, calc(var(--spacing-scale) * 35px));--padding-inline-end: max(20px, calc(var(--spacing-scale) * 35px));
-    --size-style-width: 100%;--size-style-height: fit;--size-style-width-mobile: 100%; --size-style-width-mobile-min: 5rem;
-    
-  " data-testid="group-block"><div class="group-block__media-wrapper">
-    
-
-    
-  </div>
-
-  <div class="
-      group-block-content
-      
-      layout-panel-flex
-      layout-panel-flex--column
-       mobile-column
-    " style="--flex-direction: column; --flex-wrap: nowrap; --flex-wrap-mobile: wrap;
-
---gap: 8px;
-
---horizontal-alignment: center; --vertical-alignment: flex-start;
---vertical-alignment-mobile: flex-start;
-">
-  
-
-
-
-
-
-
-
-  <div class=" spacing-style text-block text-block--ASmNJeVZlSVlIN3h3d__text_DRRf8F h4
-    text-block--align-center
-  " style="
-    --padding-block-start: 0px; --padding-block-end:0px; 
---padding-inline-start:0px; --padding-inline-end:0px; 
-
-    
---color: var(--color-foreground);
-    --width: 100%;
-    --max-width: var(--max-width--body-normal);
-    
-      --text-align: center;
-    
-    
-  ">
-    <p><strong>Shop the Studio</strong></p>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <rte-formatter class=" spacing-style text-block text-block--AVG1SbHlsMXl3VFhTa__text_EhpJQB rte
-    text-block--align-center rte 
-  " style="
-    --padding-block-start: 0px; --padding-block-end:0px; 
---padding-inline-start:0px; --padding-inline-end:0px; 
-
-    
-
-    --width: 100%;
-    --max-width: var(--max-width--body-normal);
-    
-      --text-align: center;
-    
-    
-  ">
-    <p>For creators who love designing their own world.</p><p>Curated digital assets for intentional brands. Browse our collection of templates, brand kits, and stock images — designed for coaches, healers, and creatives building Soulful brands.</p>
-  </rte-formatter>
-
-
-
-
-
-
-
-
-
-<a href="/collections/all" class="
-    size-style
-    button
-    button--AeUFSc2ZRcXdGdUJVa__button_G9nNYb
-  " style="--size-style-width: fit-content;--size-style-height: ;--size-style-width-mobile: fit-content; --size-style-width-mobile-min: fit-content;">
-  Shop Digital Assets
-</a>
-
-
-
-
-
-
-</div>
-</div>
-
-
-
-
-
-
-
-    </div>
-  </div>
+ 
 </div>
 
 
