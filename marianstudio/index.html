@@ -1627,7 +1627,7 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
 
 
 <div class="section-background color-scheme-3"></div>
-<aside class="announcement-bar spacing-style section section--full-width color-scheme-3" style="   background-image: url(pics/2f70f266694dfb68ab24460ebd7a502c.jpg);background-size: cover;   --padding-block-start: 15px; --padding-block-end:15px; 
+<aside style="display:none" class="d-none announcement-bar spacing-style section section--full-width color-scheme-3" style="   background-image: url(pics/2f70f266694dfb68ab24460ebd7a502c.jpg);background-size: cover;   --padding-block-start: 15px; --padding-block-end:15px; 
 --padding-inline-start:0px; --padding-inline-end:0px; 
 ; --border-bottom-width: 0px;">
   
@@ -1653,7 +1653,8 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
       --line-height: 1;
     " aria-hidden="false">
     <p class="announcement-bar__text">
-      <strong>Студия эстетичных веб-сайтов</strong>
+      // <strong>Студия эстетичных веб-сайтов</strong>
+      <strong>Осознанный дизайн и креативные решения</strong>
     </p>
 
     
@@ -1732,6 +1733,7 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
 </svg>
 </span>
       </button>
+      
       <nav class="menu-drawer__navigation" style="--menu-top-level-font-family: var(--font-subheading--family);
 --menu-top-level-font-size-desktop: 1rem; --menu-top-level-font-style: var(--font-subheading--style); --menu-top-level-font-weight: var(--font-subheading--weight); --menu-top-level-font-case:uppercase;
 
@@ -2087,7 +2089,8 @@ uppercase;
             
         
       
-    </div><div class="header__column header__column--center" data-testid="header-top-center">
+    </div>
+    <div class="header__column header__column--center" data-testid="header-top-center">
       
         
           
@@ -2132,7 +2135,9 @@ uppercase;
             
         
       
-    </div><div class="header__column header__column--right" data-testid="header-top-right">
+    </div>
+    
+    <div class="header__column header__column--right" data-testid="header-top-right">
       
         
           
@@ -2172,6 +2177,8 @@ uppercase;
       </h2>
       
     </header>
+
+    
 
     
       <div class="account-actions__sign-ins" data-skip-subtree-update="true">
@@ -2230,6 +2237,7 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
 
 
   </div>
+  
 </anchored-popover-component>
 
 
@@ -2313,6 +2321,7 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
       </ul>
     </nav>
   </div>
+  
 </div>
 
 
@@ -2406,7 +2415,43 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
     </div>
         </div>
       </div>
+    <aside class="custom-textbar-aside announcement-bar spacing-style section section--full-width color-scheme-3" style="      --padding-block-start: 25px; --padding-block-end:05px; 
+">
+  
+
+  <announcement-bar-component class="announcement-bar__slider">
     
+
+    <div class="announcement-bar__slides">
+      
+<slideshow-slide ref="slides[]" class="
+      announcement-bar__slide
+      text-block
+      text-block--AaFRFSEhPV1JUdkgzY__announcement_BxgCk9
+      text-block--align-center
+      text-block--full-width
+      custom-typography
+      custom-font-size
+      custom-font-weight
+    " style="
+--color: ;--font-size: 1rem;--font-weight: 700;    --font-family: var(--font-body--family);    --text-transform: none;    --text-wrap: ;          --line-height: var(--line-height--body-);        --letter-spacing: var(--letter-spacing--body-normal);
+      --width: 100%;
+      --text-align: center;
+      --line-height: 1;
+    " aria-hidden="false">
+    <p class="announcement-bar__text custom-textbar">
+      <a>Студия осознанного дизайна и креативных решений</a>
+    </p>
+
+    
+  </slideshow-slide>
+
+
+
+    </div>
+  </announcement-bar-component>
+</aside>
+
   
     
 
@@ -2415,7 +2460,7 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
     
     
       <div class="header__row header__row--bottom color-scheme-1 section section--full-width-margin section--page-width mobile:hidden" ref="headerRowTop" style="--margin-top: 40px;">
-        <div class="header__columns spacing-style" style="margin-top: 35px">
+        <div class="header__columns spacing-style" style="margin-top: 15px">
           <div class="header__column header__column--center" data-testid="header-bottom-center">
       
         
@@ -2466,7 +2511,7 @@ await import("//thebrandalchemists.com/cdn/shopifycloud/shop-js/modules/v2/chunk
   
     <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
       <a href="/pages/about" data-skip-node-update="true" class="menu-list__link" ref="menuitem">
-        <span class="menu-list__link-title">Обо мне</span>
+        <span class="menu-list__link-title">О нас</span>
       </a></li>
   
     <li role="presentation" class="menu-list__list-item" on:focus="/activate" on:blur="/deactivate" on:pointerenter="/activate" on:pointerleave="/deactivate">
@@ -3359,12 +3404,343 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
     }
   }
 </style>
+<!-- ===== VIDEO HERO BANNER → HERO SLIDER START ===== -->
+<section class="video-hero-banner hero-slider" id="heroSlider">
+  <!-- СЛАЙД 1: видео + текст -->
+  <div class="hero-slider__slide is-active">
+    <video class="video-hero-banner__video" autoplay muted loop playsinline preload="auto"
+           poster="pics/Website_Hero_964d589d-35ca-44aa-8877-21374b2497e8.jpg">
+      <source src="vecteezy_white-color-futuristic-wavy-pattern-abstract-design-simple_47069308.mp4" type="video/mp4">
+    </video>
+    <div class="video-hero-banner__overlay"></div>
+    <div class="video-hero-banner__content">
+      <h2 class="video-hero-banner__title" data-text="Студия эстетичных веб-сайтов">
+        Дизайн, который 
+        <br>
+        воплощает смыслы
+      </h2>
+      <p>
+        Помогаем брендам раскрыть уникальность и характер через визуальный язык дизайна. 
+        <!--Через погружение в ДНК бренда. Сочетание инженерного мышления и аналитического подхода <br/> с тонким визуальным вкусом и точностью к деталям
+        <br>
+        Мы создаем смыслы. 
+        <br>
+        Через погружение в ДНК бренда. Анализируем бренд и находим лучшее решение, повышающее конверсии и продажи. Создаем инженерно выверенное решение
+        Дизайн - мощный инструмент, способный привлечь внимание, повысить продажи и решить любые задачи бизнеса. Так как именно визуал и подача - первое, на что обращает внимание клиент при знакомстве с брендом.-->
+        
+        
+        
+        
+        
+        <!-- 
+          Наш подход — в точном балансе эстетики и инженерной продуманности.
+Начинаем не с визуала, а со смысла. Погружаемся в ДНК бренда, выстраиваем стратегию и проектируем решение так, чтобы форма точно соответствовала содержанию.
+          
+          Мы создаем смыслы. Через погружение в ДНК бренда. Анализируем бренд и находим лучшее решение, повышающее конверсии и продажи. Создаем инженерно выверенное решение
+        
+        
+        // Наш уникальность - в балансе эстетики и инженерного подхода
+        
+        // Каждый бренд уникален — со своей историей, характером, ценностями и внутренней логикой.
+        // Мы погружаемся в экосистему бренда и разрабатываем идеальное решение, основанное на сочетании визуальной эстетики и продуманной инженерной логики.
 
+        
+
+        // Помогаем брендам воплощать философию и эстетику в визуал.
+        // Каждый бренд уникален по 
+
+
+        // Помогаем брендам воплощать философию и ценности в визуал. Баланс эстетического и инженерного
+        
+        // нАС ВДОХНОВЛЯЕТ МНОГООБРАЗИЕ И УНИКАЛЬНОСТЬ КАЖДОГО БРЕНДА. нАША УНИКАЛЬНОСТЬ - В СОЧЕТАНИИ ЭСТЕТИКИ И ЧУВСТВОВАНИЯ И ИНЖЕНЕРНОГО ПОДХОДА И ЭСТЕТИКИ БАЛАНС ФОРМЫ И ОФОРМЛЕНИЯ
+
+        // Наш подход в глубоком погружении 
+        // Наш подход основывается на глубоком анализе структуры бренда и 
+
+        // Соединяем эстетику и инженерный подход-->
+        Наш подход - в глубоком погружении в ДНК и экосистему бренда, чтобы понять его характер, смыслы и цели. Сначала выстраиваем стратегию и архитектуру решения, затем воплощаем её в визуале
+
+        <!--Наш подход — в глубоком погружении в ДНК и экосистему бренда, чтобы понять его характер, смыслы и задачи, а затем выстроить точную стратегию и инженерно-дизайнерскую основу для их воплощения.-->
+
+
+        <!--Наш подход — в глубоком погружении в ДНК и экосистему бренда, чтобы понять его характер, смыслы и внутреннюю логику — и превратить их в целостный визуальный и цифровой опыт.-->
+
+
+        <!--Наш подход — в глубоком погружении в ДНК и экосистему бренда, чтобы понять, как всё должно работать вместе. Сначала выстраиваем стратегию и архитектуру решения, затем воплощаем её в визуале.-->
+
+
+      </p>
+    </div>
+  </div>
+
+  <!-- СЛАЙД 2: картинка + текст (замените под себя) -->
+  <div class="hero-slider__slide">
+    <video class="video-hero-banner__video video-hero-banner__video--slow" autoplay muted loop playsinline preload="auto"
+           poster="pics/Website_Hero_964d589d-35ca-44aa-8877-21374b2497e8.jpg">
+      <source src="vecteezy_soap-bubbles-isolated-on-black-background-abstract-soap_10427702.mp4" type="video/mp4">
+    </video>
+    <div class="video-hero-banner__overlay"></div>
+    <div class="video-hero-banner__content">
+      <h2 class="video-hero-banner__title" data-text="Студия эстетичных веб-сайтов">
+        Дизайн, создающий бизнес
+      </h2>
+      <p>Мы уверены, что дизайн - основополагающая, которая строит бизнесы. Ведь хороший дизайн и качественно продуманный  UX - 99% всех продаж и хороший пользовательский опыт</p>
+    </div>
+  </div>
+
+  <!-- Точки-индикаторы -->
+  <div class="hero-slider__dots">
+    <button class="hero-slider__dot is-active" data-index="0" aria-label="Слайд 1"></button>
+    <button class="hero-slider__dot" data-index="1" aria-label="Слайд 2"></button>
+  </div>
+</section>
+
+<style>
+  /* ===== VIDEO HERO BANNER (base — оставлен как был) ===== */
+  .video-hero-banner {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    min-height: 480px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .video-hero-banner__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .video-hero-banner__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0.45) 30%,
+      rgba(255, 255, 255, 0.35) 50%,
+      rgba(255, 255, 255, 0.5) 75%,
+      rgba(255, 255, 255, 0.85) 100%
+    );
+  }
+
+  .video-hero-banner__content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .video-hero-banner__title {
+    max-width: 594px;
+    position: relative;
+    margin: 0;
+    font-family: "Cormorant Garamond", serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 33px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: #2b2727;
+  }
+
+  .video-hero-banner__title::after {
+    content: "";
+    position: absolute;
+    inset: -20px -40px;
+    z-index: -1;
+    /* background: radial-gradient(
+      ellipse at center,
+      rgba(212, 175, 55, 0.25) 0%,
+      rgba(212, 175, 55, 0) 70%
+    ); */
+    pointer-events: none;
+  }
+
+  /* ===== HERO SLIDER (переход между слайдами) ===== */
+  .hero-slider__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    transition:
+      opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hero-slider__slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+  }
+
+  /* Слайд с картинкой как фон */
+  .hero-slider__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1.05);
+    transition: transform 9s ease-out, filter 1.6s ease;
+    will-change: transform, filter;
+  }
+
+  .hero-slider__slide.is-active .hero-slider__bg {
+    transform: scale(1);
+    animation: heroBreath 9s ease-in-out infinite alternate;
+  }
+
+  .hero-slider__slide:not(.is-active) .hero-slider__bg {
+    filter: blur(6px);
+  }
+
+  @keyframes heroBreath {
+    from { transform: scale(1); }
+    to   { transform: scale(1.06); }
+  }
+
+  /* Появление текста внутри активного слайда */
+  .hero-slider__slide .video-hero-banner__title {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 1.2s ease 0.5s,
+      transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+  }
+
+  .hero-slider__slide.is-active .video-hero-banner__title {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Точки */
+  .hero-slider__dots {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 5;
+  }
+
+  .hero-slider__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid #2b2727;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .hero-slider__dot.is-active {
+    background: #2b2727;
+    transform: scale(1.25);
+  }
+
+  /* ===== Адаптив ===== */
+  @media screen and (max-width: 749px) {
+    .video-hero-banner {
+      height: 60vh;
+      min-height: 360px;
+    }
+    .video-hero-banner__title {
+      font-size: clamp(1.6rem, 8vw, 2.4rem);
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const slider = document.getElementById('heroSlider');
+    if (!slider) return;
+
+    const slides = slider.querySelectorAll('.hero-slider__slide');
+    const dots = slider.querySelectorAll('.hero-slider__dot');
+
+    // ⏱ ЗАДЕРЖКА показа одного слайда (ms).
+    // 7000 = 7 сек. Для "минуты" → 60000.
+    const INTERVAL = 7000;
+
+    let current = 0;
+    let timer = null;
+
+    function goTo(index) {
+      slides[current].classList.remove('is-active');
+      dots[current].classList.remove('is-active');
+
+      current = (index + slides.length) % slides.length;
+
+      slides[current].classList.add('is-active');
+      dots[current].classList.add('is-active');
+
+      // Перезапуск видео на активном слайде (если есть)
+      const video = slides[current].querySelector('video');
+      if (video) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
+    }
+
+    function next() { goTo(current + 1); }
+
+    function start() {
+      stop();
+      timer = setInterval(next, INTERVAL);
+    }
+
+    function stop() {
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        goTo(i);
+        start();
+      });
+    });
+
+    // Пауза при наведении — чтобы не «убегал», пока читают
+    slider.addEventListener('mouseenter', stop);
+    slider.addEventListener('mouseleave', start);
+
+    // Пауза, когда вкладка неактивна
+    document.addEventListener('visibilitychange', () => {
+      document.hidden ? stop() : start();
+    });
+
+    const slowVideo = slider.querySelector('.video-hero-banner__video--slow');
+if (slowVideo) {
+  slowVideo.playbackRate = 0.5; // 0.5 = медленнее в 2 раза
+  slowVideo.addEventListener('loadeddata', () => { slowVideo.playbackRate = 0.5; });
+}
+
+    start();
+  })();
+</script>
+<!-- ===== VIDEO HERO BANNER → HERO SLIDER END ===== -->
 <hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk class="ai-hero-grid-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
   <div class="ai-hero-grid__container-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
     <div class="ai-hero-grid__row-1-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
       
-        <h1 class="ai-hero-grid__headline-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">Помогаю брендам воплощать философию и ценности в визуал</h1>
+        <h1 class="ai-hero-grid__headline-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">Помогаем брендам воплощать философию и ценности в визуал</h1>
       
     </div>
 
@@ -3373,14 +3749,14 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
         <div class="ai-hero-grid__background-box-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk"></div>
         <div class="ai-hero-grid__image-wrapper-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
           
-            <img src="pics/73.jpg" alt="" loading="lazy" width="1856" height="2464" class="ai-hero-grid__image-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
+            <img src="CcXXTywfZmxhxjpwIQw6pVhjlOW4YWjC3WiA-fa-BjyKMcOMB4lZLwuA3JWfXog4GsfMb3xtz8tGnqdZ0Z3cwc7C.jpg" alt="" loading="lazy" width="1856" height="2464" class="ai-hero-grid__image-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
           
         </div>
       </div>
 
       <div class="ai-hero-grid__right-column-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk">
         
-          <div class="ai-hero-grid__body-text-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk"><p>Дизайн • Брендинг • Разработка сайта под ключ</p><p>Сочетание инженерного мышления и аналитического подхода <br/> с тонким визуальным вкусом и точностью к деталям</p></div>
+          <div class="ai-hero-grid__body-text-aostdmfhrmuhhywxhraigenblockbe4dacdjckifk"><p>Дизайн • Брендинг • Разработка сайта • SMM</p><p>Сочетание инженерного мышления и аналитического подхода <br/> с тонким визуальным вкусом и точностью к деталям</p></div>
           Наш акцент — на детальном подходе, глубине и любви к проекту. <br>
           Каждый проект для нас - это целая история, <br/>наполненная философией, эстетикой и смыслами.
         
@@ -3696,7 +4072,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
     
     
   ">
-    <p><em>CURATED VISUAL EXPERIENCES</em></p>
+    <p><em>О НАС</em></p>
   </rte-formatter>
 
 
@@ -3859,7 +4235,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 </div>
 
 
-</div><div id="shopify-section-template--21648781213731__section_ri7WN9" class="shopify-section section-wrapper">
+</div><div  id="shopify-section-template--21648781213731__section_ri7WN9" class="shopify-section section-wrapper">
 
 
 
@@ -3874,7 +4250,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 
   </div>
 
-  <div class="border-style custom-section-content" style="--border-width: 0.5px; --border-style: solid; --border-color:
+  <div style="display: ;" class="border-style custom-section-content" style="--border-width: 0.5px; --border-style: solid; --border-color:
 rgb(var(--color-border-rgb) / 1.0); --border-radius:
 0px; 
 ">
@@ -3905,9 +4281,9 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 
 
 
-  <rte-formatter class=" spacing-style text-block text-block--AZnVXTEJZOVcreDVJM__text_bPefJR rte
+  <rte-formatter display:none; class=" spacing-style text-block text-block--AZnVXTEJZOVcreDVJM__text_bPefJR rte
      rte 
-  " style="
+  " style=" display: none;
     --padding-block-start: 0px; --padding-block-end:0px; 
 --padding-inline-start:0px; --padding-inline-end:0px; 
 
@@ -3936,7 +4312,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 
   <rte-formatter class=" spacing-style text-block text-block--AdGV5L3V4cFRWOGM3c__text_7idEdm rte
      rte 
-  " style="
+  " style=" display: none;
     --padding-block-start: 0px; --padding-block-end:0px; 
 --padding-inline-start:0px; --padding-inline-end:0px; 
 
@@ -3992,7 +4368,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
         layout-panel-flex--row
         section-content-wrapper
          mobile-column
-      " style="
+      " style=" display:none;
         --flex-direction: row; --flex-wrap: nowrap; --flex-wrap-mobile: wrap;
 
 --gap: 0px;
@@ -4420,7 +4796,10 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
     
     
   ">
-    <h4>creating visual worlds for soulful brands, worldwide</h4>
+    <!-- <h4>creating visual worlds for soulful brands, worldwide</h4> -->
+     <h4>
+      Делаем бренд-дизайн, интерфейсы и оказываем дизайн-поддержку
+     </h4>
   </rte-formatter>
 
 
@@ -4475,7 +4854,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 
 
 
-<div id="Hero-template--21648781213731__hero_qEpKGb" class="hero color-scheme-6" style="
+<div style="display:none" id="Hero-template--21648781213731__hero_qEpKGb" class="hero color-scheme-6" style="
     --hero-border-style: ;
     --hero-border-width: px;
     --hero-border-opacity: %;
@@ -4731,14 +5110,16 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
   --size-style-width: 100%;--size-style-height: fit;--size-style-width-mobile: 100%; --size-style-width-mobile-min: 5rem;
   --padding-block-start: 0px;--padding-block-end: 0px;--padding-inline-start: 0px;--padding-inline-end: 0px;
 ">
-    
-<img src="pics/The_Brand_Alchemists_Niches.png" alt="List of wellness and lifestyle related categories served by The Brand Alchemists" srcset="pics/The_Brand_Alchemists_Niches_1.png 240w, pics/The_Brand_Alchemists_Niches_2.png 352w, pics/The_Brand_Alchemists_Niches_6.png 832w, pics/The_Brand_Alchemists_Niches_3.png 1200w, pics/The_Brand_Alchemists_Niches_5.png 1600w, pics/The_Brand_Alchemists_Niches_7.png 1920w, pics/The_Brand_Alchemists_Niches_4.png 2560w, pics/The_Brand_Alchemists_Niches.png 3840w" width="1000" height="1500" loading="lazy" class="image-block__image border-style" style="
-  --ratio: 0.6666666666666666;
-  --border-width: 1px; --border-style: none; --border-color:
-rgb(var(--color-border-rgb) / 1.0); --border-radius:
-0px; 
+    <div>
+      <h2>
+  Делаем бренды заметными в своей индустрии
+</h2>
+<p>
+  Создаём цельный, запоминающийся бренд и помогаем ему оставаться узнаваемым на всех носителях.
+От идеи и позиционирования — до визуальных систем, упаковки, сайтов и дизайн-поддержки.
+</p>
+    </div>
 
-" sizes="auto, (min-width: 750px) 100vw, 100vw">
 
   </div>
 
@@ -5177,7 +5558,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 
 
 <div class="section-background color-scheme-1"></div>
-<div class="section section--full-width color-scheme-1" data-testid="ui-test-section" style="
+<div class="section section--full-width color-scheme-1" data-testid="ui-test-section" style=" display:none;
     
 
     
@@ -5343,7 +5724,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
 
   
 
-<div class="
+<div style="display:none" class="
     resource-list
     
     
@@ -6760,7 +7141,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
     
     
   ">
-    <h2>Stay in Touch</h2>
+    <h2>Реализуем ваш проект!</h2>
   </rte-formatter>
 
 
@@ -6789,7 +7170,7 @@ rgb(var(--color-border-rgb) / 1.0); --border-radius:
     
     
   ">
-    <p>For monthly updates on our latest blogs, projects & new products drop your details below!</p>
+    <p>От идеи до работающего продукта</p>
   </rte-formatter>
 
 
