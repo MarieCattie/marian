@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Профессиональный клининг квартир, домов и офисов. Безупречная чистота и забота о вашем пространстве.">
+<title>CLEAN SPACE — Профессиональный клининг</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark: #172b2b;
+  --green: #b7ee65;
+  --mint: #e6f5e9;
+  --accent: #31a77d;
+  --light: #f8faf6;
+  --muted: #788582;
+  --radius: 24px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--dark);
+  background: var(--light);
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+img { max-width: 100%; display: block; }
+.container { width: min(1160px, calc(100% - 40px)); margin: auto; }
+header {
+  height: 82px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(248,250,246,.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #e8eee8;
+}
+.nav { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.logo { font-family: Manrope; font-size: 24px; font-weight: 800; letter-spacing: -1.5px; }
+.logo span { color: #2da47b; }
+.nav-links { display: flex; gap: 30px; color: #53615c; font-size: 14px; font-weight: 600; }
+.nav-links a:hover { color: var(--accent); }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.phone { font-weight: 700; font-size: 14px; }
+.btn {
+  border: none;
+  border-radius: 100px;
+  background: var(--green);
+  color: var(--dark);
+  padding: 15px 25px;
+  font-weight: 800;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: .25s;
+}
+.btn:hover { background: #a4df4c; transform: translateY(-3px); }
+.btn-dark { background: var(--dark); color: white; }
+.btn-dark:hover { background: #294b43; }
+.hero { padding: 66px 0 75px; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--mint);
+  color: #26855e;
+  border-radius: 50px;
+  padding: 9px 15px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+.dot { width: 7px; height: 7px; background: #36b27e; border-radius: 50%; }
+h1 {
+  font-family: Manrope;
+  font-size: clamp(42px, 5.2vw, 70px);
+  line-height: 1.08;
+  letter-spacing: -3.5px;
+  margin-bottom: 24px;
+}
+h1 span { color: #32a77b; }
+.hero-text { font-size: 17px; line-height: 1.8; color: var(--muted); max-width: 440px; margin-bottom: 32px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 13px; }
+.hero-note { display: flex; align-items: center; gap: 12px; margin-top: 37px; }
+.avatars { display: flex; padding-left: 5px; }
+.avatar {
+  width: 34px; height: 34px; border-radius: 50%; border: 2px solid white;
+  margin-left: -6px; background: #d3e6cf; display: grid; place-items: center; font-size: 17px;
+}
+.hero-note strong { font-size: 13px; }
+.hero-note small { display: block; color: var(--muted); margin-top: 3px; }
+.hero-visual { position: relative; }
+.hero-image {
+  height: 485px; border-radius: 36px; overflow: hidden;
+  background: #dbece2;
+  position: relative;
+}
+.hero-image img { width: 100%; height: 100%; object-fit: cover; }
+.image-label {
+  position: absolute; bottom: 20px; left: 20px; right: 20px;
+  padding: 18px 22px; background: rgba(255,255,255,.92);
+  border-radius: 20px; display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(10px);
+}
+.image-label strong { font-size: 15px; }
+.image-label small { display: block; color: var(--muted); margin-top: 4px; }
+.check-icon { background: var(--green); width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; font-size: 20px; }
+.float-card {
+  position: absolute; top: 35px; left: -28px; background: white;
+  border-radius: 18px; padding: 15px 20px; box-shadow: 0 12px 40px #244a321a;
+}
+.float-card strong { display: block; font-size: 22px; }
+.float-card small { color: var(--muted); }
+.stats { padding: 30px 0; border-top: 1px solid #e7ece6; border-bottom: 1px solid #e7ece6; }
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.stat { text-align: center; }
+.stat strong { font: 800 30px Manrope; }
+.stat p { color: var(--muted); font-size: 13px; margin-top: 5px; }
+section { padding: 100px 0; }
+.section-head { max-width: 650px; margin: 0 auto 48px; text-align: center; }
+.section-tag { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+h2 { font: 800 clamp(32px,4vw,47px) Manrope; letter-spacing: -2px; line-height: 1.2; }
+.section-head p { color: var(--muted); line-height: 1.7; margin-top: 16px; }
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+.service-card {
+  background: white; border-radius: 25px; padding: 16px;
+  border: 1px solid #edf0ea; transition: .3s;
+}
+.service-card:hover { transform: translateY(-7px); box-shadow: 0 18px 45px #294b4312; }
+.service-img { height: 205px; border-radius: 17px; overflow: hidden; background: var(--mint); }
+.service-img img { width: 100%; height: 100%; object-fit: cover; transition: .4s; }
+.service-card:hover img { transform: scale(1.05); }
+.service-content { padding: 22px 10px 12px; }
+.service-content h3 { font: 700 20px Manrope; margin-bottom: 10px; }
+.service-content p { font-size: 14px; color: var(--muted); line-height: 1.65; min-height: 68px; }
+.service-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+.price { font-size: 17px; font-weight: 800; }
+.price small { display: block; font-size: 11px; font-weight: 500; color: var(--muted); }
+.arrow { width: 40px; height: 40px; border-radius: 50%; background: var(--mint); display: grid; place-items: center; font-size: 20px; }
+.why { background: #edf5eb; }
+.why-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 65px; }
+.why-photo { height: 475px; border-radius: 30px; overflow: hidden; }
+.why-photo img { width: 100%; height: 100%; object-fit: cover; }
+.why-content h2 { margin-bottom: 20px; }
+.why-content > p { color: var(--muted); line-height: 1.8; margin-bottom: 30px; }
+.features { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.feature { display: flex; gap: 13px; align-items: flex-start; }
+.feature-icon { min-width: 42px; height: 42px; background: white; border-radius: 13px; display: grid; place-items: center; font-size: 20px; }
+.feature h3 { font-size: 14px; margin-bottom: 5px; }
+.feature p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.step { padding: 26px 20px; border: 1px solid #e7ece6; border-radius: 22px; }
+.step-number { color: #37a77c; font: 800 35px Manrope; margin-bottom: 22px; }
+.step h3 { font-size: 17px; margin-bottom: 10px; }
+.step p { font-size: 13px; line-height: 1.7; color: var(--muted); }
+.reviews { background: #f0f5ed; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.review { background: white; padding: 28px; border-radius: 23px; }
+.stars { color: #efb83b; letter-spacing: 3px; margin-bottom: 18px; }
+.review > p { line-height: 1.8; font-size: 14px; color: #57645e; min-height: 105px; }
+.review-author { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+.review-avatar { width: 43px; height: 43px; background: var(--mint); border-radius: 50%; display: grid; place-items: center; font-size: 20px; }
+.review-author strong { font-size: 13px; display: block; }
+.review-author small { color: var(--muted); font-size: 11px; }
+.contact { padding: 90px 0; }
+.contact-box { background: var(--dark); color: white; border-radius: 34px; padding: 55px; display: grid; grid-template-columns: 1fr 1fr; gap: 55px; align-items: center; }
+.contact-copy h2 { font-size: clamp(32px,4vw,46px); }
+.contact-copy p { color: #bdcbc4; line-height: 1.8; margin-top: 20px; max-width: 400px; }
+.contact-points { margin-top: 30px; display: grid; gap: 13px; color: #e2eee5; font-size: 14px; }
+.contact-points span::before { content: "✓"; color: var(--green); font-weight: 800; margin-right: 10px; }
+.contact-form { background: white; border-radius: 25px; padding: 30px; color: var(--dark); }
+.contact-form h3 { font: 800 23px Manrope; margin-bottom: 8px; }
+.contact-form > p { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+.field { margin-bottom: 15px; }
+.field label { font-size: 12px; font-weight: 700; display: block; margin-bottom: 7px; }
+.field input, .field select, .field textarea {
+  width: 100%; border: 1px solid #e2eae3; background: #f8faf7;
+  border-radius: 11px; padding: 13px 14px; outline: none; color: var(--dark);
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); }
+.field textarea { resize: vertical; min-height: 75px; }
+.contact-form .btn { width: 100%; margin-top: 5px; }
+.form-note { font-size: 10px; color: var(--muted); line-height: 1.5; text-align: center; margin-top: 13px; }
+#success { display: none; background: var(--mint); color: #21744f; padding: 13px; border-radius: 12px; margin-top: 15px; font-size: 13px; }
+footer { background: #142523; color: white; padding: 35px 0; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+footer .logo { color: white; }
+footer p { color: #a8b8b0; font-size: 12px; }
+footer a { color: var(--green); font-weight: 700; }
+.reveal { opacity: 0; transform: translateY(25px); transition: .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@media(max-width:900px) {
+  .nav-links { display: none; }
+  .hero-grid { gap: 30px; }
+  .hero-image { height: 400px; }
+  .services-grid { grid-template-columns: repeat(2,1fr); }
+  .why-grid { gap: 35px; }
+  .steps-grid { grid-template-columns: repeat(2,1fr); }
+  .contact-box { padding: 35px; gap: 30px; }
+}
+@media(max-width:650px) {
+  .container { width: min(100% - 32px, 500px); }
+  header { height: 70px; }
+  .logo { font-size: 21px; }
+  .nav-right { gap: 0; }
+  .nav-right .phone { display: none; }
+  .nav-right .btn { padding: 11px 16px; font-size: 12px; }
+  .hero { padding: 45px 0 55px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 38px; }
+  h1 { font-size: 47px; letter-spacing: -2.5px; }
+  .hero-text { font-size: 15px; }
+  .hero-image { height: 360px; border-radius: 25px; }
+  .float-card { left: 10px; top: 12px; }
+  .image-label { left: 12px; right: 12px; bottom: 12px; }
+  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 25px 10px; }
+  .stat strong { font-size: 26px; }
+  section { padding: 70px 0; }
+  .section-head { margin-bottom: 32px; }
+  .services-grid { grid-template-columns: 1fr; gap: 16px; }
+  .service-img { height: 220px; }
+  .service-content p { min-height: 0; }
+  .why-grid { grid-template-columns: 1fr; gap: 30px; }
+  .why-photo { height: 330px; }
+  .features { gap: 20px 12px; }
+  .feature { gap: 9px; }
+  .feature h3 { font-size: 12px; }
+  .feature p { font-size: 11px; }
+  .steps-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .step { padding: 20px 15px; }
+  .step-number { font-size: 29px; margin-bottom: 12px; }
+  .step h3 { font-size: 14px; }
+  .step p { font-size: 12px; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .review > p { min-height: 0; }
+  .contact { padding: 65px 0; }
+  .contact-box { grid-template-columns: 1fr; padding: 27px 18px; gap: 30px; border-radius: 25px; }
+  .contact-form { padding: 23px 17px; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+@media(max-width:370px) {
+  h1 { font-size: 40px; }
+  .hero-actions .btn { padding: 13px 17px; font-size: 13px; }
+  .features { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="logo">CLEAN<span>.</span>SPACE</a>
+    <nav class="nav-links">
+      <a href="#services">Услуги</a>
+      <a href="#about">О нас</a>
+      <a href="#steps">Как работаем</a>
+      <a href="#reviews">Отзывы</a>
+    </nav>
+    <div class="nav-right">
+      <a href="tel:+37120000000" class="phone">+371 200 00 000</a>
+      <a href="#contact" class="btn">Заказать уборку ↗</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> Пространство для жизни</div>
+      <h1>Чистота, в которую <span>влюбляешься.</span></h1>
+      <p class="hero-text">Профессиональный клининг квартир, домов и офисов. Мы позаботимся о чистоте, а вы — о важных моментах своей жизни.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn">Рассчитать стоимость ↗</a>
+        <a href="#services" class="btn btn-dark">Наши услуги</a>
+      </div>
+      <div class="hero-note">
+        <div class="avatars">
+          <div class="avatar">👩🏻</div><div class="avatar">👨🏻</div><div class="avatar">👩🏽</div>
+        </div>
+        <div><strong>Более 2 500 довольных клиентов</strong><small>Нам доверяют чистоту своего дома</small></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="float-card"><strong>100%</strong><small>Гарантия качества</small></div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1100&q=85" alt="Чистый современный интерьер">
+        <div class="image-label">
+          <div><strong>Ваш дом — наша забота</strong><small>Безупречная чистота каждый день</small></div>
+          <div class="check-icon">✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="container stats-grid">
+    <div class="stat"><strong>2 500+</strong><p>Довольных клиентов</p></div>
+    <div class="stat"><strong>5 лет</strong><p>Опыта в клининге</p></div>
+    <div class="stat"><strong>98%</strong><p>Клиентов возвращаются</p></div>
+    <div class="stat"><strong>24/7</strong><p>На связи с вами</p></div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Наши услуги</div>
+      <h2>Чистота для любого пространства</h2>
+      <p>Подберём подходящий формат уборки и сделаем ваше пространство по-настоящему свежим.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service-card reveal">
+        <div class="service-img"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Уборка квартиры"></div>
+        <div class="service-content">
+          <h3>Уборка квартир</h3>
+          <p>Бережная уборка всех комнат, кухни, ванной и жилых зон. Идеальная чистота без лишних хлопот.</p>
+          <div class="service-bottom"><div class="price">от 45 €<small>Стоимость за услугу</small></div><a href="#contact" class="arrow">↗</a></div>
+        </div>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-img"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=80" alt="Генеральная уборка"></div>
+        <div class="service-content">
+          <h3>Генеральная уборка</h3>
+          <p>Глубокая очистка поверхностей, труднодоступных мест и всех деталей вашего интерьера.</p>
+          <div class="service-bottom"><div class="price">от 90 €<small>Стоимость за услугу</small></div><a href="#contact" class="arrow">↗</a></div>
+        </div>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-img"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80" alt="Уборка офиса"></div>
+        <div class="service-content">
+          <h3>Уборка офисов</h3>
+          <p>Поддерживаем рабочее пространство в идеальном состоянии для продуктивной работы.</p>
+          <div class="service-bottom"><div class="price">от 60 €<small>Стоимость за услугу</small></div><a href="#contact" class="arrow">↗</a></div>
+        </div>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Уборка домов"></div>
+        <div class="service-content">
+          <h3>Уборка домов</h3>
+          <p>Комплексный уход за большими пространствами, загородными домами и коттеджами.</p>
+          <div class="service-bottom"><div class="price">от 120 €<small>Стоимость за услугу</small></div><a href="#contact" class="arrow">↗</a></div>
+        </div>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-img"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80" alt="Мытье окон"></div>
+        <div class="service-content">
+          <h3>Мытьё окон</h3>
+          <p>Чистые стёкла, рамы и подоконники. Больше света и свежести в вашем доме.</p>
+          <div class="service-bottom"><div class="price">от 30 €<small>Стоимость за услугу</small></div><a href="#contact" class="arrow">↗</a></div>
+        </div>
+      </article>
+      <article class="service-card reveal">
+        <div class="service-img"><img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=800&q=80" alt="Уборка после ремонта"></div>
+        <div class="service-content">
+          <h3>После ремонта</h3>
+          <p>Убираем строительную пыль, следы материалов и остатки ремонта. Готовим помещение к жизни.</p>
+          <div class="service-bottom"><div class="price">от 150 €<small>Стоимость за услугу</small></div><a href="#contact" class="arrow">↗</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="about">
+  <div class="container why-grid">
+    <div class="why-photo reveal">
+      <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=85" alt="Профессиональная уборка">
+    </div>
+    <div class="why-content reveal">
+      <div class="section-tag">Почему выбирают нас</div>
+      <h2>Мы замечаем даже то, что не видно</h2>
+      <p>Для нас клининг — это не просто уборка. Это забота о вашем комфорте, времени и здоровье. Каждая деталь имеет значение.</p>
+      <div class="features">
+        <div class="feature"><div class="feature-icon">🌿</div><div><h3>Безопасные средства</h3><p>Качественная и бережная бытовая химия.</p></div></div>
+        <div class="feature"><div class="feature-icon">✨</div><div><h3>Идеальный результат</h3><p>Контроль качества после каждой уборки.</p></div></div>
+        <div class="feature"><div class="feature-icon">⏰</div><div><h3>Точно по времени</h3><p>Приезжаем тогда, когда вам удобно.</p></div></div>
+        <div class="feature"><div class="feature-icon">💚</div><div><h3>Опытная команда</h3><p>Профессионалы, которым можно доверять.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="steps">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Всего 4 шага</div>
+      <h2>Чистота проще, чем кажется</h2>
+      <p>Вам не нужно ни о чём беспокоиться. Мы организуем всё от первого звонка до финального результата.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal"><div class="step-number">01</div><h3>Оставляете заявку</h3><p>Расскажите, какая уборка вам нужна.</p></div>
+      <div class="step reveal"><div class="step-number">02</div><h3>Согласовываем детали</h3><p>Рассчитываем стоимость и выбираем удобное время.</p></div>
+      <div class="step reveal"><div class="step-number">03</div><h3>Выполняем уборку</h3><p>Наша команда приезжает и делает свою работу.</p></div>
+      <div class="step reveal"><div class="step-number">04</div><h3>Вы наслаждаетесь</h3><p>Принимаете результат и отдыхаете в чистоте.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-tag">Отзывы клиентов</div>
+      <h2>Нас рекомендуют друзьям</h2>
+      <p>Главная награда для нас — ваша улыбка и желание вернуться снова.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review reveal">
+        <div class="stars">★★★★★</div>
+        <p>«Просто невероятно! Квартира сияет, даже самые сложные места идеально чистые. Теперь буду обращаться только сюда».</p>
+        <div class="review-author"><div class="review-avatar">👩🏻</div><div><strong>Анна К.</strong><small>Уборка квартиры</small></div></div>
+      </div>
+      <div class="review reveal">
+        <div class="stars">★★★★★</div>
+        <p>«Заказывали генеральную уборку перед переездом. Команда приехала вовремя, всё сделали быстро и очень аккуратно».</p>
+        <div class="review-author"><div class="review-avatar">👨🏻</div><div><strong>Михаил Р.</strong><small>Генеральная уборка</small></div></div>
+      </div>
+      <div class="review reveal">
+        <div class="stars">★★★★★</div>
+        <p>«Очень приятный сервис! Удобная запись, вежливые сотрудники и действительно отличный результат. Рекомендую!».</p>
+        <div class="review-author"><div class="review-avatar">👩🏽</div><div><strong>Елена С.</strong><small>Регулярная уборка</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-box">
+      <div class="contact-copy">
+        <div class="section-tag" style="color:#b7ee65">Время для перемен</div>
+        <h2>Давайте сделаем ваш мир чище!</h2>
+        <p>Оставьте заявку, и наш менеджер свяжется с вами, ответит на вопросы и рассчитает стоимость уборки.</p>
+        <div class="contact-points">
+          <span>Бесплатная консультация</span>
+          <span>Индивидуальный расчёт стоимости</span>
+          <span>Удобное время для уборки</span>
+        </div>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <h3>Оставить заявку</h3>
+        <p>Заполните форму — это займёт меньше минуты.</p>
+        <div class="field">
+          <label for="name">Ваше имя *</label>
+          <input id="name" name="name" type="text" placeholder="Как к вам обращаться?" required>
+        </div>
+        <div class="field">
+          <label for="phoneInput">Номер телефона *</label>
+          <input id="phoneInput" name="phone" type="tel" placeholder="+371 200 00 000" required>
+        </div>
+        <div class="field">
+          <label for="service">Какая услуга вас интересует?</label>
+          <select id="service" name="service">
+            <option>Уборка квартиры</option>
+            <option>Генеральная уборка</option>
+            <option>Уборка офиса</option>
+            <option>Уборка дома</option>
+            <option>Мытьё окон</option>
+            <option>Уборка после ремонта</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Комментарий</label>
+          <textarea id="message" name="message" placeholder="Расскажите подробнее (необязательно)"></textarea>
+        </div>
+        <button class="btn" type="submit">Отправить заявку ↗</button>
+        <div id="success" role="status">Спасибо! Ваша заявка подготовлена. Для реальной отправки подключите обработчик формы.</div>
+        <div class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a href="#" class="logo">CLEAN<span>.</span>SPACE</a>
+    <p>© 2026 CLEAN SPACE. Чистота — наше искусство.</p>
+    <a href="tel:+37120000000">+371 200 00 000</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!this.reportValidity()) return;
+
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phoneInput').value.trim();
+
+  if (!name || !phone) return;
+
+  document.getElementById('success').style.display = 'block';
+  document.getElementById('success').scrollIntoView({
+    behavior: 'smooth',
+    block: 'nearest'
+  });
+  this.reset();
+});
+</script>
+</body>
+</html>
